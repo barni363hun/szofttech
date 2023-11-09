@@ -1,3 +1,4 @@
 Tennivalók:
 - Osztályokat megirogatni
+    -osztályok többségébe kell-e ID?
 - Osztályok adattagjainak nevét és adatait kiírni fájl

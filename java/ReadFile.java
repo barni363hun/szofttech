@@ -44,8 +44,7 @@ max_elements=this.splitLine(i,token).length;}}
 return max_elements;}
 
 public String[][] createTable(String token){
-int max_elements=this.getMaxElements(token);
-String[][] table=new String[this.getListSize()][max_elements];
+String[][] table=new String[this.getListSize()][this.getMaxElements(token)];
 String[] current_line;
 int elements_count;
 for(int i=0;i<this.getListSize();i++){
@@ -56,11 +55,3 @@ table[i][j]=current_line[j];}}
 return table;}
 
 }
-//ReadFile(String filename)			- betolti a file-t
-//getListSize()					- visszaadja a sorok szamat
-//getList()					- visszaadja a listat
-//getLine(int number)				- visszaadja a megadott sort
-//splitLine(int number, String token)		- szetszedi a sort a tokenek menten
-//splittedLineSize(String[] splittedLine)	- visszaadja a megadott szetdarabolt sor elemeinek szamat
-//getMaxElements(String token)			- visszaadja a legtobb elem szamat az osszes sor kozul
-//createTable(String token)			- atalakitja az osszes listat ket dimenzios tombre
