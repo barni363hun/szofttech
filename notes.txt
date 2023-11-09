@@ -1,0 +1,3 @@
+Tennivalók:
+- Osztályokat megirogatni
+- Osztályok adattagjainak nevét és adatait kiírni fájl
