@@ -7,8 +7,8 @@ LinkedList<String>lineList=new LinkedList<String>();
 public ReadFile(String filename){
 File data=new File(filename);
 if(data.exists()){
-System.out.println("Opening File: "+data.getName());
-System.out.println("Path: "+data.getAbsolutePath());
+//System.out.println("Opening File: "+data.getName());
+//System.out.println("Path: "+data.getAbsolutePath());
 }else{
 System.out.println("File does not exist.");}
 try{

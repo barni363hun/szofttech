@@ -38,6 +38,9 @@ public String getCustomerFirstName(){
 	return customerFirstName;}
 public String getCustomerLastName(){
 	return customerLastName;}
+public String getCustomerName(){
+	String name=getCustomerFirstName()+" "+getCustomerLastName();
+	return name;}
 public String getCustomerAddressZIP(){
 	return customerAddressZIP;}
 public String getCustomerAddressTown(){
@@ -51,8 +54,7 @@ public String getCustomerEmail(){
 public String[] getCustomer(){
 	String[] customer={
 	getCustomerID(),
-	getCustomerFirstName(),
-	getCustomerLastName(),
+	getCustomerName(),
 	getCustomerAddressZIP(),
 	getCustomerAddressTown(),
 	getCustomerAddressStreet(),
