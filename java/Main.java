@@ -8,13 +8,11 @@ class Main{
 	ReadFile customerList =new ReadFile("../data/database.customer.csv");
 	ReadFile itemList =new ReadFile("../data/database.item.csv");
 
-
 	Login login=new Login();
 	login.setUserNameTyped(userList.getRow(userList.token,0));
 	login.setUserPasswordTyped(userList.getRow(userList.token,1)[login.line]);
 
-
-	User user=new User(userList.splitLine(2, userList.token));
+	User user=new User(userList.splitLine(login.line, userList.token));
 
 	int customerNum=customerList.getListSize();
 	Customer[] customers=new Customer[customerNum];
