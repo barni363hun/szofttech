@@ -43,7 +43,7 @@ if(max_elements<this.splitLine(i,token).length){
 max_elements=this.splitLine(i,token).length;}}
 return max_elements;}
 
-public String[][] createTable(String token){
+public String[][] getTable(String token){
 String[][] table=new String[this.getListSize()][this.getMaxElements(token)];
 String[] current_line;
 int elements_count;
@@ -53,5 +53,11 @@ elements_count=current_line.length;
 for(int j=0;j<current_line.length;j++){
 table[i][j]=current_line[j];}}
 return table;}
+
+public String[] getRow(String token,int r){
+String[] row=new String[this.getListSize()];
+for(int i=0;i<this.getListSize();i++){
+row[i]=this.splitLine(i,token)[r];}
+return row;}
 
 }

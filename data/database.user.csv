@@ -1,1 +1,3 @@
-userName,userPassword,userType
+userName,userPassword,userType,userRowInDatabase
+Admin,admin,A,0
+Czuppi,jelszo,C,1
