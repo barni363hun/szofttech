@@ -1,3 +1,7 @@
 Tennivalók:
 - Osztályokat megirogatni
+    -osztályok többségébe kell-e ID?
 - Osztályok adattagjainak nevét és adatait kiírni fájl
+- login és file-ok betöltése párhuzamosan:
+https://naveen-metta.medium.com/unleashing-the-power-of-parallel-programming-in-java-6af510e20704
+(tudom hogy ekkora programnál nem számít a sebesség,de hátha Tarczali értékeli)

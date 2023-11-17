@@ -1,1 +1,2 @@
-userID,userName,firstName,lastName,addressZIP,addressTown,addressStreet,phone,email
+customerID,customerFirstName,customerLastName,customerAddressZIP,customerAddressTown,customerAddressStreet,customerPhone,customerEmail
+nemkell,Czuppon,Andras,8200,Veszprem,utca 6,+36309100782,czuppona@hotmail.com
