@@ -22,7 +22,7 @@ public class TransportApp {
     // Enter your User Name:
     // ha kell akkor pwd
     System.out.print("Type in your role:");    
-    System.out.print("customer / admin / courier / depot");
+    System.out.print("c / a / u / d");
 
     String role = sc.nextLine();
     if (roleCheck(role)) {
