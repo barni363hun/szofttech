@@ -1,29 +1,38 @@
 import java.util.Scanner;
 import classes.users.*;
+import classes.*;
+import classes.file.*;
 
 public class TransportApp {
     
-    Scanner sc;
-    Customer[] customerList;
-    Depot[] depotList;
     User user;
+    Admin admin;
+    Courier[] couriers;
+    Customer[] customers;
+    Depot[] depots;
+    Warehouse warehouse;
+    Item[] items;
+    Message[] messages;
+    Order[] orders;
+    
     FileManager fileManager;
-    // customerList
-    // User currentUser=null;
+    
+    Scanner sc;
 
     public TransportApp() {
         sc = new Scanner(System.in);
     }
 
-    public TransportApp(FileManager fileManager) {
-        this.fileManager = fileManager;
-        fileManager.getUsers();
-        customerList = fileManager.getCustomers();
+    public TransportApp(FileManager _fileManager) {
+        this.fileManager = _fileManager;
+        
+        // fileManager.getUsers();
+        // customerList = fileManager.getCustomers();
     }
 
     public void startMenu(){
 
-    fileManager.saveData(Customer[] customerList, Depot[] depotList);
+    // fileManager.saveData(Customer[] customerList, Depot[] depotList);
 
     // select your role...
     // Enter your User Name:
@@ -31,7 +40,7 @@ public class TransportApp {
     System.out.print("Type in your role:");    
     System.out.print("c / a / u / d");
 
-    user = fileManager.login();
+    // user = fileManager.login();
     String role = sc.nextLine();
     if (roleCheck(role)) {
         if(role != "customer"){
@@ -41,7 +50,7 @@ public class TransportApp {
             if (login(username)) {
                 switch (role) {
                     case "c": //courier
-                       courierMenu();
+                        currierMenu();
                         break;
                     case "d": //depo
                         // currentUser = ...
@@ -85,7 +94,8 @@ public class TransportApp {
         int menupont = Integer.parseInt(sc.nextLine());
         switch (menupont) {
             case 1:
-                //listMegrendelesek();
+                 int azon = Integer.parseInt(sc.nextLine());
+                //getMegrendeles(azon);
                 break;
             case 2:
                 //getItems();
@@ -135,7 +145,9 @@ public class TransportApp {
                 //addItem();
                 break;
             case 4:
-                //removeItem();
+                System.out.print("IemId: ");
+                int itemId = Integer.parseInt(sc.nextLine());
+                //removeItem(itemId);
                 break;
             default:
                 break;
