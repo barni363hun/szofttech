@@ -1,26 +1,31 @@
 import java.util.*;
 import java.io.*;
-class Main{
-	public static void main(String[] args){
-	Main obj=new Main();
 
-	ReadFile userList =new ReadFile("../data/database.user.csv");
-	ReadFile customerList =new ReadFile("../data/database.customer.csv");
-	ReadFile itemList =new ReadFile("../data/database.item.csv");
+class Main {
+	public static void main(String[] args) {
+		Main obj = new Main();
+		TransportApp t = new TransportApp();
 
-	Login login=new Login();
-	login.setUserNameTyped(userList.getRow(userList.token,0));
-	login.setUserPasswordTyped(userList.getRow(userList.token,1)[login.line]);
+		t.startMenu()
 
-	User user=new User(userList.splitLine(login.line, userList.token));
+		ReadFile userList = new ReadFile("data/database.user.csv");
+		ReadFile customerList = new ReadFile("data/database.customer.csv");
+		ReadFile itemList = new ReadFile("data/database.item.csv");
 
-	int customerNum=customerList.getListSize();
-	Customer[] customers=new Customer[customerNum];
-	for(int i=0;i<customerNum;i++){
-	customers[i]=new Customer(customerList.splitLine(i, customerList.token));}
+		Login login = new Login();
+		login.setUserNameTyped(userList.getRow(userList.token, 0));
+		login.setUserPasswordTyped(userList.getRow(userList.token, 1)[login.line]);
 
-	System.out.println(Arrays.toString(user.getUser()));
-	System.out.println(Arrays.toString(customers[user.getUserRowInDatabase()].getCustomer()));
+		User user = new User(userList.splitLine(login.line, userList.token));
+
+		int customerNum = customerList.getListSize();
+		Customer[] customers = new Customer[customerNum];
+		for (int i = 0; i < customerNum; i++) {
+			customers[i] = new Customer(customerList.splitLine(i, customerList.token));
+		}
+
+		System.out.println(Arrays.toString(user.getUser()));
+		System.out.println(Arrays.toString(customers[user.getUserRowInDatabase()].getCustomer()));
 
 	}
 }
