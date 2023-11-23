@@ -31,9 +31,9 @@ public class TransportApp {
             String username = sc.nextLine();
             if (login(username)) {
                 switch (role) {
-                    case "customer":
-                        currentUser = user
-                        adminMenu();
+                    case "courier":
+                        // currentUser = ...
+                        // courierMenu();
                         break;
                     case "admin":
                         // currentUser = ...
