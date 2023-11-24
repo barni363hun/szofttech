@@ -8,6 +8,8 @@ public class FileRead {
     static final String fileExtension = ".csv";
     LinkedList<String> lineList = new LinkedList<String>();
 
+
+
     public  FileRead(String filename) {
         File data = new File(this.filePath + filename + this.fileExtension);
         if (data.exists()) {

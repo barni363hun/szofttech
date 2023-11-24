@@ -33,7 +33,10 @@ public class TransportApp {
     }
 
     public void startMenu(){
-
+       
+       //Demo
+        Item i = new Item();
+        i.listItems();
     // fileManager.saveData(Customer[] customerList, Depot[] depotList);
 
     // select your role...
