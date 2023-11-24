@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 import classes.users.*;
 import classes.*;
@@ -16,6 +17,7 @@ public class TransportApp {
     Order[] orders;
     
     FileManager fileManager;
+    Item item;
     
     Scanner sc;
 
@@ -98,7 +100,7 @@ public class TransportApp {
                 //getMegrendeles(azon);
                 break;
             case 2:
-                //getItems();
+                item.listItems();
                 break;
             default:
                 break;
@@ -139,7 +141,7 @@ public class TransportApp {
                 //listMegrendelesek();
                 break;
             case 2:
-                //getItems();
+                //listItems();
                 break;
             case 3:
                 //addItem();
