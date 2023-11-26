@@ -6,6 +6,9 @@ import classes.file.*;
 
 public class TransportApp {
     
+    Item i = new Item();
+    Order order;
+
     User user;
     Admin admin;
     Courier[] couriers;
@@ -35,7 +38,7 @@ public class TransportApp {
     public void startMenu(){
        
        //Demo
-        Item i = new Item();
+
         i.listItems();
     // fileManager.saveData(Customer[] customerList, Depot[] depotList);
 
@@ -47,12 +50,12 @@ public class TransportApp {
 
     // user = fileManager.login();
     String role = sc.nextLine();
-    if (roleCheck(role)) {
-        if(role != "customer"){
-            System.out.print("Input your username");
-            String username = sc.nextLine();
-            // fileManager.login() -> User | UserNotFoundException
-            if (login(username)) {
+    //if (roleCheck(role)) {
+    //    if(role != "customer"){
+    //        System.out.print("Input your username");
+    //        String username = sc.nextLine();
+    //        // fileManager.login() -> User | UserNotFoundException
+    //        if (login(username)) {
                 switch (role) {
                     case "c": //courier
                         currierMenu();
@@ -66,17 +69,18 @@ public class TransportApp {
                         adminMenu();
                         break;
                     default:
+                    customerMenu();
                         break;
                 }
-            }
+        //   }
 
-        } else {
-            customerMenu();
-        }
-    } else {
-        System.out.println("User found!");
-    }
-    System.out.print("Enter your User Name: ");
+        //} else {
+        //    customerMenu();
+       // }
+ //   } else {
+  //      System.out.println("User found!");
+  //  }
+  //  System.out.print("Enter your User Name: ");
 
     }
     
@@ -92,17 +96,17 @@ public class TransportApp {
         //menüpontok:
         //- add to cart
         //- remove from cart
-        //- list items
+        //- list itemsa
         System.out.println("=====Customer=====");
         System.out.println("1. Csomagkovetes");
         System.out.println("2. Rendeles");
-        int menupont = Integer.parseInt(sc.nextLine());
+        String menupont = sc.nextLine();
         switch (menupont) {
-            case 1:
+            case "1":
                  int azon = Integer.parseInt(sc.nextLine());
                 //getMegrendeles(azon);
                 break;
-            case 2:
+            case "2":
                 item.listItems();
                 break;
             default:
@@ -117,9 +121,10 @@ public class TransportApp {
         //  |- Sikeres / sikertelen kézbesítés
         System.out.println("=====Currier=====");
         System.out.print("Csomagazonosito: ");
-        int csomagAzon = Integer.parseInt(sc.nextLine());
-        //setKeeper(csomagAzon, "Futar");
-        //getCsomagById();
+        String csomagAzon = sc.nextLine();
+        //(csomagAzon, "Futar");
+        order.track(csomagAzon,"Ceg");
+        order.updateTrack();;
 
     }
     private void depoMenu(){
@@ -138,18 +143,18 @@ public class TransportApp {
         System.out.println("2. Termeklista");
         System.out.println("3. Termek hozzaad");
         System.out.println("4. Termek torol");
-        int menupont = Integer.parseInt(sc.nextLine());
+        String menupont = sc.nextLine();
         switch (menupont) {
-            case 1:
+            case "1":
                 //listMegrendelesek();
                 break;
-            case 2:
-                //listItems();
+            case "2":
+                i.listItems();
                 break;
-            case 3:
+            case "3":
                 //addItem();
                 break;
-            case 4:
+            case "4":
                 System.out.print("IemId: ");
                 int itemId = Integer.parseInt(sc.nextLine());
                 //removeItem(itemId);

@@ -4,7 +4,7 @@ import java.io.*;
 
 class ReadFile {
     static final String token = ",";
-    static final String filePath = "../data/database.";
+    static final String filePath = "D://softtech/szofttech/data/database.";
     static final String fileExtension = ".csv";
     LinkedList<String> lineList = new LinkedList<String>();
 
