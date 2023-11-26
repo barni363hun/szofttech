@@ -45,8 +45,15 @@ public class TransportApp {
     // select your role...
     // Enter your User Name:
     // ha kell akkor pwd
-    System.out.print("Type in your role:");    
-    System.out.print("c / a / u / d");
+    System.out.println("Szerepkor:");    
+    System.out.println("c - Futar");
+    System.out.println("d - Depo");    
+    System.out.println("a - Admin");     
+    System.out.println("w- Raktar");    
+    System.out.println("Enter - Felhasznalo");
+    System.out.println("");    
+
+   
 
     // user = fileManager.login();
     String role = sc.nextLine();
@@ -59,14 +66,13 @@ public class TransportApp {
                 switch (role) {
                     case "c": //courier
                         currierMenu();
-                        break;
-                    case "d": //depo
-                        // currentUser = ...
-                        // courierMenu();
-                        break;    
+                        break;   
                     case "a": //admin 
                         // currentUser = ...
                         adminMenu();
+                        break;
+                    case "d": //Depo 
+                        depoMenu();
                         break;
                     default:
                     customerMenu();
@@ -103,8 +109,12 @@ public class TransportApp {
         String menupont = sc.nextLine();
         switch (menupont) {
             case "1":
-                 int azon = Integer.parseInt(sc.nextLine());
-                //getMegrendeles(azon);
+                 
+        //(csomagAzon, "Futar");
+                System.out.print("Csomagazonosito: ");
+                String csomagAzon = sc.nextLine();
+                order.track(csomagAzon,"user");
+
                 break;
             case "2":
                 item.listItems();
@@ -123,8 +133,8 @@ public class TransportApp {
         System.out.print("Csomagazonosito: ");
         String csomagAzon = sc.nextLine();
         //(csomagAzon, "Futar");
-        order.track(csomagAzon,"Ceg");
-        order.updateTrack();;
+        order.track(csomagAzon,"Futar");
+        order.updateTrack();
 
     }
     private void depoMenu(){
@@ -133,8 +143,10 @@ public class TransportApp {
         //- Statuszmodositas
         System.out.println("=====Depo=====");
         System.out.print("Csomagazonosito: ");
-        int csomagAzon = Integer.parseInt(sc.nextLine());
-        //setKeeper(csomagAzon, "Depo");
+        String csomagAzon = sc.nextLine();
+        //(csomagAzon, "Futar");
+        order.track(csomagAzon,"Depo");
+        order.updateTrack();
 
     }
     private void adminMenu(){

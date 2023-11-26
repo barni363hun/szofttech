@@ -21,11 +21,17 @@ public class Order {
             while ((line = br.readLine()) != null) {
                 String[] row = line.split(cvsSplitBy);
                 if (row[0].equals(search)) {
+                    if (setK != "user"){
                     System.out.println(line);
-                    if (setK != ""){
+                    } else {
+                        System.out.print("Itt a csomag: ");
+                        System.out.println(row[3]);
+                    }
+                    if (setK != "" && setK != "user"){
                         setKeeper(setK, i);
                     }
                     return;
+
                 }
                 i++;
             }
