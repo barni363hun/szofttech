@@ -2,8 +2,7 @@ package classes;
 import java.util.*;
 import java.io.*;
 import java.nio.file.*;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+
 
 import classes.file.FileRead;
 
@@ -11,7 +10,7 @@ public class Order {
     
 
     public static void track(String search, String setK) {
-        String csvFile = "D://softtech/szofttech/data/database.parcell.csv";
+        String csvFile = "D://softtech/szofttech/data/database.parcel.csv";
         String line = "";
         String cvsSplitBy = ",";
        
@@ -41,8 +40,8 @@ public class Order {
  
     }
     public static void setKeeper(String keeper, int targetRow) {
-        String csvFile = "D://softtech/szofttech/data/database.parcell.csv";
-        String tempFile = "D://softtech/szofttech/data/database.tempParcell.csv";
+        String csvFile = "D://softtech/szofttech/data/database.parcel.csv";
+        String tempFile = "D://softtech/szofttech/data/database.tempParcel.csv";
         String cvsSplitBy = ",";
       
                try (BufferedReader br = new BufferedReader(new FileReader(csvFile));
@@ -52,7 +51,7 @@ public class Order {
             while ((line = br.readLine()) != null) {
                 List<String> row = new ArrayList<>(Arrays.asList(line.split(cvsSplitBy)));
                 if (rowIndex == targetRow && row.size() >= 4) {
-                    row.set(3, keeper);
+                    row.set(4, keeper);
                 }
                 pw.println(String.join(cvsSplitBy, row));
                 rowIndex++;
@@ -65,11 +64,34 @@ public class Order {
         
     }
     public static void updateTrack() {
-         String csvFile = "D://softtech/szofttech/data/database.parcell.csv";
-        String tempFile = "D://softtech/szofttech/data/database.tempParcell.csv";
+         String csvFile = "D://softtech/szofttech/data/database.parcel.csv";
+        String tempFile = "D://softtech/szofttech/data/database.tempParcel.csv";
 
         try {
             Files.move(Paths.get(tempFile), Paths.get(csvFile), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void makeTrackNum(String nev, String cim,String tel) {
+        String csvFile = "D://softtech/szofttech/data/database.parcel.csv";
+        int id = 99;
+      
+
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            while (br.readLine() != null) {
+                id++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile, true))) {
+             String newLine = id + "," + nev + "," +  cim + "," + tel + ",Feldolgozas alatt";
+            bw.newLine();
+            bw.write(newLine);
+            System.out.println("Siker");
         } catch (IOException e) {
             e.printStackTrace();
         }

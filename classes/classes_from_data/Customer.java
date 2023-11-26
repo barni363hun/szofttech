@@ -1,7 +1,6 @@
-package classes.users;
+package classes.classes_from_data;
 
-public class Customer {
-	String customerID;
+public class Customer{
 	String customerFirstName;
 	String customerLastName;
 	String customerAddressZIP;
@@ -21,8 +20,7 @@ public class Customer {
 		setCustomerEmail(s[7]);
 	}
 
-	public void setCustomerID(String cID) {
-		this.customerID = cID;
+	private void setCustomerID(String string) {
 	}
 
 	public void setCustomerFirstName(String cFN) {
@@ -51,10 +49,6 @@ public class Customer {
 
 	public void setCustomerEmail(String cE) {
 		this.customerEmail = cE;
-	}
-
-	public String getCustomerID() {
-		return customerID;
 	}
 
 	public String getCustomerFirstName() {
@@ -92,7 +86,6 @@ public class Customer {
 
 	public String[] getCustomer() {
 		String[] customer = {
-				getCustomerID(),
 				getCustomerName(),
 				getCustomerAddressZIP(),
 				getCustomerAddressTown(),

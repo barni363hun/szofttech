@@ -1,11 +1,11 @@
-package classes.users;
+package classes.classes_from_data;
 public class User {
 	String userName;
 	String userPassword;
 	char userType;
 	int userRowInDatabase;
 
-	User(String[] s) {
+	protected User() {
 		setUserName(s[0]);
 		setUserPassword(s[1]);
 		setUserType(s[2]);
