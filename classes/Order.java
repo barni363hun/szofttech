@@ -3,14 +3,16 @@ import java.util.*;
 import java.io.*;
 import java.nio.file.*;
 
-
 import classes.file.FileRead;
 
 public class Order {
     
-
+    public static String csvLoc(){
+         String csvFile = "D://softtech-backup/softtech/szofttech/data/database.parcell.csv";
+         return csvFile;
+    }
     public static void track(String search, String setK) {
-        String csvFile = "D://softtech/szofttech/data/database.parcel.csv";
+        String csvFile = csvLoc();
         String line = "";
         String cvsSplitBy = ",";
        
@@ -20,14 +22,21 @@ public class Order {
             while ((line = br.readLine()) != null) {
                 String[] row = line.split(cvsSplitBy);
                 if (row[0].equals(search)) {
+                    if (setK != "Kezbesitve"){
                     if (setK != "user"){
-                    System.out.println(line);
+                    System.out.println("====" + row[0] + " csomag====");
+                        if (setK != "Depo"){
+                            System.out.println("Cimzett: "+row[1]);
+                            System.out.println("Elerhetoseg: "+row[3]);
+                        }
+                        System.out.println("Cim: "+row[2]);
                     } else {
-                        System.out.print("Itt a csomag: ");
-                        System.out.println(row[3]);
-                    }
+                        System.out.print("Csomag állapota/helyzete: ");
+                        System.out.println(row[4]);
+                    }}
                     if (setK != "" && setK != "user"){
                         setKeeper(setK, i);
+                    
                     }
                     return;
 
@@ -40,8 +49,8 @@ public class Order {
  
     }
     public static void setKeeper(String keeper, int targetRow) {
-        String csvFile = "D://softtech/szofttech/data/database.parcel.csv";
-        String tempFile = "D://softtech/szofttech/data/database.tempParcel.csv";
+        String csvFile = csvLoc();
+        String tempFile = "D://softtech-backup/softtech/szofttech/data/database.Tempparcell.csv";
         String cvsSplitBy = ",";
       
                try (BufferedReader br = new BufferedReader(new FileReader(csvFile));
@@ -64,8 +73,9 @@ public class Order {
         
     }
     public static void updateTrack() {
-         String csvFile = "D://softtech/szofttech/data/database.parcel.csv";
-        String tempFile = "D://softtech/szofttech/data/database.tempParcel.csv";
+         String csvFile = csvLoc();
+        String tempFile = "D://softtech-backup/softtech/szofttech/data/database.Tempparcell.csv";
+        System.out.println("\n\n========\nCsomag allapota frissult\n========\n\n");
 
         try {
             Files.move(Paths.get(tempFile), Paths.get(csvFile), StandardCopyOption.REPLACE_EXISTING);
@@ -74,8 +84,8 @@ public class Order {
         }
     }
 
-    public void makeTrackNum(String nev, String cim,String tel) {
-        String csvFile = "D://softtech/szofttech/data/database.parcel.csv";
+    public static void makeTrackNum(String nev, String cim,String tel) {
+        String csvFile = csvLoc();
         int id = 99;
       
 
@@ -91,9 +101,29 @@ public class Order {
              String newLine = id + "," + nev + "," +  cim + "," + tel + ",Feldolgozas alatt";
             bw.newLine();
             bw.write(newLine);
-            System.out.println("Siker");
+            System.out.println("\n====Sikeres rendeles====\nCsomag azonositoja: "+ id + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public static void listOrders(){
+        String csvFile = csvLoc();
+        String line = "";
+        String cvsSplitBy = ",";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+                System.out.println("====Folyamatban levo rendelesek====");
+            while ((line = br.readLine()) != null) {
+              String[] row = line.split(cvsSplitBy);
+              if (row[4].equals("Kezbesitve") || row[4].equals("currentLocation")){
+                }else{
+                System.out.println(row[0] + "-as szamu csomag itt: " + row[4]);
+               }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
