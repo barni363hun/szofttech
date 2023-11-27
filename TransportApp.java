@@ -13,14 +13,18 @@ public class TransportApp {
     LinkedList<Item> items;
     LinkedList<Order> orders;
     LinkedList<User> users;
+    LinkedList<Courier> couriers;
 
     Message message;
     Scanner sc;
+    Order order;
 
     public TransportApp() {
+        
+        customers.add(new Customer([""]))
         // ezek azok a class-ok amikbe belemennek a file-ok
         // FileRead customerList = new FileRead("customer");
-        LinkedList<Customer> customers = new LinkedList<>();
+        // LinkedList<Customer> customers = new LinkedList<>();
         // for (int i = 1; i < customerList.getListSize(); i++) {
         //     customers.add(new Customer(customerList.splitLine(i, customerList.token)));
         // }
@@ -55,10 +59,12 @@ public class TransportApp {
 
     private void printMenu(String title,Map<String,String> menupoints){
         System.out.println("===="+title+"====");
-        for (Map.Entry<String, String> entry : menupoints.entrySet()) {
-            System.out.println(entry.getKey() + " - " + entry.getValue());
+        if(menupoints.size() > 0){
+            for (Map.Entry<String, String> entry : menupoints.entrySet()) {
+                System.out.println(entry.getKey() + " - " + entry.getValue());
+            }
+            System.out.println("");
         }
-        System.out.println("");
     } 
     
 
@@ -68,7 +74,7 @@ public class TransportApp {
             "d", "Depo",
             "a", "Admin",
             "w", "Raktár",
-            "f", "Felhhasználó",
+            "v", "Vevő",
             "k", "Kilépés"
         ));
         // user = fileManager.login();
@@ -80,36 +86,53 @@ public class TransportApp {
         //        if (login(username)) {
         boolean exit = false;
         while(!exit){
-            switch (getChar()) {
-                case 'c':
-                    currierMenu();
-                    break;
-                case 'a':
-                    adminMenu();
-                    break;
-                case 'd':
-                    depoMenu();
-                    break;
-                case 'w':
-                    // warehouseMenu();
-                    break;
-                case 'f':
-                    customerMenu();
-                    break;
-                case 'k':
-                    exit = true;
-                    break;
-                default:
+            char c = getChar();
+            if ("cdaw".contains(String.valueOf(c))) {
+                User u = login();
+                switch (c) {
+                    case 'c':
+                        //TODO Courier currentUser = courierList.get()
+                        Courier currentCourier = new Courier(u);
+                        courierMenu(currentCourier);
+                        break;
+                    case 'a':
+                        adminMenu();
+                        break;
+                    case 'd':
+                        depoMenu();
+                        break;
+                    case 'w':
+                        // warehouseMenu();
+                        break;
+                }
+            }
+            else if(c == 'v'){
+                customerMenu();
+            }
+            else if(c == 'k'){
+                exit = true;
+            }
+            else{
                     System.out.println("Nincs ilyen menüpont!");
-                    break;
             }
         }
     }
-    
 
-    // private boolean login(String username) {
-    //     return false;
-    // }
+    private User login() {       
+                             
+        // List<String> userInfoList = new ArrayList<>();
+        // System.out.println("username:");
+        // userInfoList.add(sc.nextLine());
+        // System.out.println("password:");
+        // userInfoList.add(sc.nextLine());
+        // System.out.println("password:");
+        // userInfoList.add(sc.nextLine());
+
+        String[] userInfo = new String[] {"barni","asd","a","5"};
+
+        return new User(userInfo);
+    }
+    
     // private boolean roleCheck(String role) {
     //     return true;
     // }
@@ -121,57 +144,55 @@ public class TransportApp {
             "2", "Termék kosárba rakása",
             "3", "Termék törlése a kosárból",
             "4", "Kosár tartalmának megtekintése",
-            "5", "Kosár tartalmának megrendelése"
+            "5", "Kosár tartalmának megrendelése",
+            "k", "Kilépés"
         ));
-        switch (getChar()) {
-            // félrerakva továbbiakig
-            // case '1':
-            //     printMenu("Csomaghoz tartozó üzenetek lekérdezése",Map.of(
-            //     ));
-            //     System.out.print("Csomagazonosito: ");
-            //     String csomagAzon = sc.nextLine();
-            //     message.getMessage(csomagAzon); //TODO
-            //     break;
-            case '1':
-                printMenu("Megérkezett rendelés visszaigazolása",Map.of(
-                ));
-                System.out.print("Csomagazonosito: ");
-                Item.listItems(); //TODO
-                switch (getChar()) { 
-                }
-            case '2':
-                printMenu("Termék kosárba rakása",Map.of(
-                ));
-                Item.listItems(); //TODO
-                switch (getChar()) { 
-                }
-            case '3':
-                printMenu("Termék kosárba rakása",Map.of(
-                ));
-                Item.listItems(); //TODO
+        
+        boolean exit = false;
+        while(!exit){
+            switch (getChar()) {
+                // félrerakva továbbiakig
+                // case '1':
+                //     printMenu("Csomaghoz tartozó üzenetek lekérdezése",Map.of(
+                //     ));
+                //     System.out.print("Csomagazonosito: ");
+                //     String csomagAzon = sc.nextLine();
+                //     message.getMessage(csomagAzon); //TODO
+                //     break;
+                case '1':
+                    printMenu("Megérkezett rendelés visszaigazolása",Map.of());
+                    System.out.print("Csomagazonosito: ");
+                case '2':
+                    printMenu("Termék kosárba rakása",Map.of());
+                    for (Item item : items) {
+                        item.printData();
+                    }
+                case '3':
+                    printMenu("Termék kosárba rakása",Map.of(
+                    ));
+                    Item.listItems(); //TODO
+                    break;
+                case '4':
+                    printMenu("Kosár tartalmának megtekintése",Map.of(
+                    ));
+                    Item.listCart(); 
+                    break; 
+                default:
+                    System.out.println("Nincs ilyen menüpont!");
                 break;
-            default:
-
-            case '4':
-                printMenu("Kosár tartalmának megtekintése",Map.of(
-                ));
-                Item.listCart(); /
-                break;                break;
+                case 'k':
+                    exit = true;
+                    break;
+                    
+                    
+            }
         }
-
     }
 
-    private void currierMenu(){
+    private void courierMenu(Courier currentCourier){
+       
         System.out.print("Csomagazonosito: ");
         String csomagAzon = sc.nextLine();
-        printMenu("currier",Map.of(
-            "1", "Csomag felvétele",
-            "2", "Csomag kiszállítva",
-            "3", "Csomag kiszállítása sikertelen",
-            "4", "Kosár tartalmának megtekintése",
-            "5", "Kosár tartalmának megrendelése",
-            "6", "Megérkezett rendelés visszaigazolása"
-        ));
         //menüpontok:
         //- megrendelés lekérdezés
         //  |- Sikeres / sikertelen kézbesítés
@@ -180,23 +201,38 @@ public class TransportApp {
                     // System.out.println("y - Csomagot kiszállítottam");
                     // System.out.println("n - Csomagot nem sikerült kiszállítani");
                     // System.out.print("k - kilépés: ");
-        System.out.println("\n\n=====Currier=====");
-        
-        System.out.println("1. Csomagkezeles");
-        System.out.println("2. Kezbesitve");
-        String menupont = sc.nextLine();
-        // switch (menupont) {
-        //     case "1":
+        printMenu("Courier",Map.of(
+            "1", "Csomag felvétele a raktárból",
+            "2", "Csomag kiszállítva",
+            "3", "Csomag kiszállítása sikertelen",
+            "k", "Kilépés"
+            ));
+            
+            boolean exit = false;
+        while(!exit){
+        switch (getChar()) {
+            case '1':
+                printMenu("Csomag felvéve",Map.of());
+                order.keeper = currentCourier;
+            break;
+            case '2':
+                printMenu("Sikeres kézbesítés",Map.of());//         order.track(csomagAzon,"Kezbesitve");
                 
-        //         order.track(csomagAzon,"Futar");
-        //         order.updateTrack();
-        //     break;
-        //     case "2":
-        //         order.track(csomagAzon,"Kezbesitve");
-        //         order.updateTrack();
-        //     break;
-        // }
+            break;
+            case '3':
+                printMenu("Sikertelen kézbesítés",Map.of());
 
+
+            break;
+            case 'k':
+                exit = true;
+
+            break;
+            default:
+                System.out.println("Nincs ilyen menüpont!");
+            break;
+    }
+    }
     }
     private void depoMenu(){
         System.out.println("\n\n=====Depo=====");
@@ -213,30 +249,38 @@ public class TransportApp {
                     // System.out.println("r - raktár felvétele");
                     // System.out.println("t - termék módosítás");
         System.out.println("\n\n=====Admin=====");
-        System.out.println("1. Megrenelesek");
-        System.out.println("2. Termeklista");
-        System.out.println("3. Termek hozzaad");
-        System.out.println("4. Termek torol");
-        String menupont = sc.nextLine();
-        // switch (menupont) {
-        //     case "1":
-        //         order.listOrders();
-        //         break;
-        //     case "2":
-        //         i.listItems();
-        //         break;
-        //     case "3":
-        //         i.addItem();
-        //         break;
-        //     case "4":
-        //         System.out.print("IemId: ");
-        //         int itemId = Integer.parseInt(sc.nextLine());
-        //         //removeItem(itemId);
-        //         break;
-        //     default:
-        //         break;
-        // }
+        printMenu("admin",Map.of(
+            "1", "Megrendelések",
+            "2", "Terméklista",
+            "3", "Termék hozzáadása",
+            "4", "Termék törlése",
+            "k", "Kilépés"
+        ));
+         boolean exit = false;
+        while(!exit){
+        switch (getChar()) {
+            case '1':
+                order.listOrders();
+                break;
+            case '2':
+                i.listItems();
+                break;
+            case '3':
+                i.addItem();
+                break;
+            case '4':
+                System.out.print("IemId: ");
+                int itemId = Integer.parseInt(sc.nextLine());
+                //removeItem(itemId);
+                break;
+            case 'k':
+                exit = true;
+                break;
+            default:
+                System.out.println("Nincs ilyen menüpont!");
+            break;
+        }
     }
-
+    }
 
 }

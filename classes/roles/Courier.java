@@ -8,8 +8,8 @@ import classes.classes_from_data.User;
 public class Courier extends User {
     }
 
-    protected Courier(String[] s) {
-        super(s);
+    public Courier(User u) {
+        super(u);
         // TODO Auto-generated constructor stub
     }
 

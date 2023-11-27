@@ -6,12 +6,19 @@ public class User {
 	char userType;
 	int userRowInDatabase;
 
-	protected User(String[] s) {
+	public User(User _u) {
+        this.userName = _u.userName;
+        this.userPassword = _u.userPassword;
+        this.userType = _u.userType;
+        this.userRowInDatabase = _u.userRowInDatabase;
+	}
+	public User(String[] s) {
 		setUserName(s[0]);
 		setUserPassword(s[1]);
 		setUserType(s[2]);
 		setUserRowInDatabase(s[3]);
 	}
+
 
 	public void setUserName(String uN) {
 		this.userName = uN;

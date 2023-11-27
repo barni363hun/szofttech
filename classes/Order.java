@@ -20,45 +20,12 @@ public class Order {
         //return state;
     }
 
-    public static void track(String search, String setK) {
-        // String csvFile = csvLoc();
-        // String line = "";
-        // String cvsSplitBy = ",";
-       
-        // //FileRead fileread = new FileRead("item");
-        // try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-        //     int i = 0;
-        //     while ((line = br.readLine()) != null) {
-        //         String[] row = line.split(cvsSplitBy);
-        //         if (row[0].equals(search)) {
-        //             if (setK != "Kezbesitve"){
-        //             if (setK != "user"){
-        //             System.out.println("====" + row[0] + " csomag====");
-        //                 if (setK != "Depo"){
-        //                     System.out.println("Cimzett: "+row[1]);
-        //                     System.out.println("Elerhetoseg: "+row[3]);
-        //                 }
-        //                 System.out.println("Cim: "+row[2]);
-        //             } else {
-        //                 System.out.print("Csomag állapota/helyzete: ");
-        //                 System.out.println(row[4]);
-        //             }}
-        //             if (setK != "" && setK != "user"){
-        //                 setKeeper(setK, i);
-                    
-        //             }
-        //             return;
 
-        //         }
-        //         i++;
-        //     }
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
- 
+    public static void track(String search, String setK) {
+        
     }
-    public void setKeeper(Courier k) {
-        keeper = k;
+    // public void setKeeper(User k) {
+    //     keeper = k;
         
         // String csvFile = csvLoc();
         // String tempFile = "D://softtech-backup/softtech/szofttech/data/database.Tempparcell.csv";
@@ -82,7 +49,7 @@ public class Order {
 
         // // Az ideiglenes fájl átnevezése az eredeti fájl nevére
         
-    }
+    // }
     public void updateTrack() {
         //  String csvFile = csvLoc();
         // String tempFile = "D://softtech-backup/softtech/szofttech/data/database.Tempparcell.csv";
