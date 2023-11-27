@@ -2,7 +2,7 @@ package classes.file;
 import java.io.Console;
 import java.util.Scanner;
 
-class Login {
+public class Login {
 	String userNameTyped;
 	String userPasswordTyped;
 	int line;
@@ -10,7 +10,7 @@ class Login {
 	public void setUserNameTyped(String[] s) {
 		System.out.print("Enter your User Name: ");
 		Scanner sc = new Scanner(System.in);
-		this.userNameTyped = sc.nextLine();
+		this.userNameTyped = sc.next();
 		if (nameCheck(s) == false) {
 			System.out.println("User named '" + this.userNameTyped + "' does not exists!");
 			this.setUserNameTyped(s);

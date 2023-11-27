@@ -1,14 +1,15 @@
 package classes.file;
-import java.util.*;
 import java.io.*;
+import java.lang.*;
+import java.util.*;
 
-class FileRead {
-    static final String token = "[,;]";
+public class FileRead {
+    public static final String token = "[,;]";
     static final String filePath = "../data/database.";
     static final String fileExtension = ".csv";
     LinkedList<String> lineList = new LinkedList<String>();
 
-    public FileRead(String filename) {
+    public  FileRead(String filename) {
         File data = new File(this.filePath + filename + this.fileExtension);
         if (data.exists()) {
             // System.out.println("Opening File: "+data.getName());
