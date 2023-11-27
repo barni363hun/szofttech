@@ -1,11 +1,12 @@
 package classes.classes_from_data;
+
 public class User {
 	String userName;
 	String userPassword;
 	char userType;
 	int userRowInDatabase;
 
-	protected User() {
+	protected User(String[] s) {
 		setUserName(s[0]);
 		setUserPassword(s[1]);
 		setUserType(s[2]);

@@ -6,7 +6,7 @@ int itemPrice;
 int itemQuantity;
 boolean itemIsInquired;
 
-Item(String[] s) {
+	protected Item(String[] s) {
 		setItemName(s[0]);
 		setItemPrice(s[1]);
 		setItemQuantity(s[2]);
@@ -18,30 +18,30 @@ Item(String[] s) {
 	}
 
     public void setItemPrice(String iP) {
-		this.itemPrice = iP;
+		this.itemPrice = Integer.parseInt(iP);
 	}
 
     public void setItemQuantity(String iQ) {
-		this.itemQuantity = iQ;
+		this.itemQuantity = Integer.parseInt(iQ);
 	}
 
     public void setItemIsInquired(String iII) {
-		this.itemIsInquired = iII;
+		this.itemIsInquired = Boolean.parseBoolean(iII);
 	}
 
     public String getItemName() {
 		return itemName;
 	}
 
-    public String getItemPrice() {
+    public int getItemPrice() {
 		return itemPrice;
 	}
 
-    public String getItemQuantity() {
+    public int getItemQuantity() {
 		return itemQuantity;
 	}
     
-    public String getIsInquired() {
+    public Boolean getIsInquired() {
 		return itemIsInquired;
 	}
 

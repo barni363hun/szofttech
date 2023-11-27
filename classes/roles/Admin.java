@@ -4,10 +4,7 @@ import java.util.Scanner;
 
 import classes.classes_from_data.User;
 
-public class Admin extends User{
-    Scanner sc = new Scanner(System.in);
-    public  Admin(String[] s) {
-      
+public class Admin extends User{ 
     }
     
     private void adminMenu(){

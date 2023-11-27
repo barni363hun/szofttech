@@ -6,8 +6,6 @@ import classes.Order;
 import classes.classes_from_data.User;
 
 public class Depot extends User{
-    public Depot(String[] s) {
-       
     }
     Scanner sc = new Scanner(System.in);
     Order order = new Order();

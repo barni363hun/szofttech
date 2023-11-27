@@ -3,9 +3,7 @@ package classes.roles;
 import java.util.Scanner;
 
 public class Warehouse extends Depot{
-    public Warehouse(String[] s) {
-        super(s);
-    }
+
  Scanner sc = new Scanner(System.in);
 private void warehouseMenu(){
         //menüpontok:

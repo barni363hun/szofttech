@@ -4,10 +4,8 @@ import java.util.Scanner;
 import classes.Order;
 import classes.classes_from_data.User;
 
-public class Customer extends User{
-    public Customer() {
-        super();
-    }
+public class User_Customer extends User{
+
     Scanner sc = new Scanner(System.in);
 Order order = new Order();
 private void customerMenu(){
