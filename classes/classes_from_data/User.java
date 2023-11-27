@@ -3,11 +3,13 @@ package classes.classes_from_data;
 public class User {
 	public int id;
 	public String userName;
-    public User(int id, String userName) {
-        this.id = id;
-        this.userName = userName;
+    public User(int _id, String _userName) {
+        this.id = _id;
+        this.userName = _userName;
     }
 	public User(User u) {
+        this.id = u.id;
+        this.userName = u.userName;
 	}
 }
 	// String userPassword;

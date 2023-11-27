@@ -9,6 +9,35 @@ public class Order {
     public User keeper;
     public Customer receiver;
     public LinkedList<Item> items;
+	
+    public void printData() {
+        StringBuilder dataString = new StringBuilder("Order ID: " + id);
+
+        if (keeper != null) {
+            dataString.append(", Keeper: ").append(keeper.userName);
+        } else {
+            dataString.append(", Keeper: Not assigned");
+        }
+
+        if (receiver != null) {
+            dataString.append(", Receiver: ").append(receiver.userName);
+        } else {
+            dataString.append(", Receiver: Not assigned");
+        }
+
+        dataString.append(", Items: ");
+        for (Item item : items) {
+            dataString.append(item.name).append("), ");
+        }
+
+        // Remove the trailing comma and space
+        if (!items.isEmpty()) {
+            dataString.setLength(dataString.length() - 2);
+        }
+
+        System.out.println(dataString.toString());
+    }
+
 
     public Order(int id, User keeper, Customer receiver, LinkedList<Item> items) {
         this.id = id;
@@ -34,7 +63,5 @@ public class Order {
         this.receiver = receiver;
         this.items = items;
     }
-	public void printData() {
-	}
 
 }

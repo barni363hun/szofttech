@@ -11,13 +11,13 @@ public class Warehouse extends Depot {
         System.out.println("=====Warehouse=====");
         System.out.println("1. Csomagkovetes");
         System.out.println("2. Megrendelesek");
-        String menupont = sc.nextLine();
+        String menupont = sc.next();
         switch (menupont) {
             case "1":
 
                 // (csomagAzon, "Futar");
                 System.out.print("Csomagazonosito: ");
-                String csomagAzon = sc.nextLine();
+                String csomagAzon = sc.next();
                 order.track(csomagAzon, "Raktar");
                 order.updateTrack();
                 break;
