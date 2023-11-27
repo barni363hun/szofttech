@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 import classes.classes_from_data.User;
 
-public class Admin extends User{ 
+public class Admin extends User {
     }
-    
-    private void adminMenu(){
+
+    private void adminMenu() {
         System.out.println("=====Admin=====");
         System.out.println("1. Megrenelesek");
         System.out.println("2. Termeklista");
@@ -16,18 +16,18 @@ public class Admin extends User{
         String menupont = sc.nextLine();
         switch (menupont) {
             case "1":
-                //listMegrendelesek();
+                // listMegrendelesek();
                 break;
             case "2":
-                //i.listItems();
+                // i.listItems();
                 break;
             case "3":
-                //addItem();
+                // addItem();
                 break;
             case "4":
                 System.out.print("IemId: ");
                 int itemId = Integer.parseInt(sc.nextLine());
-                //removeItem(itemId);
+                // removeItem(itemId);
                 break;
             default:
                 break;

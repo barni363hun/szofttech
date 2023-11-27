@@ -9,7 +9,7 @@ public class Customer{
 	String customerPhone;
 	String customerEmail;
 
-	protected Customer(String[] s) {
+	public Customer(String[] s) {
 		setCustomerFirstName(s[0]);
 		setCustomerLastName(s[1]);
 		setCustomerAddressZIP(s[2]);

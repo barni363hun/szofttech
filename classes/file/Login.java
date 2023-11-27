@@ -2,7 +2,7 @@ package classes.file;
 import java.io.Console;
 import java.util.Scanner;
 
-class Login {
+public class Login {
 	String userNameTyped;
 	String userPasswordTyped;
 	int line;

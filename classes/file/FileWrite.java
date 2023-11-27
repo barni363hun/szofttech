@@ -1,11 +1,12 @@
 package classes.file;
+
 import java.io.*;
 import java.util.*;
 
 public class FileWrite {
-static final String token=",";
-static final String filePath="../data/database.";
-static final String fileExtension=".csv";
+    static final String token = ",";
+    static final String filePath = "../data/database.";
+    static final String fileExtension = ".csv";
 
 public FileWrite(LinkedList listToWrite){
 //LinkedList<String>lineList=new LinkedList<String>();
