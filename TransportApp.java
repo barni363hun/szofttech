@@ -1,156 +1,67 @@
-import java.util.Scanner;
-import classes.users.*;
-import classes.*;
+import java.util.*;
 import classes.file.*;
+import classes.roles.*;
+import classes.classes_from_data.*;
 
 public class TransportApp {
-    
-    User user;
-    Admin admin;
-    Courier[] couriers;
-    Customer[] customers;
-    Depot[] depots;
-    Warehouse warehouse;
-    Item[] items;
-    Message[] messages;
-    Order[] orders;
-    
-    FileManager fileManager;
-    
-    Scanner sc;
 
-    public TransportApp() {
-        sc = new Scanner(System.in);
+//ezek azok a class-ok amikbe belemennek a file-ok
+	FileRead customerList = new FileRead("customer");
+    LinkedList<Customer> customers = new LinkedList<>();
+    for(int i=1;i<customerList.getListSize();i++){
+    customers.add(new Customer(customerList.splitLine(i, customerList.token)));
     }
+    //Customer[] customers;
+	FileRead itemList = new FileRead("item");
+    //Item[] items;
+    FileRead orderList = new FileRead("order");
+    //Order[] orders;
+    FileRead userList = new FileRead("user");
+    User user;
 
-    public TransportApp(FileManager _fileManager) {
-        this.fileManager = _fileManager;
-        
-        // fileManager.getUsers();
-        // customerList = fileManager.getCustomers();
+//Ezek a szerep class-ok
+    Admin admin;
+    Courier courier;
+    User_Customer customer;
+    Depot depot;
+    Warehouse warehouse;
+
+    public void loginMenu(){
+        Login login=new Login();
+	    login.setUserNameTyped(userList.getRow(userList.token,0));
+	    login.setUserPasswordTyped(userList.getRow(userList.token,1)[login.line]);
+        User user=new User(userList.splitLine(login.line, userList.token));
     }
 
     public void startMenu(){
+/*
+    System.out.println("Szerepkor:");    
+    System.out.println("c - Futar");
+    System.out.println("d - Depo");    
+    System.out.println("a - Admin");     
+    System.out.println("w - Raktar");    
+    System.out.println("Enter - Felhasznalo");
+    System.out.println("");
+*/
 
-    // fileManager.saveData(Customer[] customerList, Depot[] depotList);
-
-    // select your role...
-    // Enter your User Name:
-    // ha kell akkor pwd
-    System.out.print("Type in your role:");    
-    System.out.print("c / a / u / d");
-
-    // user = fileManager.login();
-    String role = sc.nextLine();
-    if (roleCheck(role)) {
-        if(role != "customer"){
-            System.out.print("Input your username");
-            String username = sc.nextLine();
-            // fileManager.login() -> User | UserNotFoundException
-            if (login(username)) {
-                switch (role) {
-                    case "c": //courier
-                        currierMenu();
+                    switch (user.getUserType()) {
+                    case 'c': //courier
+                        Courier.Menu();
+                        break;   
+                    case 'a': //admin 
+                        // currentUser = ...
+                        //adminMenu();
                         break;
-                    case "d": //depo
-                        // currentUser = ...
-                        // courierMenu();
-                        break;    
-                    case "a": //admin 
-                        // currentUser = ...
-                        adminMenu();
+                    case 'd': //Depo 
+                        //depoMenu();
+                        break;
+                    case 'w': //Depo 
+                        //warehouseMenu();
                         break;
                     default:
+                        //customerMenu();
                         break;
                 }
-            }
-
-        } else {
-            customerMenu();
-        }
-    } else {
-        System.out.println("User found!");
-    }
-    System.out.print("Enter your User Name: ");
-
-    }
-    
-
-    private boolean login(String username) {
-        return false;
-    }
-    private boolean roleCheck(String role) {
-        return true;
     }
 
-    private void customerMenu(){
-        //menüpontok:
-        //- add to cart
-        //- remove from cart
-        //- list items
-        System.out.println("=====Customer=====");
-        System.out.println("1. Csomagkovetes");
-        System.out.println("2. Rendeles");
-        int menupont = Integer.parseInt(sc.nextLine());
-        switch (menupont) {
-            case 1:
-                 int azon = Integer.parseInt(sc.nextLine());
-                //getMegrendeles(azon);
-                break;
-            case 2:
-                //getItems();
-                break;
-            default:
-                break;
-        }
-
-    }
-
-    private void currierMenu(){
-        //menüpontok:
-        //- megrendelés lekérdezés
-        //  |- Sikeres / sikertelen kézbesítés
-        System.out.println("=====Currier=====");
-        System.out.print("Csomagazonosito: ");
-        int csomagAzon = Integer.parseInt(sc.nextLine());
-        //setKeeper(csomagAzon, "Futar");
-        //getCsomagById();
-
-    }
-    private void depoMenu(){
-        //menüpontok:
-        //- Csomaglekerdezes
-        //- Statuszmodositas
-        System.out.println("=====Depo=====");
-        System.out.print("Csomagazonosito: ");
-        int csomagAzon = Integer.parseInt(sc.nextLine());
-        //setKeeper(csomagAzon, "Depo");
-
-    }
-    private void adminMenu(){
-        System.out.println("=====Admin=====");
-        System.out.println("1. Megrenelesek");
-        System.out.println("2. Termeklista");
-        System.out.println("3. Termek hozzaad");
-        System.out.println("4. Termek torol");
-        int menupont = Integer.parseInt(sc.nextLine());
-        switch (menupont) {
-            case 1:
-                //listMegrendelesek();
-                break;
-            case 2:
-                //getItems();
-                break;
-            case 3:
-                //addItem();
-                break;
-            case 4:
-                System.out.print("IemId: ");
-                int itemId = Integer.parseInt(sc.nextLine());
-                //removeItem(itemId);
-                break;
-            default:
-                break;
-        }
-    }
 }
