@@ -1,17 +1,19 @@
 package classes.file;
-import java.util.*;
-import java.io.*;
 
-class ReadFile {
+import java.io.*;
+import java.util.*;
+
+public class FileWrite {
     static final String token = ",";
     static final String filePath = "../data/database.";
     static final String fileExtension = ".csv";
-    LinkedList<String> lineList = new LinkedList<String>();
 
-public FileWrite(String filename){
+public FileWrite(LinkedList listToWrite){
+//LinkedList<String>lineList=new LinkedList<String>();
 try{
 FileWriter writer = new FileWriter(this.filePath+filename+this.fileExtension);
-writer.write();
+for(int i=0;i<classToWrite.size();i++){
+writer.write(listToWrite);}
 writer.close();}
 catch{e.printStackTrace();}
 }
