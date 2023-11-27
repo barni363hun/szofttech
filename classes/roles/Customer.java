@@ -1,13 +1,15 @@
 package classes.roles;
 
 import java.util.LinkedList;
-
+import classes.Item;
 import classes.Order;
 import classes.classes_from_data.User;
 
-public class Depot extends User {
+public class Customer extends User{
     
-    public Depot(User u) {
+    public LinkedList<Item> cart; 
+
+    public Customer(User u) {
         super(u);
     }
 }
