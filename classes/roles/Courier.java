@@ -16,7 +16,7 @@ public class Courier extends User {
     Scanner sc = new Scanner(System.in);
     Order order = new Order();
 
-    public static void Menu() {
+    static public static void Menu() {
         // menüpontok:
         // - megrendelés lekérdezés
         // |- Sikeres / sikertelen kézbesítés
