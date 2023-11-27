@@ -10,6 +10,14 @@ public class TransportApp {
     LinkedList<Item> items;
     LinkedList<Order> orders;
     LinkedList<User> users;
+    // Ezek a szerep class-ok
+    Admin admin;
+    Courier courier;
+    User_Customer customer;
+    Depot depot;
+    Warehouse warehouse;
+
+    Scanner sc = new Scanner(System.in);
 
     public TransportApp() {
         // ezek azok a class-ok amikbe belemennek a file-ok
@@ -27,13 +35,6 @@ public class TransportApp {
         User user;
     }
 
-    // Ezek a szerep class-ok
-    Admin admin;
-    Courier courier;
-    User_Customer customer;
-    Depot depot;
-    Warehouse warehouse;
-
     public void loginMenu() {
         Login login = new Login();
         login.setUserNameTyped(userList.getRow(userList.token, 0));
@@ -43,6 +44,7 @@ public class TransportApp {
 
     public void startMenu() {
         /*
+         * System.out.println("=====Főmenü=====");
          * System.out.println("Szerepkor:");
          * System.out.println("c - Futar");
          * System.out.println("d - Depo");
@@ -52,24 +54,39 @@ public class TransportApp {
          * System.out.println("");
          */
 
-        switch (user.getUserType()) {
-            case 'c': // courier
-                Courier.Menu();
-                break;
-            case 'a': // admin
-                // currentUser = ...
-                // adminMenu();
-                break;
-            case 'd': // Depo
-                // depoMenu();
-                break;
-            case 'w': // Depo
-                // warehouseMenu();
-                break;
-            default:
-                // customerMenu();
-                break;
+        String input = sc.next();
+        if (input.length() > 0) {
+            char character = input.charAt(0);
+
+            switch (character) {
+                case 'c':
+                    System.out.println("=====Courier=====");
+                    System.out.println("r - Raktárhoz megérkeztem, csomag felvétele");
+                    System.out.println("y - Csomagot kiszállítottam");
+                    System.out.println("n - Csomagot nem sikerült kiszállítani");
+                    System.out.print("k - kilépés: ");
+                    break;
+                case 'a':
+                    System.out.println("=====Admin=====");
+                    System.out.println("f - futár felvétele");
+                    System.out.println("r - raktár felvétele");
+                    System.out.println("t - termék módosítás");
+                    break;
+                case 'd': // Depo
+                    // depoMenu();
+                    break;
+                case 'w': // Depo
+                    // warehouseMenu();
+                    break;
+                default:
+                    // customerMenu();
+                    break;
+            }
+        } else {
+            // TODO throw exception
+            System.out.println("No character entered.");
         }
+
     }
 
 }
