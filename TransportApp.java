@@ -65,8 +65,8 @@ public class TransportApp {
         items.add(itemI);
         items.add(itemJ);
 
-        Customer r1 = new Customer(new User(1, "András"));
-        Customer r2 = new Customer(new User(2, "Gábor"));
+        Customer r1 = new Customer(new User(1, "Andras"));
+        Customer r2 = new Customer(new User(2, "Gabor"));
         Customer r3 = new Customer(new User(3, "Feri"));
         customers.add(r1);
         customers.add(r2);
@@ -86,8 +86,8 @@ public class TransportApp {
         orders.add(order2);
         orders.add(order3);
 
-        couriers.add(new Courier(new User(1, "András")));
-        depots.add(new Depot(new User(2, "Balázs")));
+        couriers.add(new Courier(new User(1, "Andras")));
+        depots.add(new Depot(new User(2, "Balazs")));
         // orders.add(new Order()); // todo custom constructor-ok
         // items.add(new Item());
 
@@ -129,15 +129,15 @@ public class TransportApp {
     }
 
     public void startMenu() {
-        printMenu("Főmenü", Map.of(
-                "c", "Futár",
-                "d", "Depo",
-                // "a", "Admin",
-                "w", "Raktár",
-                "v", "Vevő",
-                "k", "Kilépés"));
         boolean exit = false;
         while (!exit) {
+            printMenu("Főmenü", Map.of(
+                    "c", "Futár",
+                    "d", "Depo",
+                    // "a", "Admin",
+                    "w", "Raktár",
+                    "v", "Vevő",
+                    "k", "Kilépés"));
             char c = getChar();
             // if ("cdvk".contains(String.valueOf(c))) {
             //     // User u = login();
@@ -167,22 +167,21 @@ public class TransportApp {
     }
 
     private void customerMenu(Customer c) {
-        printMenu("Customer", Map.of(
-                // "1", "Csomaghoz tartozó üzenetek lekérdezése",
-                "2", "Termék kosárba rakása",
-                "3", "Termék törlése a kosárból",
-                "4", "Kosár tartalmának megtekintése",
-                "5", "Kosár tartalmának megrendelése",
-                "k", "Kilépés"));
-
         boolean exit = false;
         while (!exit) {
+            printMenu("Customer", Map.of(
+                    // "1", "Csomaghoz tartozó üzenetek lekérdezése",
+                    "2", "Termék kosárba rakása",
+                    "3", "Termék törlése a kosárból",
+                    "4", "Kosár tartalmának megtekintése",
+                    "5", "Kosár tartalmának megrendelése",
+                    "k", "Kilépés"));
             switch (getChar()) {
                 case '2':
-                    printMenu("Termék kosárba rakása", Map.of());
+                    printMenu("Termék kosárba rakása", Map.of("k", "Kilépés"));
                     c.cart.add(getItemById());
                 case '3':
-                    printMenu("Termék törlése a kosárból", Map.of());
+                    printMenu("Termék törlése a kosárból", Map.of("k", "Kilépés"));
                     c.cart.remove(getItemById());
                     break;
                 case '4':
@@ -195,11 +194,11 @@ public class TransportApp {
                     printMenu("Kosár tartalmának megrendelése", Map.of());
                     orders.add(new Order(random.nextInt(1000,Integer.MAX_VALUE), depots.getFirst(), c, c.cart));
                     break;
-                default:
-                    System.out.println("Nincs ilyen menüpont!");
-                    break;
                 case 'k':
                     exit = true;
+                    break;
+                default:
+                    System.out.println("Nincs ilyen menüpont!");
                     break;
 
             }
@@ -207,15 +206,15 @@ public class TransportApp {
     }
 
     private void courierMenu(Courier currentCourier) {
-        printMenu("Courier", Map.of(
-                "1", "Csomag felvétele a raktárból",
-                "2", "Csomag kiszállítva",
-                "3", "Csomag kiszállítása sikertelen",
-                "k", "Kilépés"));
         printOrders();
         Order currentOrder = getOrderById();
         boolean exit = false;
         while (!exit) {
+            printMenu("Courier", Map.of(
+                    "1", "Csomag felvétele a raktárból",
+                    "2", "Csomag kiszállítva",
+                    "3", "Csomag kiszállítása sikertelen",
+                    "k", "Kilépés"));
             switch (getChar()) {
                 case '1':
                     printMenu("Csomag felvéve", Map.of());
@@ -240,11 +239,11 @@ public class TransportApp {
     }
 
     private void depotMenu(Depot depo) {
-        printMenu("Depo", Map.of(
-                "1", "Csomag átvétele",
-                "k", "Kilépés"));
         boolean exit = false;
         while (!exit) {
+            printMenu("Depo", Map.of(
+                    "1", "Csomag átvétele",
+                    "k", "Kilépés"));
             switch (getChar()) {
                 case '1':
                     printMenu("Csomag felvéve", Map.of());
@@ -266,6 +265,7 @@ public class TransportApp {
     }
     
     private Customer findInCustomers() {
+        // eze undorító
         System.out.println("Kerem a vevo nevet: ");
         String name = sc.next();
         Customer ret = null;
@@ -273,14 +273,16 @@ public class TransportApp {
         while (!exit) {
             for (Customer e : customers) {
                 if (e.userName.equals(name)) {
-                    ret = e;
                     exit = true;
+                    return  e;
                 }
             }
-            System.out.println("\nNincs talalat!\nKerem a vevo nevet: ");
-            name = sc.next();
+            // if(ret == null) {
+                System.out.println("\nNincs talalat!\nKerem a vevo nevet: ");
+                name = sc.next();
+            // }
         }
-        return ret;
+        return null; //null
     }
 
     private Courier findInCouriers() {
