@@ -172,18 +172,21 @@ public class TransportApp {
             printMenu("Customer", Map.of(
                     // "1", "Csomaghoz tartozó üzenetek lekérdezése",
                     "2", "Termék kosárba rakása",
-                    "3", "Termék törlése a kosárból",
+                    // "3", "Termék törlése a kosárból",
                     "4", "Kosár tartalmának megtekintése",
                     "5", "Kosár tartalmának megrendelése",
                     "k", "Kilépés"));
             switch (getChar()) {
                 case '2':
-                    printMenu("Termék kosárba rakása", Map.of("k", "Kilépés"));
+                    printMenu("Termék kosárba rakása", Map.of("hibás azonosító", "Kilépés"));
                     c.cart.add(getItemById());
-                case '3':
-                    printMenu("Termék törlése a kosárból", Map.of("k", "Kilépés"));
-                    c.cart.remove(getItemById());
+                    System.out.println("A kosárban "+ c.cart.size() + " termék van");
                     break;
+                // case '3':
+                //     printMenu("Termék törlése a kosárból", Map.of("k", "Kilépés"));
+                //     //TODO
+                //     c.cart.remove();
+                //     break;
                 case '4':
                     printMenu("Kosár tartalmának megtekintése", Map.of());
                     for (Item item : c.cart) {
@@ -193,6 +196,8 @@ public class TransportApp {
                 case '5':
                     printMenu("Kosár tartalmának megrendelése", Map.of());
                     orders.add(new Order(random.nextInt(1000,Integer.MAX_VALUE), depots.getFirst(), c, c.cart));
+                    c.cart.removeAll(c.cart);
+                    System.out.println("Megrendelés leadva, kosár ürítve!");
                     break;
                 case 'k':
                     exit = true;
@@ -268,7 +273,6 @@ public class TransportApp {
         // eze undorító
         System.out.println("Kerem a vevo nevet: ");
         String name = sc.next();
-        Customer ret = null;
         Boolean exit = false;
         while (!exit) {
             for (Customer e : customers) {
@@ -277,48 +281,44 @@ public class TransportApp {
                     return  e;
                 }
             }
-            // if(ret == null) {
-                System.out.println("\nNincs talalat!\nKerem a vevo nevet: ");
-                name = sc.next();
-            // }
+            System.out.println("\nNincs talalat!\nKerem a vevo nevet: ");
+            name = sc.next();
         }
-        return null; //null
+        return null;
     }
 
     private Courier findInCouriers() {
         System.out.println("Kerem a futar nevet: ");
         String name = sc.next();
-        Courier ret = null;
         Boolean exit = false;
         while (!exit) {
             for (Courier e : couriers) {
                 if (e.userName.equals(name)) {
-                    ret = e;
                     exit = true;
+                    return  e;
                 }
             }
             System.out.println("\nNincs talalat!\nKerem a futar nevet: ");
             name = sc.next();
         }
-        return ret;
+        return null;
     }
 
     private Depot findInDepot() {
         System.out.println("Kerem a depo nevet: ");
         String name = sc.next();
-        Depot ret = null;
         Boolean exit = false;
         while (!exit) {
             for (Depot e : depots) {
                 if (e.userName.equals(name)) {
-                    ret = e;
                     exit = true;
+                    return  e;
                 }
             }
             System.out.println("\nNincs talalat!\nKerem a depo nevet: ");
             name = sc.next();
         }
-        return ret;
+        return null;
     }
 
     private void printItems() {
