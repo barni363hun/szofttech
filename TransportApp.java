@@ -10,12 +10,13 @@ import classes.classes_from_data.User;
 
 public class TransportApp {
 
-    // LinkedList<Customer> customers;
+    LinkedList<Customer> customers;
     LinkedList<Item> items = new LinkedList<Item>();
     LinkedList<Order> orders = new LinkedList<Order>();
     LinkedList<Courier> couriers = new LinkedList<Courier>();
     LinkedList<Depot> depots = new LinkedList<Depot>();
     LinkedList<Customer> customers = new LinkedList<Customer>();
+    User user;
     Random random = new Random();
 
     // Message message;
@@ -25,6 +26,18 @@ public class TransportApp {
     public TransportApp() {
         // LinkedList<User> users = new LinkedList<User>();
         // users.add(new User(3,"Barnabás"));
+
+        /*ez töltené be a customer list-et
+        customers = new LinkedList<Customer>();
+		for (int i = 0; i < customerList.getListSize(); i++) {
+			customers.add( new Customer(customerList.splitLine(i)));
+		}*/
+/*ez lenne a login
+        Login login = new Login();
+		login.setUserNameTyped(userList.getRow(0));
+		System.out.println(login.line);
+		login.setUserPasswordTyped(userList.getRow(1)[login.line]);
+		user = new User(userList.splitLine(login.line));*/
 
         // ---Itemek
         LinkedList<Item> item1 = new LinkedList<Item>();
