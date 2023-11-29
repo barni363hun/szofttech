@@ -1,8 +1,0 @@
-//ReadFile(String filename)			- betolti a file-t
-//getListSize()					- visszaadja a sorok szamat
-//getList()					- visszaadja a listat
-//getLine(int number)				- visszaadja a megadott sort
-//splitLine(int number, String token)		- szetszedi a sort a tokenek menten
-//splittedLineSize(String[] splittedLine)	- visszaadja a megadott szetdarabolt sor elemeinek szamat
-//getMaxElements(String token)			- visszaadja a legtobb elem szamat az osszes sor kozul
-//createTable(String token)			- atalakitja az osszes listat ket dimenzios tombre
