@@ -14,13 +14,13 @@ public class Order {
         StringBuilder dataString = new StringBuilder("Order ID: " + id);
 
         if (keeper != null) {
-            dataString.append(", Keeper: ").append(keeper.userName);
+            dataString.append(", Keeper: ").append(keeper.getUserName());
         } else {
             dataString.append(", Keeper: Not assigned");
         }
 
         if (receiver != null) {
-            dataString.append(", Receiver: ").append(receiver.userName);
+            dataString.append(", Receiver: ").append(receiver.getUserName());
         } else {
             dataString.append(", Receiver: Not assigned");
         }

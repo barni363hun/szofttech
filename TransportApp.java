@@ -1,21 +1,23 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
+
+import classes.classes_from_data.*;
 import classes.file.*;
 import classes.roles.*;
-import classes.Item;
-import classes.Order;
-import classes.classes_from_data.User;
+import classes.*;
 
 public class TransportApp {
-
-    LinkedList<Customer> customers;
     LinkedList<Item> items = new LinkedList<Item>();
     LinkedList<Order> orders = new LinkedList<Order>();
     LinkedList<Courier> couriers = new LinkedList<Courier>();
     LinkedList<Depot> depots = new LinkedList<Depot>();
     LinkedList<Customer> customers = new LinkedList<Customer>();
+
+
+    FileRead customerList = new FileRead("customer");
+	FileRead itemList = new FileRead("item");
+	FileRead orderList = new FileRead("order");
+	FileRead userList = new FileRead("user");
     User user;
     Random random = new Random();
 
@@ -24,83 +26,58 @@ public class TransportApp {
     // Admin admin = new Admin();
 
     public TransportApp() {
+        
         // LinkedList<User> users = new LinkedList<User>();
         // users.add(new User(3,"Barnabás"));
 
-        /*ez töltené be a customer list-et
-        customers = new LinkedList<Customer>();
-		for (int i = 0; i < customerList.getListSize(); i++) {
-			customers.add( new Customer(customerList.splitLine(i)));
-		}*/
-/*ez lenne a login
+        //Depo-courier load
+		for (int i = 1; i < userList.getListSize(); i++) {
+            String temp[] = userList.splitLine(i);
+            
+            switch (temp[2]) {
+                case "C":
+                    couriers.add(new Courier(new User(temp)));
+                    break;
+                case "D":
+                    depots.add(new Depot(new User(temp)));
+                    break;
+                default:
+                    break;
+            }
+		}
+
+
+        //Order lista feltolt
+        for (int i = 1; i < orderList.getListSize(); i++) {
+			// orders.add(new Order(orderList.splitLine(i)));
+        }
+
+
+		for (int i = 1; i < customerList.getListSize(); i++) {
+            //Szállítási adatok, elérhetőségek, stb
+			//customers.add(new Customer(customerList.splitLine(i)));
+        }
         Login login = new Login();
 		login.setUserNameTyped(userList.getRow(0));
-		System.out.println(login.line);
 		login.setUserPasswordTyped(userList.getRow(1)[login.line]);
-		user = new User(userList.splitLine(login.line));*/
+		user = new User(userList.splitLine(login.line));
 
-        // ---Itemek
-        LinkedList<Item> item1 = new LinkedList<Item>();
-        LinkedList<Item> item2 = new LinkedList<Item>();
-        LinkedList<Item> item3 = new LinkedList<Item>();
-
-        Item itemA = new Item(1, "Asztal", 1000);
-        Item itemB = new Item(2, "Szek", 4000);
-        Item itemC = new Item(3, "Terito", 2000);
-
-        Item itemE = new Item(4, "Terito", 888);
-        Item itemF = new Item(5, "Vaza", 444);
-        Item itemG = new Item(6, "Nagyvaza", 1999);
-
-        Item itemH = new Item(7, "Konyv", 3567);
-        Item itemI = new Item(8, "Konyv2", 3990);
-        Item itemJ = new Item(9, "NemKonyv", 2990);
-
-        item1.add(itemA);
-        item1.add(itemB);
-        item1.add(itemC);
-
-        item2.add(itemE);
-        item2.add(itemF);
-        item2.add(itemG);
-
-        item3.add(itemH);
-        item3.add(itemI);
-        item3.add(itemJ);
-
-        items.add(itemA);
-        items.add(itemB);
-        items.add(itemC);
-        items.add(itemE);
-        items.add(itemF);
-        items.add(itemG);
-        items.add(itemH);
-        items.add(itemI);
-        items.add(itemJ);
-
-        Customer r1 = new Customer(new User(1, "Andras"));
-        Customer r2 = new Customer(new User(2, "Gabor"));
-        Customer r3 = new Customer(new User(3, "Feri"));
-        customers.add(r1);
-        customers.add(r2);
-        customers.add(r3);
-
-
-        Depot d1 = new Depot(new User(4, "Depo1"));
-        Courier c1 = new Courier(new User(5, "Futar1"));
+////
+//        Depot d1 = new Depot(new User(4, "Depo1"));
+        //Courier c1 = new Courier(new User(5, "Futar1"));
 
         // ---Order Order(int id, User keeper, Customer receiver, LinkedList<Item>
         // items)
-        Order order1 = new Order(100, d1, r1, item1);
-        Order order2 = new Order(101, c1, r2, item2);
-        Order order3 = new Order(102, c1, r3, item3);
+        // Order order1 = new Order(100, d1, r1, item1);
+        // Order order2 = new Order(101, c1, r2, item2);
+        // Order order3 = new Order(102, c1, r3, item3);
 
-        orders.add(order1);
-        orders.add(order2);
-        orders.add(order3);
+        // orders.add(order1);
+        // orders.add(order2);
+        // orders.add(order3);
 
-        couriers.add(new Courier(new User(1, "Andras")));
-        depots.add(new Depot(new User(2, "Balazs")));
+        // couriers.add(new Courier(new User(1, "Andras")));
+        // depots.add(new Depot(new User(2, "Balazs")));
         // orders.add(new Order()); // todo custom constructor-ok
         // items.add(new Item());
 
@@ -131,7 +108,7 @@ public class TransportApp {
         }
     }
 
-    private void printMenu(String title, Map<String, String> menupoints) {
+    private  void printMenu(String title, Map<String, String> menupoints) {
         System.out.println("====" + title + "====");
         if (menupoints.size() > 0) {
             for (Map.Entry<String, String> entry : menupoints.entrySet()) {
@@ -142,64 +119,79 @@ public class TransportApp {
     }
 
     public void startMenu() {
-        boolean exit = false;
-        while (!exit) {
-            printMenu("Főmenü", Map.of(
-                    "c", "Futár",
-                    "d", "Depo",
-                    // "a", "Admin",
-                    "w", "Raktár",
-                    "v", "Vevő",
-                    "k", "Kilépés"));
-            char c = getChar();
-            // if ("cdvk".contains(String.valueOf(c))) {
-            //     // User u = login();
-                switch (c) {
-                    case 'c':
-                        courierMenu(findInCouriers());
-                        break;
-                    case 'd':
-                        depotMenu(findInDepot());
-                        break;
-                    case 'v':
-                        customerMenu(findInCustomers());
-                        break;
-                    case 'k':
-                        exit = true;
-                        break;
-                    default:
-                        System.out.println("Nincs ilyen menüpont!");
-                        break;
-                }
+        //System.out.println("=====\n" + user.getUserType() + "\n=====" );
+        switch (user.getUserType()) {
+            case 'C': // futar
+                courierMenu(user);
+                break;
+            case 'D': // Depo
+                depotMenu(user);
+                break;
+            case 'V': // vevo
+                customerMenu(new Customer(user));
+                break;
+            default:
+                break;
+        }
+
+
+
+        // boolean exit = false;
+        // while (!exit) {
+        //     printMenu("Fomenu", Map.of(
+        //             "c", "Futar",
+        //             "d", "Depo",
+        //             // "a", "Admin",
+        //             "w", "Raktar",
+        //             "v", "Vevo",
+        //             "k", "Kilépes"));
+        //     char c = getChar();
+        //     // if ("cdvk".contains(String.valueOf(c))) {
+        //     //     // User u = login();
+        //         switch (c) {
+        //             case 'c':
+        //                 courierMenu(findInCouriers());
+        //                 break;
+        //             case 'd':
+        //                 depotMenu(findInDepot());
+        //                 break;
+        //             case 'v':
+        //                 customerMenu(findInCustomers());
+        //                 break;
+        //             case 'k':
+        //                 exit = true;
+        //                 break;
+        //             default:
+        //                 System.out.println("Nincs ilyen menüpont!");
+        //                 break;
+        //         }
             // } else if (c == 'v') {
             //     // TODO bekérni a felhasználónevet és átadni
             // } else if (c == 'k') {
             // } else {
             // }
-        }
+        //}
     }
 
+    //private void customerMenu(Customer c) {
     private void customerMenu(Customer c) {
         boolean exit = false;
         while (!exit) {
             printMenu("Customer", Map.of(
                     // "1", "Csomaghoz tartozó üzenetek lekérdezése",
                     "2", "Termék kosárba rakása",
-                    // "3", "Termék törlése a kosárból",
+                    "3", "Termék törlése a kosárból",
                     "4", "Kosár tartalmának megtekintése",
                     "5", "Kosár tartalmának megrendelése",
                     "k", "Kilépés"));
             switch (getChar()) {
                 case '2':
-                    printMenu("Termék kosárba rakása", Map.of("hibás azonosító", "Kilépés"));
+                    printMenu("Termék kosárba rakása", Map.of("k", "Kilépés"));
                     c.cart.add(getItemById());
-                    System.out.println("A kosárban "+ c.cart.size() + " termék van");
+                case '3':
+                    printMenu("Termék törlése a kosárból", Map.of("k", "Kilépés"));
+                    c.cart.remove(getItemById());
                     break;
-                // case '3':
-                //     printMenu("Termék törlése a kosárból", Map.of("k", "Kilépés"));
-                //     //TODO
-                //     c.cart.remove();
-                //     break;
                 case '4':
                     printMenu("Kosár tartalmának megtekintése", Map.of());
                     for (Item item : c.cart) {
@@ -209,8 +201,6 @@ public class TransportApp {
                 case '5':
                     printMenu("Kosár tartalmának megrendelése", Map.of());
                     orders.add(new Order(random.nextInt(1000,Integer.MAX_VALUE), depots.getFirst(), c, c.cart));
-                    c.cart.removeAll(c.cart);
-                    System.out.println("Megrendelés leadva, kosár ürítve!");
                     break;
                 case 'k':
                     exit = true;
@@ -223,7 +213,8 @@ public class TransportApp {
         }
     }
 
-    private void courierMenu(Courier currentCourier) {
+    //private void courierMenu(Courier currentCourier) {
+    private void courierMenu(User currentCourier) {
         printOrders();
         Order currentOrder = getOrderById();
         boolean exit = false;
@@ -256,7 +247,8 @@ public class TransportApp {
         }
     }
 
-    private void depotMenu(Depot depo) {
+       // private void depotMenu(Depot depo) {
+        private void depotMenu(User depo) {
         boolean exit = false;
         while (!exit) {
             printMenu("Depo", Map.of(
@@ -289,49 +281,53 @@ public class TransportApp {
         Boolean exit = false;
         while (!exit) {
             for (Customer e : customers) {
-                if (e.userName.equals(name)) {
+                if (e.getUserName().equals(name)) {
                     exit = true;
                     return  e;
                 }
             }
-            System.out.println("\nNincs talalat!\nKerem a vevo nevet: ");
-            name = sc.next();
+            // if(ret == null) {
+                System.out.println("\nNincs talalat!\nKerem a vevo nevet: ");
+                name = sc.next();
+            // }
         }
-        return null;
+        return null; //null
     }
 
     private Courier findInCouriers() {
         System.out.println("Kerem a futar nevet: ");
         String name = sc.next();
+        Courier ret = null;
         Boolean exit = false;
         while (!exit) {
             for (Courier e : couriers) {
-                if (e.userName.equals(name)) {
+                if (e.getUserName().equals(name)) {
+                    ret = e;
                     exit = true;
-                    return  e;
                 }
             }
             System.out.println("\nNincs talalat!\nKerem a futar nevet: ");
             name = sc.next();
         }
-        return null;
+        return ret;
     }
 
     private Depot findInDepot() {
         System.out.println("Kerem a depo nevet: ");
         String name = sc.next();
+        Depot ret = null;
         Boolean exit = false;
         while (!exit) {
             for (Depot e : depots) {
-                if (e.userName.equals(name)) {
+                if (e.getUserName().equals(name)) {
+                    ret = e;
                     exit = true;
-                    return  e;
                 }
             }
             System.out.println("\nNincs talalat!\nKerem a depo nevet: ");
             name = sc.next();
         }
-        return null;
+        return ret;
     }
 
     private void printItems() {

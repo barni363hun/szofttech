@@ -8,8 +8,8 @@ public class Login {
 	public String userNameTyped;
 	public String userPasswordTyped;
 	public int line;
-	
 	public void setUserNameTyped(String[] s) {
+
 		System.out.print("Enter your User Name: ");
 		Scanner sc = new Scanner(System.in);
 		this.userNameTyped = sc.nextLine();
@@ -32,6 +32,7 @@ public class Login {
 	}
 
 	public void setUserPasswordTyped(String s) {
+
 		char[] userPasswordMasked = System.console().readPassword("Enter your Password: ");
 		for (int i = 0; i < userPasswordMasked.length; i++) {
 			System.out.print("*");
@@ -44,6 +45,7 @@ public class Login {
 		} else {
 			System.out.println("You are now logged in!");
 		}
+
 	}
 
 	public boolean passwordCheck(String s) {
@@ -52,5 +54,5 @@ public class Login {
 		}
 		return false;
 	}
-	
+
 }
