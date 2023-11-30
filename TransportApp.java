@@ -1,23 +1,24 @@
 import java.io.*;
 import java.util.*;
 
-import classes.classes_from_data.*;
+import classes.user.*;
 import classes.file.*;
-import classes.order.Order;
+import classes.item.ItemController;
+import classes.item.ItemModel;
+import classes.order.*;
 import classes.user_depot.*;
-import classes.user_customer.*;
 import classes.user_courier.*;
 import classes.*;
 
 public class TransportApp {
-    LinkedList<Item> items;
-    LinkedList<Order> orders = new LinkedList<Order>();
-    LinkedList<Courier> couriers = new LinkedList<Courier>();
-    LinkedList<Depot> depots = new LinkedList<Depot>();
+    // LinkedList<OrderM> orders = new LinkedList<Order>();
+    // LinkedList<Courier> couriers = new LinkedList<Courier>();
+    LinkedList<DepotModel> depot = new LinkedList<DepotModel>();
     LinkedList<CustomerModel> customers;
-
-fileLoad();
     CustomerView customerView = new CustomerView();
+    
+    DepotController depotController = new DepotController();
+    CourierController courierController = new CourierController();
 
     FileRead customerList = new FileRead("customer");
 	FileRead itemList = new FileRead("item");
@@ -41,10 +42,10 @@ fileLoad();
             
             switch (temp[2]) {
                 case "C":
-                    couriers.add(new Courier(new User(temp)));
+                    courierController.addToCourier(new CourierModel(new User(temp)));
                     break;
                 case "D":
-                    depots.add(new Depot(new User(temp)));
+                    depotController.addToDepot(new DepotModel(new User(temp)));
                     break;
                 default:
                     break;
@@ -67,59 +68,32 @@ fileLoad();
 		login.setUserPasswordTyped(userList.getRow(1)[login.line]);
 		user = new User(userList.splitLine(login.line));
 
-        if user.type = customer
-         c = new CustomerView(user) 
-
-////
-//        Depot d1 = new Depot(new User(4, "Depo1"));
-        //Courier c1 = new Courier(new User(5, "Futar1"));
-
-        // ---Order Order(int id, User keeper, Customer receiver, LinkedList<Item>
-        // items)
-        // Order order1 = new Order(100, d1, r1, item1);
-        // Order order2 = new Order(101, c1, r2, item2);
-        // Order order3 = new Order(102, c1, r3, item3);
-
-        // orders.add(order1);
-        // orders.add(order2);
-        // orders.add(order3);
-
-        // couriers.add(new Courier(new User(1, "Andras")));
-        // depots.add(new Depot(new User(2, "Balazs")));
-        // orders.add(new Order()); // todo custom constructor-ok
-        // items.add(new Item());
-
-        // ezek azok a class-ok amikbe belemennek a file-ok
-        // FileRead customerList = new FileRead("customer");
-        // LinkedList<Customer> customers = new LinkedList<>();
-        // for (int i = 1; i < customerList.getListSize(); i++) {
-        // customers.add(new Customer(customerList.splitLine(i, customerList.token)));
-        // }
-        // // Customer[] customers;
-        // FileRead itemList = new FileRead("item");
-        // // Item[] items;
-        // FileRead orderList = new FileRead("order");
-        // // Order[] orders;
-        // FileRead users = new FileRead("user");
-        sc = new Scanner(System.in);
+        switch (user.getUserType()) {
+            case 'C': // futar
+                // CourierView c = new CourierView(user);
+                break;
+            case 'D': // Depo
+                new DepotView().depotMenu(
+                    new DepotController(user),
+                    new OrderController());
+                break;
+            case 'V': // vevo
+                new CustomerView().customerMenu(
+                    new CustomerController(user),
+                    new ItemController(),
+                    new OrderController(),
+                    new DepotController());
+                break;
+            default:
+                break;
+        }
+        
     }
 
 
     public void startMenu() {
         //System.out.println("=====\n" + user.getUserType() + "\n=====" );
-        switch (user.getUserType()) {
-            case 'C': // futar
-                CourierView(user);
-                break;
-            case 'D': // Depo
-                DepotView();
-                break;
-            case 'V': // vevo
-                CustomerView();
-                break;
-            default:
-                break;
-        }
+        
 
 
 
@@ -235,51 +209,32 @@ fileLoad();
     }
 
        // private void depotMenu(Depot depo) {
-        private void depotMenu(User depo) {
-        boolean exit = false;
-        while (!exit) {
-            printMenu("Depo", Map.of(
-                    "1", "Csomag átvétele",
-                    "k", "Kilépés"));
-            switch (getChar()) {
-                case '1':
-                    printMenu("Csomag felvéve", Map.of());
-                    Order currentOrder = getOrderById();
-                    if (currentOrder.keeper instanceof Courier) {
-                        currentOrder.keeper = depo;
-                    } else {
-                        System.out.println("Ez a csomag nem futárnál van!");
-                    }
-                    break;
-                case 'k':
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Nincs ilyen menüpont!");
-                    break;
-            }
-        }
-    }
+    //     private void depotMenu(User depo) {
+    //     boolean exit = false;
+    //     while (!exit) {
+    //         printMenu("Depo", Map.of(
+    //                 "1", "Csomag átvétele",
+    //                 "k", "Kilépés"));
+    //         switch (getChar()) {
+    //             case '1':
+    //                 printMenu("Csomag felvéve", Map.of());
+    //                 Order currentOrder = getOrderById();
+    //                 if (currentOrder.keeper instanceof Courier) {
+    //                     currentOrder.keeper = depo;
+    //                 } else {
+    //                     System.out.println("Ez a csomag nem futárnál van!");
+    //                 }
+    //                 break;
+    //             case 'k':
+    //                 exit = true;
+    //                 break;
+    //             default:
+    //                 System.out.println("Nincs ilyen menüpont!");
+    //                 break;
+    //         }
+    //     }
+    // }
     
-    private CustomerModel findInCustomers() {
-        // eze undorító
-        System.out.println("Kerem a vevo nevet: ");
-        String name = sc.next();
-        Boolean exit = false;
-        while (!exit) {
-            for (CustomerModel e : customers) {
-                if (e.getUserName().equals(name)) {
-                    exit = true;
-                    return  e;
-                }
-            }
-            // if(ret == null) {
-                System.out.println("\nNincs talalat!\nKerem a vevo nevet: ");
-                name = sc.next();
-            // }
-        }
-        return null; //null
-    }
 
     private Courier findInCouriers() {
         System.out.println("Kerem a futar nevet: ");

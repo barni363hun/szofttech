@@ -3,17 +3,17 @@ package classes.user_courier;
 import java.util.Map;
 
 import classes.ViewUtils;
+import classes.item.ItemView;
+import classes.user.User;
 
 public class CourierView {
 
-    User user = new User user();
+    public CourierView() {
+        courierMenu();
+    }
 
- public CourierView(User user, ItemView iv) {
-    courierMenu();
- }
-
-private void courierMenu() {
-    printOrders();
+    private void courierMenu() {
+        printOrders();
         Order currentOrder = getOrderById();
         boolean exit = false;
         while (!exit) {
@@ -24,15 +24,15 @@ private void courierMenu() {
                     "k", "Kilépés"));
             switch (ViewUtils.getChar()) {
                 case '1':
-                     ViewUtils.printMenu("Csomag felvéve", Map.of());
+                    ViewUtils.printMenu("Csomag felvéve", Map.of());
                     currentOrder.keeper = currentCourier;
                     break;
                 case '2':
-                     ViewUtils.printMenu("Sikeres kézbesítés", Map.of());
+                    ViewUtils.printMenu("Sikeres kézbesítés", Map.of());
                     currentOrder.keeper = currentOrder.receiver;
                     break;
                 case '3':
-                     ViewUtils.printMenu("Sikertelen kézbesítés", Map.of());
+                    ViewUtils.printMenu("Sikertelen kézbesítés", Map.of());
                     currentOrder.keeper = depots.getFirst();
                     break;
                 case 'k':
@@ -43,6 +43,6 @@ private void courierMenu() {
                     break;
             }
         }
-}
+    }
 
 }

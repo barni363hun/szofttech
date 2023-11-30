@@ -1,4 +1,4 @@
-package classes.roles.customer;
+package classes.user_customer;
 
 import java.util.LinkedList;
 import classes.*;
@@ -19,8 +19,6 @@ public class CustomerModel extends User{
 	String customerEmail;
 
     public LinkedList<ItemModel> cart = new LinkedList<ItemModel>();
-
-    
 
 	public CustomerModel(String[] s) {
 		setCustomerFirstName(s[0]);

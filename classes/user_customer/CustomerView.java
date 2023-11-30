@@ -1,52 +1,63 @@
-package classes.roles.customer;
+package classes.user_customer;
 
-import classes.classes_from_data.User;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Random;
+import java.util.Scanner;
+
+import classes.ViewUtils;
+import classes.item.ItemController;
+import classes.item.ItemModel;
+import classes.item.ItemView;
+import classes.order.OrderController;
+import classes.order.OrderModel;
+import classes.user.User;
+import classes.user_customer.CustomerModel;
+import classes.user_depot.DepotController;
 
 public class CustomerView {
 
-    CustomerController customerController = null;
-    ItemView itemView = null;
     ViewUtils viewUtils = null;
+    Scanner sc = new Scanner(System.in);
 
-    public CustomerView(User user, ItemView iv) {
-        customerController = new CustomerController(user);
-        itemView = iv;
-        customerMenu();
-    }
+    public CustomerView() {}
 
-    public void customerMenu(){
-
+    public void customerMenu(CustomerController customerController, 
+        ItemController itemController,
+        OrderController orderController,DepotController depotController){
         boolean exit = false;
                 while (!exit) {
-                    printMenu("Customer", Map.of(
+                    ViewUtils.printMenu("Customer", Map.of(
                             // "1", "Csomaghoz tartozó üzenetek lekérdezése",
                             "2", "Termék kosárba rakása",
                             "3", "Termék törlése a kosárból",
                             "4", "Kosár tartalmának megtekintése",
                             "5", "Kosár tartalmának megrendelése",
                             "k", "Kilépés"));
-                    switch (getChar()) {
+                    switch (ViewUtils.getChar()) {
                         case '2':
-                            printMenu("Termék kosárba rakása", Map.of("k", "Kilépés"));
-                            String itemId = itemView.getItemById();
-                            Item item = itemController.getItemById(itemId);
+                            ViewUtils.printMenu("Termék kosárba rakása", Map.of("k", "Kilépés"));
+                            ItemModel item = new ItemView(itemController).getItemFromUser();
                             customerController.addToCart(item);
-                            customerController.addToCart();
-                            // c.cart.add(getItemById());
                         case '3':
-                            printMenu("Termék törlése a kosárból", Map.of("k", "Kilépés"));
-                            customerController.listCart();
-                            customerController.removeFromCart();
-                            // c.cart.remove(getItemById());
+                            ViewUtils.printMenu("Termék törlése a kosárból", Map.of("k", "Kilépés"));
+                            customerController.removeFromCart(selectItemFromCart());
                             break;
                         case '4':
-                            printMenu("Kosár tartalmának megtekintése", Map.of());
-                            customerController.listCart();
+                            ViewUtils.printMenu("Kosár tartalmának megtekintése", Map.of());
+                            listCart();
                             break;
                         case '5':
-                            printMenu("Kosár tartalmának megrendelése", Map.of());
-                            customerController.sendOrder();
-                            // orders.add(new Order(random.nextInt(1000,Integer.MAX_VALUE), depots.getFirst(), c, c.cart));
+                            ViewUtils.printMenu("Kosár tartalmának megrendelése", Map.of());
+                            // TODO id így maradjon?
+                            int id = new Random().nextInt(1000,Integer.MAX_VALUE);
+                            
+                            // TODO wtf?
+                            orderController.orders.add(new OrderModel(
+                                id, 
+                                depotController.getWareHouse(),
+                                selectRecieverFromCustomers(),
+                                customerController.customer.cart));
                             break;
                         case 'k':
                             exit = true;
@@ -68,5 +79,35 @@ public class CustomerView {
         setKeeperToValaki()
 
     }
+
+    private CustomerModel selectRecieverFromCustomers(){
+        //TODO return a customer
+        
+    }
+
+    private ItemModel selectItemFromCart(){
+        listCart();
+        ViewUtils.printMenu("Adja meg a termék id-jét", Map.of("k", "Kilépés"));
+        String bemenet = sc.nextLine();
+        LinkedList<ItemModel> list = customerController.customer.cart;
+        if (bemenet != "k"){
+            for (int i = 0; i < list.size(); i++) {
+                if (Integer.toString(list.get(i).id) == bemenet){
+                    return list.get(i);
+                }
+            }
+        }
+        ViewUtils.printMenu("Hibás érték", Map.of());
+        return null;
+    }
+
+    public void listCart() {
+       LinkedList<ItemModel> tempCart = customerController.customer.cart;
+        for (int i = 0; i < tempCart.size(); i++) {
+            System.out.println(
+                    "Item ID: " + tempCart.get(i).id + ", Name: " + tempCart.get(i).name + ", Price: $" + tempCart.get(i).price);
+        }
+    }
+
 
 }
