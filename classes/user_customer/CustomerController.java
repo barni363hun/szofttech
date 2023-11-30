@@ -1,58 +1,60 @@
-package classes.roles.customer;
+package classes.user_customer;
 
-import classes.classes_from_data.User;
 import classes.file.FileRead;
-import classes.order.Order;
+import classes.item.ItemModel;
+import classes.order.OrderController;
+import classes.user.User;
 
 import java.util.LinkedList;
+import java.util.Scanner;
 
 import classes.*;
 
 public class CustomerController {
 
-    
-    CustomerModel customer = null;
-    
-    OrderController OrderController = null;
+    public CustomerModel customer = null;
     
     LinkedList<CustomerModel> customers = new LinkedList<CustomerModel>();
 
-
     // FileRead customerList = new FileRead("customer");
 
-    public CustomerController(User user, OrderController o) {
+    public CustomerController(User user) {
         customer = new CustomerModel(user);
-                
         customers = new LinkedList<CustomerModel>();
         FileRead customerList = new FileRead("customer");
-
         for (int i = 1; i < customerList.getListSize(); i++) {
                     String temp[] = customerList.splitLine(i);
         }
 
     }
+    
+    // public void setKeeperToMe(OrderController orderController) {
+    //     Order o = orderController.orders.get()
+    //     o.setKeeoper(customer)
+    //     orderController.orders.set(where customer = customer,o)
 
-    public void addToCart() {
-        customer.cart.add(Item i);
+    // }
+    
 
+    public CustomerModel selectFromCustomers() {
+        // eze undorító
+        System.out.println("Kerem a vevo nevet: ");
+        String name = new Scanner(System.in).next();
+        Boolean exit = false;
+        while (!exit) {
+            for (CustomerModel e : customers) {
+                if (e.getUserName().equals(name)) {
+                    exit = true;
+                    return  e;
+                }
+            }
+            // if(ret == null) {
+                System.out.println("\nNincs talalat!\nKerem a vevo nevet: ");
+                name = sc.next();
+            // }
+        }
+        return null; //null
     }
-    public void listCart() {
-        customer.cart.list(Item i);
-    }
-    public void removeFromCart(){
-        customer.cart.list(Item i);
-    }
-    public void sendOrder(){
-        
-    }
-
-    public void setKeeperToMe() {
-        Order o = orderController.orders.get(where customer = customer)
-        o.setKeeoper(customer)
-        orderController.orders.set(where customer = customer,o)
-
-    }
-
 
     
 }

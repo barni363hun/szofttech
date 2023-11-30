@@ -1,13 +1,14 @@
 package classes;
 
 import java.util.Map;
+import java.util.Scanner;
 
 public class ViewUtils {
     
     static public char getChar() {
         while (true) {
             System.out.println("Adj meg egy karatert!");
-            String input = sc.next();
+            String input = new Scanner(System.in).next();
             if (input.length() == 1) {
                 return input.charAt(0);
             } else {

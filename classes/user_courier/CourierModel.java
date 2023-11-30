@@ -8,6 +8,7 @@ import classes.user.User;
 
 public class CourierModel extends User {
     
+    
     public CourierModel(User u) {
         super(u);
         // TODO Auto-generated constructor stub

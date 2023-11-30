@@ -1,10 +1,9 @@
 package classes.order;
 import java.util.LinkedList;
-
-import classes.roles.*;
-import classes.roles.customer.CustomerModel;
+import classes.item.ItemModel;
 import classes.user.User;
 import classes.user_courier.CourierModel;
+import classes.user_customer.*;
 import classes.user_depot.DepotModel;
 
 
@@ -49,23 +48,23 @@ public class OrderModel {
         this.receiver = receiver;
         this.items = items;
     }
-    public OrderModel(int id, DepotModel keeper, CustomerModel receiver, LinkedList<ItemModel> items) {
-        this.id = id;
-        this.keeper = keeper;
-        this.receiver = receiver;
-        this.items = items;
-    }
-    public OrderModel(int id, CourierModel keeper, CustomerModel receiver, LinkedList<ItemModel> items) {
-        this.id = id;
-        this.keeper = keeper;
-        this.receiver = receiver;
-        this.items = items;
-    }
-    public OrderModel(int id, CustomerModel keeper, CustomerModel receiver, LinkedList<ItemModel> items) {
-        this.id = id;
-        this.keeper = keeper;
-        this.receiver = receiver;
-        this.items = items;
-    }
+    // public OrderModel(int id, DepotModel keeper, CustomerModel receiver, LinkedList<ItemModel> items) {
+    //     this.id = id;
+    //     this.keeper = keeper;
+    //     this.receiver = receiver;
+    //     this.items = items;
+    // }
+    // public OrderModel(int id, CourierModel keeper, CustomerModel receiver, LinkedList<ItemModel> items) {
+    //     this.id = id;
+    //     this.keeper = keeper;
+    //     this.receiver = receiver;
+    //     this.items = items;
+    // }
+    // public OrderModel(int id, CustomerModel keeper, CustomerModel receiver, LinkedList<ItemModel> items) {
+    //     this.id = id;
+    //     this.keeper = keeper;
+    //     this.receiver = receiver;
+    //     this.items = items;
+    // }
 
 }
