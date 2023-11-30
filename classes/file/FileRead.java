@@ -34,28 +34,23 @@ public class FileRead {
 
     public int getListSize() {
         return lineList.size();
-
     }
 
     public LinkedList<String> getList() {
         return lineList;
-
     }
 
     public String getLine(int number) {
         return lineList.get(number);
-
     }
 
     public String[] splitLine(int number) {
         String[] splittedLine = lineList.get(number).split(this.token);
         return splittedLine;
-
     }
 
     public int splittedLineSize(String[] splittedLine) {
         return splittedLine.length;
-
     }
 
     public int getMaxElements() {

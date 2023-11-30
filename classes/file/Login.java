@@ -8,6 +8,15 @@ public class Login {
 	public String userNameTyped;
 	public String userPasswordTyped;
 	public int line;
+
+	public User loadUser(){
+		FileRead userList = new FileRead("user");
+		this.setUserNameTyped(userList.getRow(0));
+		this.setUserPasswordTyped(userList.getRow(1)[this.line]);
+		User user = new User(userList.splitLine(this.line));
+		return user;
+	}
+
 	public void setUserNameTyped(String[] s) {
 
 		System.out.print("Enter your User Name: ");

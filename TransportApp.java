@@ -10,21 +10,25 @@ import classes.user_courier.*;
 import classes.*;
 
 public class TransportApp {
-    LinkedList<Item> items;
+
+    LinkedList<Item> items = new LinkedList<Item>();
     LinkedList<Order> orders = new LinkedList<Order>();
     LinkedList<Courier> couriers = new LinkedList<Courier>();
     LinkedList<Depot> depots = new LinkedList<Depot>();
-    LinkedList<CustomerModel> customers;
+    LinkedList<CustomerModel> customers = new LinkedList<Customer>();
 
-fileLoad();
     CustomerView customerView = new CustomerView();
 
     FileRead customerList = new FileRead("customer");
 	FileRead itemList = new FileRead("item");
 	FileRead orderList = new FileRead("order");
-	FileRead userList = new FileRead("user");
+	//ez egyelore lemegy a loginben, ide nem kell, amig nem akarunk veluk csinaltatni valamit
+    //FileRead userList = new FileRead("user");
+
+    //login
     User user;
-    Random random = new Random();
+    Login login = new Login();
+    user = Login.loadUser();
 
     // Message message;
     Scanner sc;
@@ -63,9 +67,7 @@ fileLoad();
 			//customers.add(new Customer(customerList.splitLine(i)));
         }
         Login login = new Login();
-		login.setUserNameTyped(userList.getRow(0));
-		login.setUserPasswordTyped(userList.getRow(1)[login.line]);
-		user = new User(userList.splitLine(login.line));
+		user = login.loadUser();
 
         if user.type = customer
          c = new CustomerView(user) 

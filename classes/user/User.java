@@ -6,10 +6,6 @@ public class User {
 	char userType;
 	int userRowInDatabase;
 
-	public User(){}
-	
-	public User(User u){}
-
 	public User(String[] s) {
 		setUserName(s[0]);
 		setUserPassword(s[1]);
