@@ -1,8 +1,10 @@
-package classes.roles;
+package classes;
 
 import java.util.Scanner;
 
-public class Warehouse extends Depot {
+import classes.user_depot.DepotModel;
+
+public class Warehouse extends DepotModel {
 
     private void warehouseMenu() {
         // menüpontok:

@@ -1,6 +1,6 @@
-package classes;
+package classes.item;
 
-public class Item {
+public class ItemModel {
 	public int id;
 	public String name;
 	public int price;
@@ -9,7 +9,7 @@ public class Item {
         System.out.println("Item ID: " + id + ", Name: " + name + ", Price: $" + price);
     }
 	
-	public Item(int id, String name, int price) {
+	public ItemModel(int id, String name, int price) {
 		this.id = id;
         this.name = name;
         this.price = price;

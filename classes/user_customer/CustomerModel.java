@@ -1,13 +1,14 @@
-package classes.roles;
+package classes.roles.customer;
 
 import java.util.LinkedList;
 import classes.*;
-import classes.Order;
-import classes.classes_from_data.User;
+import classes.item.ItemModel;
+import classes.order.OrderModel;
+import classes.user.User;
 
 
 
-public class Customer extends User{
+public class CustomerModel extends User{
 
 	String customerFirstName;
 	String customerLastName;
@@ -17,11 +18,11 @@ public class Customer extends User{
 	String customerPhone;
 	String customerEmail;
 
-    public LinkedList<Item> cart = new LinkedList<Item>();
+    public LinkedList<ItemModel> cart = new LinkedList<ItemModel>();
 
     
 
-	public Customer(String[] s) {
+	public CustomerModel(String[] s) {
 		setCustomerFirstName(s[0]);
 		setCustomerLastName(s[1]);
 		setCustomerAddressZIP(s[2]);
@@ -31,7 +32,7 @@ public class Customer extends User{
 		setCustomerEmail(s[6]);
         //super(s);
 	}
-    public Customer(User u){
+    public CustomerModel(User u){
         super(u);
     }
 

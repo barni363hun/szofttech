@@ -1,4 +1,4 @@
-package classes.classes_from_data;
+package classes.user;
 
 public class User {
 	String userName;
