@@ -10,9 +10,8 @@ public class CourierController {
 
     public LinkedList<CourierModel> couriers = new LinkedList<CourierModel>();
 
-    public CourierController() {
-        
-    }
+    public CourierController() {}
+
     public CourierController(User user) {
          courier = new CourierModel(user);
     }

@@ -70,7 +70,7 @@ public class TransportApp {
 
         switch (user.getUserType()) {
             case 'C': // futar
-                // CourierView c = new CourierView(user);
+                new CourierView().courierMenu();
                 break;
             case 'D': // Depo
                 new DepotView().depotMenu(

@@ -2,6 +2,7 @@ package classes.user_customer;
 
 import classes.file.FileRead;
 import classes.item.ItemModel;
+import classes.order.OrderController;
 import classes.user.User;
 
 import java.util.LinkedList;
@@ -26,27 +27,13 @@ public class CustomerController {
         }
 
     }
-
-    public void addToCart(ItemModel i) {
-        customer.cart.add(i);
-
-    }
     
-    public void getCart(){
-        
-    }
+    // public void setKeeperToMe(OrderController orderController) {
+    //     Order o = orderController.orders.get()
+    //     o.setKeeoper(customer)
+    //     orderController.orders.set(where customer = customer,o)
 
-    public void setKeeperToMe() {
-        Order o = orderController.orders.get(where customer = customer)
-        o.setKeeoper(customer)
-        orderController.orders.set(where customer = customer,o)
-
-    }
-
-	public void removeFromCart(ItemModel selectItemFromCart) {
-        // TODO
-        // customer.cart.remove
-	}
+    // }
     
 
     public CustomerModel selectFromCustomers() {

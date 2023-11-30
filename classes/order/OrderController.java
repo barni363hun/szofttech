@@ -28,4 +28,8 @@ public class OrderController {
         }
     }
 
+    public LinkedList<OrderModel> getOrders(){
+        return orders;
+    }
+
 }

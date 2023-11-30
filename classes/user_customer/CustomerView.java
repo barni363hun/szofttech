@@ -38,10 +38,10 @@ public class CustomerView {
                         case '2':
                             ViewUtils.printMenu("Termék kosárba rakása", Map.of("k", "Kilépés"));
                             ItemModel item = new ItemView(itemController).getItemFromUser();
-                            customerController.addToCart(item);
+                            customerController.customer.cart.add(item);
                         case '3':
                             ViewUtils.printMenu("Termék törlése a kosárból", Map.of("k", "Kilépés"));
-                            customerController.removeFromCart(selectItemFromCart());
+                            customerController.customer.cart.remove(selectItemFromCart());
                             break;
                         case '4':
                             ViewUtils.printMenu("Kosár tartalmának megtekintése", Map.of());

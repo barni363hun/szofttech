@@ -4,17 +4,19 @@ import java.util.Map;
 
 import classes.ViewUtils;
 import classes.item.ItemView;
+import classes.order.OrderController;
 import classes.user.User;
 
 public class CourierView {
 
-    public CourierView() {
-        courierMenu();
-    }
+    public CourierView() {}
 
-    private void courierMenu() {
-        printOrders();
-        Order currentOrder = getOrderById();
+    private void courierMenu(CourierController courierController,OrderController orderController) {
+
+        // BARNI IN PROGRESS
+
+        courierController.courier.
+        Order currentOrder = orderController.getOrderById();
         boolean exit = false;
         while (!exit) {
             ViewUtils.printMenu("Courier", Map.of(
