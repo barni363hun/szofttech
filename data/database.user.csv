@@ -1,3 +1,8 @@
-userName,userPassword,userType,userRowInDatabase
+userName,userPassword,userType,userRowInDatabase 
 Admin,admin,A,0
-Czuppi,jelszo,C,1
+Warehouse,warehouse,W,0
+Czuppi,jelszo,B,0
+Depo82,Depo,D,1
+Depo88,Depo,D,2
+vasarlo,jelszo,B,1
+Futar1,anyad,C,1
