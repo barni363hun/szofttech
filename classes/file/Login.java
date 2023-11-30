@@ -1,16 +1,18 @@
 package classes.file;
+
 import java.io.Console;
 import java.util.Scanner;
 
 public class Login {
-	String userNameTyped;
-	String userPasswordTyped;
-	int line;
 
+	public String userNameTyped;
+	public String userPasswordTyped;
+	public int line;
+	
 	public void setUserNameTyped(String[] s) {
 		System.out.print("Enter your User Name: ");
 		Scanner sc = new Scanner(System.in);
-		this.userNameTyped = sc.next();
+		this.userNameTyped = sc.nextLine();
 		if (nameCheck(s) == false) {
 			System.out.println("User named '" + this.userNameTyped + "' does not exists!");
 			this.setUserNameTyped(s);
@@ -50,4 +52,5 @@ public class Login {
 		}
 		return false;
 	}
+	
 }
