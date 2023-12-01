@@ -18,11 +18,11 @@ public class ItemView {
         // TODO possibly null
         // melyik item-el szeretnél dolgozni
         printData();
-        String bemenet = sc.nextLine();
         LinkedList<ItemModel> list = itemController.getItems();
         boolean exit = false;
         while (!exit) {
             ViewUtils.printMenu("Adja meg a termék id-jét", Map.of());
+            String bemenet = sc.nextLine();
             for (int i = 0; i < list.size(); i++) {
                 if (Integer.toString(list.get(i).id) == bemenet){
                     return list.get(i);

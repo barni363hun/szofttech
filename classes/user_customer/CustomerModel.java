@@ -20,7 +20,7 @@ public class CustomerModel extends User{
 
     public LinkedList<ItemModel> cart = new LinkedList<ItemModel>();
 
-	    public CustomerModel(User u){
+	public CustomerModel(User u){
         super(u);
     }
 	
