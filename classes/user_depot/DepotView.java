@@ -23,7 +23,7 @@ public class DepotView {
             switch (ViewUtils.getChar()) {
                 case '1':
                     ViewUtils.printMenu("Csomag átvétele", Map.of());
-                    OrderModel myOrder = new OrderView().getOrderOfUser(orderController,depotController.depot);
+                    OrderModel myOrder = new OrderView().getOrderFromUserOfKeeper(orderController,depotController.depot);
                     if (myOrder.keeper instanceof CourierModel) {
                         orderController.setOrderKeeper(myOrder.id, depotController.depot);
                     } else {

@@ -11,6 +11,7 @@ public class OrderModel {
     public int id;
     public User keeper;
     public CustomerModel receiver;
+    public CustomerModel sender; // TODO kell?
     public LinkedList<ItemModel> items;
 	
     public void printData() {

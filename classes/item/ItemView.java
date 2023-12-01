@@ -18,17 +18,18 @@ public class ItemView {
         // TODO possibly null
         // melyik item-el szeretnél dolgozni
         printData();
-        ViewUtils.printMenu("Adja meg a termék id-jét", Map.of("k", "Kilépés"));
         String bemenet = sc.nextLine();
         LinkedList<ItemModel> list = itemController.getItems();
-        if (bemenet != "k"){
+        boolean exit = false;
+        while (!exit) {
+            ViewUtils.printMenu("Adja meg a termék id-jét", Map.of());
             for (int i = 0; i < list.size(); i++) {
                 if (Integer.toString(list.get(i).id) == bemenet){
                     return list.get(i);
                 }
             }
-        }
         ViewUtils.printMenu("Hibás érték", Map.of());
+        }
         return null;
     }
 

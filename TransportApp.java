@@ -8,13 +8,14 @@ import classes.item.ItemModel;
 import classes.order.*;
 import classes.user_depot.*;
 import classes.user_courier.*;
+import classes.user_customer.*;
 import classes.*;
 
 public class TransportApp {
     // LinkedList<OrderM> orders = new LinkedList<Order>();
     // LinkedList<Courier> couriers = new LinkedList<Courier>();
     LinkedList<DepotModel> depot = new LinkedList<DepotModel>();
-    LinkedList<CustomerModel> customers;
+    LinkedList<CustomerModel> customers = new LinkedList<CustomerModel>();
     CustomerView customerView = new CustomerView();
     
     DepotController depotController = new DepotController();
@@ -26,10 +27,6 @@ public class TransportApp {
 	FileRead userList = new FileRead("user");
     User user;
     Random random = new Random();
-
-    // Message message;
-    Scanner sc;
-    // Admin admin = new Admin();
 
     public TransportApp() {
         
@@ -70,7 +67,10 @@ public class TransportApp {
 
         switch (user.getUserType()) {
             case 'C': // futar
-                new CourierView().courierMenu();
+                new CourierView().courierMenu(
+                    new CourierController(user),
+                    new OrderController()
+                );
                 break;
             case 'D': // Depo
                 new DepotView().depotMenu(
@@ -89,9 +89,10 @@ public class TransportApp {
         }
         
     }
+}
 
 
-    public void startMenu() {
+    // public void startMenu() {
         //System.out.println("=====\n" + user.getUserType() + "\n=====" );
         
 
@@ -132,7 +133,7 @@ public class TransportApp {
             // } else {
             // }
         //}
-    }
+    // }
 
     //private void customerMenu(Customer c) {
     //private void customerMenu(CustomerModel c) {
@@ -175,7 +176,7 @@ public class TransportApp {
     //}
 
     //private void courierMenu(Courier currentCourier) {
-    private void courierMenu(User currentCourier) {
+    // private void courierMenu(User currentCourier) {
         // printOrders();
         // Order currentOrder = getOrderById();
         // boolean exit = false;
@@ -206,7 +207,7 @@ public class TransportApp {
         //             break;
         //     }
         // }
-    }
+    // }
 
        // private void depotMenu(Depot depo) {
     //     private void depotMenu(User depo) {
@@ -236,123 +237,123 @@ public class TransportApp {
     // }
     
 
-    private Courier findInCouriers() {
-        System.out.println("Kerem a futar nevet: ");
-        String name = sc.next();
-        Courier ret = null;
-        Boolean exit = false;
-        while (!exit) {
-            for (Courier e : couriers) {
-                if (e.getUserName().equals(name)) {
-                    ret = e;
-                    exit = true;
-                }
-            }
-            System.out.println("\nNincs talalat!\nKerem a futar nevet: ");
-            name = sc.next();
-        }
-        return ret;
-    }
+//     private Courier findInCouriers() {
+//         System.out.println("Kerem a futar nevet: ");
+//         String name = sc.next();
+//         Courier ret = null;
+//         Boolean exit = false;
+//         while (!exit) {
+//             for (Courier e : couriers) {
+//                 if (e.getUserName().equals(name)) {
+//                     ret = e;
+//                     exit = true;
+//                 }
+//             }
+//             System.out.println("\nNincs talalat!\nKerem a futar nevet: ");
+//             name = sc.next();
+//         }
+//         return ret;
+//     }
 
-    private Depot findInDepot() {
-        System.out.println("Kerem a depo nevet: ");
-        String name = sc.next();
-        Depot ret = null;
-        Boolean exit = false;
-        while (!exit) {
-            for (Depot e : depots) {
-                if (e.getUserName().equals(name)) {
-                    ret = e;
-                    exit = true;
-                }
-            }
-            System.out.println("\nNincs talalat!\nKerem a depo nevet: ");
-            name = sc.next();
-        }
-        return ret;
-    }
+//     private Depot findInDepot() {
+//         System.out.println("Kerem a depo nevet: ");
+//         String name = sc.next();
+//         Depot ret = null;
+//         Boolean exit = false;
+//         while (!exit) {
+//             for (Depot e : depots) {
+//                 if (e.getUserName().equals(name)) {
+//                     ret = e;
+//                     exit = true;
+//                 }
+//             }
+//             System.out.println("\nNincs talalat!\nKerem a depo nevet: ");
+//             name = sc.next();
+//         }
+//         return ret;
+//     }
 
-    private void printItems() {
-        for (Item item : items) {
-            item.printData();
-        }
-    }
+//     private void printItems() {
+//         for (Item item : items) {
+//             item.printData();
+//         }
+//     }
 
-    private void printOrders() {
-        for (Order order : orders) {
-            order.printData();
-        }
-    }
+//     private void printOrders() {
+//         for (Order order : orders) {
+//             order.printData();
+//         }
+//     }
 
-    // private void printCustomers() {
-    //     for (Customer customer : customers) {
-    //         customer.printData();
-    //     }
-    // }
+//     // private void printCustomers() {
+//     //     for (Customer customer : customers) {
+//     //         customer.printData();
+//     //     }
+//     // }
 
-    private Item getItemById() {
-        printItems();
-        Item ret = null;
-        Boolean exit = false;
-        while (!exit) {
-            System.out.println("Kerem az item id-t: ");
-            try {
-                int itemId = Integer.parseInt(sc.next());
-                for (Item e : items) {
-                    if (e.id == itemId) {
-                        ret = e;
-                        exit = true;
-                    }
-                }
-            } catch (NumberFormatException e) {
-            }
-            System.out.println("\nHibas azonosito!\n");
-        }
-        return ret;
+//     private Item getItemById() {
+//         printItems();
+//         Item ret = null;
+//         Boolean exit = false;
+//         while (!exit) {
+//             System.out.println("Kerem az item id-t: ");
+//             try {
+//                 int itemId = Integer.parseInt(sc.next());
+//                 for (Item e : items) {
+//                     if (e.id == itemId) {
+//                         ret = e;
+//                         exit = true;
+//                     }
+//                 }
+//             } catch (NumberFormatException e) {
+//             }
+//             System.out.println("\nHibas azonosito!\n");
+//         }
+//         return ret;
 
-    }
+//     }
 
-    private Order getOrderById() {
-        printOrders();
-        Order ret = null;
-        Boolean exit = false;
-        while (!exit) {
-            System.out.println("Kerem a rendeles id-t: ");
-            try {
-                int orderId = Integer.parseInt(sc.next());
-                for (Order e : orders) {
-                    if (e.id == orderId) {
-                        ret = e;
-                        exit = true;
-                    }
-                }
-            } catch (NumberFormatException e) {
-            }
-            System.out.println("\nHibas azonosito!\n");
-        }
-        return ret;
+//     private Order getOrderById() {
+//         printOrders();
+//         Order ret = null;
+//         Boolean exit = false;
+//         while (!exit) {
+//             System.out.println("Kerem a rendeles id-t: ");
+//             try {
+//                 int orderId = Integer.parseInt(sc.next());
+//                 for (Order e : orders) {
+//                     if (e.id == orderId) {
+//                         ret = e;
+//                         exit = true;
+//                     }
+//                 }
+//             } catch (NumberFormatException e) {
+//             }
+//             System.out.println("\nHibas azonosito!\n");
+//         }
+//         return ret;
 
-    }
+//     }
 
-    private Order getCustomerById() {
-        printOrders();
-        Order ret = null;
-        Boolean exit = false;
-        while (!exit) {
-            System.out.println("Kerem a rendeles id-t: ");
-            try {
-                int orderId = Integer.parseInt(sc.next());
-                for (Order e : orders) {
-                    if (e.id == orderId) {
-                        ret = e;
-                        exit = true;
-                    }
-                }
-            } catch (NumberFormatException e) {
-            }
-            System.out.println("\nHibas azonosito!\n");
-        }
-        return ret;
+//     private Order getCustomerById() {
+//         printOrders();
+//         Order ret = null;
+//         Boolean exit = false;
+//         while (!exit) {
+//             System.out.println("Kerem a rendeles id-t: ");
+//             try {
+//                 int orderId = Integer.parseInt(sc.next());
+//                 for (Order e : orders) {
+//                     if (e.id == orderId) {
+//                         ret = e;
+//                         exit = true;
+//                     }
+//                 }
+//             } catch (NumberFormatException e) {
+//             }
+//             System.out.println("\nHibas azonosito!\n");
+//         }
+//         return ret;
 
-    }
-}
+//     }
+// }

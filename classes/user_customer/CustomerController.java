@@ -11,6 +11,7 @@ import java.util.Scanner;
 import classes.*;
 
 public class CustomerController {
+    Scanner sc = new Scanner(System.in);
 
     public CustomerModel customer = null;
     
@@ -39,7 +40,7 @@ public class CustomerController {
     public CustomerModel selectFromCustomers() {
         // eze undorító
         System.out.println("Kerem a vevo nevet: ");
-        String name = new Scanner(System.in).next();
+        String name = sc.next();
         Boolean exit = false;
         while (!exit) {
             for (CustomerModel e : customers) {

@@ -2,6 +2,8 @@ package classes.user_courier;
 
 import java.util.LinkedList;
 
+import classes.order.OrderController;
+import classes.order.OrderModel;
 import classes.user.User;
 
 public class CourierController {
@@ -18,5 +20,9 @@ public class CourierController {
     
     public void addToCourier(CourierModel u) {
         couriers.add(u);
+    }
+
+    public LinkedList<OrderModel> getMyOrders(OrderController orderController){
+        return orderController.getOrdersOfKeeper(courier);
     }
 }
