@@ -6,10 +6,15 @@ import java.util.Scanner;
 
 import classes.ViewUtils;
 import classes.user.User;
-import classes.user_customer.CustomerModel;
 
 public class OrderView {
     Scanner sc = new Scanner(System.in);
+
+    OrderController orderController = null;
+
+    public OrderView(OrderController _orderController) {
+        orderController = _orderController;
+    }
 
     /**
      * 
@@ -19,13 +24,12 @@ public class OrderView {
      * @param user
      * @return
      */
-    public OrderModel getOrderFromUserOfKeeper(OrderController orderController, User user) {
+    public OrderModel getOrderFromUserOfKeeper(User user) {
         LinkedList<OrderModel> ordersOfKeeper = orderController.getOrdersOfKeeper(user);
         return getOrderFromUser(ordersOfKeeper);
     } 
 
     public OrderModel getOrderFromUser(LinkedList<OrderModel> orders){
-        Scanner sc = new Scanner(System.in);
         LinkedList<OrderModel> temp = orders;
         ViewUtils.printMenu("Orderek", Map.of());
         for (int i = 0; i< temp.size(); i++){

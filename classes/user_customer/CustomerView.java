@@ -18,13 +18,23 @@ public class CustomerView {
     ViewUtils viewUtils = null;
     Scanner sc = new Scanner(System.in);
 
-    public CustomerView() {}
+    CustomerController customerController = null;
+    ItemController itemController = null;
+    OrderController orderController = null;
+    DepotController depotController = null;
 
-    public void customerMenu(
-        CustomerController customerController, 
-        ItemController itemController,
-        OrderController orderController,
-        DepotController depotController){
+
+    public CustomerView(
+        CustomerController _customerController, 
+        ItemController _itemController,
+        OrderController _orderController,
+        DepotController _depotController) {
+
+        customerController = _customerController;
+        itemController = _itemController;
+        orderController = _orderController;
+        depotController = _depotController;
+        
         boolean exit = false;
         while (!exit) {
             ViewUtils.printMenu("Customer", Map.of(
@@ -41,11 +51,11 @@ public class CustomerView {
                     customerController.customer.cart.add(item);
                 case '3':
                     ViewUtils.printMenu("Termék törlése a kosárból", Map.of("k", "Kilépés"));
-                    customerController.customer.cart.remove(selectItemFromCart(customerController));
+                    customerController.customer.cart.remove(selectItemFromCart());
                     break;
                 case '4':
                     ViewUtils.printMenu("Kosár tartalmának megtekintése", Map.of());
-                    listCart(customerController);
+                    listCart();
                     break;
                 case '5':
                     ViewUtils.printMenu("Kosár tartalmának megrendelése", Map.of());
@@ -54,7 +64,7 @@ public class CustomerView {
                     orderController.orders.add(new OrderModel(
                         id, 
                         depotController.getWareHouse(),
-                        selectRecieverFromCustomers(customerController),
+                        selectRecieverFromCustomers(),
                         customerController.customer.cart));
                     break;
                 case 'k':
@@ -67,13 +77,13 @@ public class CustomerView {
         }
     }
 
-    private CustomerModel selectRecieverFromCustomers(CustomerController customerController){
+    private CustomerModel selectRecieverFromCustomers(){
         //TODO return a customer
         return customerController.customer;
     }
 
-    private ItemModel selectItemFromCart(CustomerController customerController){
-        listCart(customerController);
+    private ItemModel selectItemFromCart(){
+        listCart();
         ViewUtils.printMenu("Adja meg a termék id-jét", Map.of("k", "Kilépés"));
         String bemenet = sc.nextLine();
         LinkedList<ItemModel> list = customerController.customer.cart;
@@ -88,7 +98,7 @@ public class CustomerView {
         return null;
     }
 
-    public void listCart(CustomerController customerController) {
+    public void listCart() {
        LinkedList<ItemModel> tempCart = customerController.customer.cart;
         for (int i = 0; i < tempCart.size(); i++) {
             System.out.println(

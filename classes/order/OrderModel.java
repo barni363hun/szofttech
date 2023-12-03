@@ -2,16 +2,14 @@ package classes.order;
 import java.util.LinkedList;
 import classes.item.ItemModel;
 import classes.user.User;
-import classes.user_courier.CourierModel;
 import classes.user_customer.*;
-import classes.user_depot.DepotModel;
 
 
 public class OrderModel {
     public int id;
     public User keeper;
     public CustomerModel receiver;
-    public CustomerModel sender; // TODO kell?
+    //public CustomerModel sender; hátha kell majd 
     public LinkedList<ItemModel> items;
 	
     public void printData() {

@@ -1,10 +1,6 @@
 package classes.order;
-
 import java.util.LinkedList;
-
 import classes.user.User;
-import classes.user_customer.CustomerModel;
-import classes.user_depot.DepotModel;
 
 public class OrderController {
     public LinkedList<OrderModel> orders = new LinkedList<OrderModel>();

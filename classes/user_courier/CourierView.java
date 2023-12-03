@@ -3,18 +3,20 @@ package classes.user_courier;
 import java.util.Map;
 
 import classes.ViewUtils;
-import classes.item.ItemView;
 import classes.order.OrderController;
 import classes.order.OrderModel;
 import classes.order.OrderView;
-import classes.user.User;
 
 public class CourierView {
 
-    public CourierView() {}
+    CourierController courierController = null;
+    OrderController orderController = null;
 
-    public void courierMenu(CourierController courierController,OrderController orderController) {
-        OrderView orderView=new OrderView();
+    public CourierView(CourierController _courierController,OrderController _orderController) {
+        courierController = _courierController;
+        orderController = _orderController;
+
+        OrderView orderView=new OrderView(orderController);
         OrderModel currentOrder = orderView.getOrderFromUser(courierController.getMyOrders(orderController));
         boolean exit = false;
         while (!exit) {
@@ -45,5 +47,4 @@ public class CourierView {
             }
         }
     }
-
 }

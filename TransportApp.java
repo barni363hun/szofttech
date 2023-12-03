@@ -66,16 +66,15 @@ public class TransportApp {
             case 'C': // futar
             CourierController c = new CourierController(user);
             c.couriers = couriersFromFile;
-                new CourierView().courierMenu(c,new OrderController());
+                new CourierView(c,new OrderController());
                 break;
             case 'D': // Depo
             DepotController d = new DepotController(user);
                 d.depots = depotsFromFile;
-                new DepotView().depotMenu(d,new OrderController());
+                new DepotView(d,new OrderController());
                 break;
             case 'V': // vevo
-                new CustomerView().customerMenu(
-                    new CustomerController(user),
+                new CustomerView(new CustomerController(user),
                     new ItemController(),
                     new OrderController(),
                     new DepotController());
@@ -83,6 +82,8 @@ public class TransportApp {
             default:
                 break;
         }
+
+        
         
     }
 }

@@ -18,9 +18,9 @@ public class CourierController {
          courier = new CourierModel(user);
     }
     
-    public void addToCourier(CourierModel u) {
-        couriers.add(u);
-    }
+    // public void addToCourier(CourierModel u) {
+    //     couriers.add(u);
+    // }
 
     public LinkedList<OrderModel> getMyOrders(OrderController orderController){
         return orderController.getOrdersOfKeeper(courier);
