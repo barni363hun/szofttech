@@ -8,9 +8,9 @@ public class OrderController {
     public OrderController() {
     }
 
-    public OrderModel getOrderById(String u){
+    public OrderModel getOrderById(String userId){
 		for (int i = 0; i < orders.size(); i++) {
-            if (Integer.toString(orders.get(i).id) == u){
+            if (Integer.toString(orders.get(i).id) == userId){
                 return orders.get(i);
             }
         }
@@ -18,11 +18,14 @@ public class OrderController {
 
     }
 
+    public void addOrderToList(OrderModel o){
+        orders.add(o);
+    }
 
-    public void setOrderKeeper(int id /* ez az order.id */,User user) {
+    public void setOrderKeeper(int orderId, User keeper) {
         for (int i = 0; i < orders.size(); i++) {
-            if (orders.get(i).id == id){
-              orders.get(i).keeper = user;
+            if (orders.get(i).id == orderId){
+              orders.get(i).keeper = keeper;
             }
         }
     }

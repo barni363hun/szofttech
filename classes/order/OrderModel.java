@@ -11,7 +11,7 @@ public class OrderModel {
     public CustomerModel receiver;
     //public CustomerModel sender; hátha kell majd 
     public LinkedList<ItemModel> items;
-	
+    
     public void printData() {
         StringBuilder dataString = new StringBuilder("Order ID: " + id);
 

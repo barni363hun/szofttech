@@ -13,10 +13,13 @@ public class DepotView {
 
     DepotController depotController = null;
     OrderController orderController = null;
+    OrderView orderView = null;
 
     public DepotView(DepotController _depotController,OrderController _orderController) {
         depotController = _depotController;
         orderController = _orderController;
+        orderView = new OrderView(orderController);
+
         boolean exit = false;
         while (!exit) {
             ViewUtils.printMenu("Depo", Map.of(
@@ -25,7 +28,7 @@ public class DepotView {
             switch (ViewUtils.getChar()) {
                 case '1':
                     ViewUtils.printMenu("Csomag átvétele", Map.of());
-                    OrderModel myOrder = new OrderView(orderController).getOrderFromUserOfKeeper(depotController.depot);
+                    OrderModel myOrder = orderView.getOrderFromUserOfKeeper(depotController.depot);
                     if (myOrder.keeper instanceof CourierModel) {
                         orderController.setOrderKeeper(myOrder.id, depotController.depot);
                     } else {

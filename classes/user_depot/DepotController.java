@@ -21,8 +21,8 @@ public class DepotController {
         return depots.getFirst();
     }
     
-    public void addToDepot(DepotModel u) {
-        depots.add(u);
-    }
+    // public void addToDepot(DepotModel u) {
+    //     depots.add(u);
+    // }
     
 }

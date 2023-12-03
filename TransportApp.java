@@ -27,7 +27,8 @@ public class TransportApp {
         
         LinkedList<CourierModel> couriersFromFile = new LinkedList<CourierModel>();
         LinkedList<DepotModel> depotsFromFile = new LinkedList<DepotModel>();
-
+        String[] u1 = {"Futarx","1234","C","2"};
+        User k1 = new User(u1);
         //Depo-courier load
 		for (int i = 1; i < userList.getListSize(); i++) {
             String temp[] = userList.splitLine(i);
@@ -45,16 +46,90 @@ public class TransportApp {
 		}
 
 
-        //Order lista feltolt
-        for (int i = 1; i < orderList.getListSize(); i++) {
-			// orders.add(new Order(orderList.splitLine(i)));
-        }
+
+        
+        // ---Itemek
+        ItemController itemController = new ItemController();
+        LinkedList<ItemModel> item2 = new LinkedList<ItemModel>();
+        LinkedList<ItemModel> item3 = new LinkedList<ItemModel>();
+
+        ItemModel itemA = new ItemModel(1, "Asztal", 1000);
+        ItemModel itemB = new ItemModel(2, "Szek", 4000);
+        ItemModel itemC = new ItemModel(3, "Terito", 2000);
+
+        ItemModel itemE = new ItemModel(4, "Terito", 888);
+        ItemModel itemF = new ItemModel(5, "Vaza", 444);
+        ItemModel itemG = new ItemModel(6, "Nagyvaza", 1999);
+
+        ItemModel itemH = new ItemModel(7, "Konyv", 3567);
+        ItemModel itemI = new ItemModel(8, "Konyv2", 3990);
+        ItemModel itemJ = new ItemModel(9, "NemKonyv", 2990);
+
+        itemController.addItemToList(itemA);
+        itemController.addItemToList(itemB);
+        itemController.addItemToList(itemC);
+        itemController.addItemToList(itemE);
+        itemController.addItemToList(itemF);
+        itemController.addItemToList(itemG);
+        item2.add(itemH);
+        item3.add(itemI);
+        item3.add(itemJ);
+
+        // items.add(itemA);
+        // items.add(itemB);
+        // items.add(itemC);
+        // items.add(itemE);
+        // items.add(itemF);
+        // items.add(itemG);
+        // items.add(itemH);
+        // items.add(itemI);
+        // items.add(itemJ);
+
+        String[] cm1 = {"Andras","Varga","8200","Veszprem","Egyetem utca","12345678","email@email.com"};
+        String[] cm2 = {"Toni","Megko","8200","Veszprem","Dozsa Gyorgy ut 2","12345678","dimitrov@veb2023.com"};
+        String[] cm3 = {"Zoltan","Gondolko","8200","Veszprem","Iskola utca 4","12345678","email@email.com"};
+
+        CustomerModel r1 = new CustomerModel(cm1);
+        CustomerModel r2 = new CustomerModel(cm2);
+        CustomerModel r3 = new CustomerModel(cm3);
+        // Customer r2 = new Customer(new User(2, "Gabor"));
+        // Customer r3 = new Customer(new User(3, "Feri"));
+        // customers.add(r1);
+        // customers.add(r2);
+        // customers.add(r3);
 
 
-		for (int i = 1; i < customerList.getListSize(); i++) {
-            //Szállítási adatok, elérhetőségek, stb
-			//customers.add(new Customer(customerList.splitLine(i)));
-        }
+        // Depot d1 = new Depot(new User(4, "Depo1"));
+        // Courier c1 = new Courier(new User(5, "Futar1"));
+
+        // ---Order Order(int id, User keeper, Customer receiver, LinkedList<Item>
+        // items)
+        OrderModel order1 = new OrderModel(100, k1, r1, item2);
+        OrderModel order2 = new OrderModel(101, k1, r2, item2);
+        OrderModel order3 = new OrderModel(102, k1, r3, item3);
+        OrderController orderController = new OrderController();
+        orderController.addOrderToList(order1);
+        orderController.addOrderToList(order2);
+        orderController.addOrderToList(order3);
+
+        
+        // orders.add(order1);
+        // orders.add(order2);
+        // orders.add(order3);
+
+        // couriers.add(new Courier(new User(1, "Andras")));
+        // depots.add(new Depot(new User(2, "Balazs")));
+
+        // //Order lista feltolt
+        // for (int i = 1; i < orderList.getListSize(); i++) {
+		// 	// orders.add(new Order(orderList.splitLine(i)));
+        // }
+
+
+		// for (int i = 1; i < customerList.getListSize(); i++) {
+        //     //Szállítási adatok, elérhetőségek, stb
+		// 	//customers.add(new Customer(customerList.splitLine(i)));
+        // }
         Login login = new Login();
 		login.setUserNameTyped(userList.getRow(0));
 		login.setUserPasswordTyped(userList.getRow(1)[login.line]);
@@ -66,17 +141,17 @@ public class TransportApp {
             case 'C': // futar
             CourierController c = new CourierController(user);
             c.couriers = couriersFromFile;
-                new CourierView(c,new OrderController());
+                new CourierView(c,orderController);
                 break;
             case 'D': // Depo
             DepotController d = new DepotController(user);
                 d.depots = depotsFromFile;
-                new DepotView(d,new OrderController());
+                new DepotView(d,orderController);
                 break;
             case 'V': // vevo
                 new CustomerView(new CustomerController(user),
-                    new ItemController(),
-                    new OrderController(),
+                    itemController,
+                    orderController,
                     new DepotController());
                 break;
             default:

@@ -22,7 +22,7 @@ public class ItemView {
         boolean exit = false;
         while (!exit) {
             ViewUtils.printMenu("Adja meg a termék id-jét", Map.of());
-            String bemenet = sc.nextLine();
+            String bemenet = sc.next();
             for (int i = 0; i < list.size(); i++) {
                 if (Integer.toString(list.get(i).id) == bemenet){
                     return list.get(i);

@@ -5,6 +5,8 @@ import java.util.LinkedList;
 public class ItemController {
     public LinkedList<ItemModel> items = new LinkedList<ItemModel>();
 
+    public ItemController(){}
+    
     public void addItemToList(ItemModel item){
         items.add(item);
     }

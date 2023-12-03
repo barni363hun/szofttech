@@ -11,12 +11,13 @@ public class CourierView {
 
     CourierController courierController = null;
     OrderController orderController = null;
+    OrderView orderView = null;
 
     public CourierView(CourierController _courierController,OrderController _orderController) {
         courierController = _courierController;
         orderController = _orderController;
+        orderView=new OrderView(orderController);
 
-        OrderView orderView=new OrderView(orderController);
         OrderModel currentOrder = orderView.getOrderFromUser(courierController.getMyOrders(orderController));
         boolean exit = false;
         while (!exit) {
