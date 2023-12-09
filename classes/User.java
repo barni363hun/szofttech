@@ -1,20 +1,26 @@
 package classes;
 
 public class User {
+	int id;
 	String userName;
 	String userPassword;
 	char userType;
 	int userRowInDatabase;
 
 	public User(){}
-	
+
 	public User(User u){}
+	
+	public User(Object[] objArr){
+		userName = (String) objArr[0];
+	}
 
 	public User(String[] s) {
-		setUserName(s[0]);
-		setUserPassword(s[1]);
-		setUserType(s[2]);
-		setUserRowInDatabase(s[3]);
+		this.id = Integer.parseInt(s[0]);
+		setUserName(s[1]);
+		setUserPassword(s[2]);
+		setUserType(s[3]);
+		setUserRowInDatabase(s[4]);
 	}
 
 	public void setUserName(String uN) {

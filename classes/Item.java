@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import classes.*;
+
 import classes.file.JsonHandler;
 
 public class Item {
@@ -12,17 +14,25 @@ public class Item {
 	public int id;
 	public String name;
 	public int price;
-    public boolean isInquired;
-
-    static private JsonHandler items = new JsonHandler("items.json");
 
     static Scanner sc = new Scanner(System.in);
 
-    public Item(int _id, String _name, int _price,boolean _isInquired) {
+     public Item(Object[] objectArray) {
+        this.id = (int) objectArray[0];
+        this.name = (String) objectArray[1];
+        this.price = (int) objectArray[2];
+
+    }
+
+    public Item(int _id, String _name, int _price) {
         id = _id;
         name = _name;
         price = _price;
-        isInquired = _isInquired;
+    }
+    
+    public void printData() {
+        
+        System.out.println("Product Information: ID=" + id + ", Name=" + name + ", Price=" + price);
     }
     
     public void addItemToList(int id, String name, int price){

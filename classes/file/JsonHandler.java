@@ -93,19 +93,19 @@ public class JsonHandler {
 
         System.out.println(json);
     }
-    // public static void main(String[] args) {
-    //     JsonHandler jsonHandler = new JsonHandler("data.json");
+    public static void main(String[] args) {
+        JsonHandler jsonHandler = new JsonHandler("data.json");
     
-    //     // Example usage
-    //     Object[] obj1 = {1, "John Doe", 25};
-    //     Object[] obj2 = {2, "Jane Doe", 30};
+        // Example usage
+        Object[] obj1 = {1, "John Doe", 25,new Object[]{"item1","asd"}};
+        Object[] obj2 = {2, "Jane Doe", 30};
     
-    //     jsonHandler.create(obj1);
-    //     jsonHandler.create(obj2);
+        jsonHandler.create(obj1);
+        jsonHandler.create(obj2);
     
-    //     jsonHandler.printItems(); // Print all items
+        jsonHandler.printItems(); // Print all items
     
-    //     // ... (rest of your code)
-    // }
+        // ... (rest of your code)
+    }
     
 }

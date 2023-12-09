@@ -4,11 +4,13 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ViewUtils {
+
+    static Scanner sc = new Scanner(System.in);
     
     static public char getChar() {
         while (true) {
             System.out.println("Adj meg egy karatert!");
-            String input = new Scanner(System.in).next();
+            String input = sc.next();
             if (input.length() == 1) {
                 return input.charAt(0);
             } else {

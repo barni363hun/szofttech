@@ -1,15 +1,47 @@
 package classes;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
-import classes.item.ItemModel;
-import classes.user_customer.*;
+import classes.file.JsonHandler;
 
 
 public class Order {
-    //public CustomerModel sender; hátha kell majd 
-    public LinkedList<ItemModel> items;
+    public int id;
+    public int keeperId;
+    public int receiverId;
+    public int[] itemIds;
+
+    static Scanner sc = new Scanner(System.in);
     
+    public Order(Object[] objectArray) {
+        this.id = (int) objectArray[0];
+        this.keeperId = (int) objectArray[1];
+        this.receiverId = (int) objectArray[2];
+        itemIds = (int[]) objectArray[3];
+    }
+
+    static void printOutOrders(List<Order> orders){
+        for (Order order : orders) {
+            System.out.print("Order ID: " + order.id);
+            System.out.print(" | Keeper ID: " + order.keeperId);
+            System.out.print(" | Receiver ID: " + order.receiverId);
+            System.out.print(" | Item IDs: ");
+        for (int itemId : order.itemIds) {
+            System.out.print(itemId + " ");
+        }
+        System.out.println("\n-------------------------");
+    }
+    }
+    
+    public Order(int id, int keeperId, int receiverId, int[] itemIds) {
+        this.id = id;
+        this.keeperId = keeperId;
+        this.receiverId = receiverId;
+        this.itemIds = itemIds;
+    }
+
     public void printData() {
         StringBuilder dataString = new StringBuilder("Order ID: " + id);
 
@@ -26,25 +58,17 @@ public class Order {
         }
 
         dataString.append(", Items: ");
-        for (ItemModel item : items) {
+        for (Item item : items) {
             dataString.append(item.name).append("), ");
         }
-
         // Remove the trailing comma and space
         if (!items.isEmpty()) {
             dataString.setLength(dataString.length() - 2);
         }
-
         System.out.println(dataString.toString());
     }
 
 
-    public Order(int id, User keeper, Customer receiver, LinkedList<ItemModel> items) {
-        this.id = id;
-        this.keeper = keeper;
-        this.receiver = receiver;
-        this.items = items;
-    }
 
     /**
      * 

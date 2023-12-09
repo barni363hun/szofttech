@@ -1,15 +1,47 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
-public class Courier extends User{
+import classes.file.JsonHandler;
 
+public class Courier extends User {
+    private List<Order> orders = new ArrayList<>();
     
-    public CourierMenu() {
+    public Courier(User user) {
+        super(user);
+    }
 
+    public void setOrders(JsonHandler orderHandler) {
+        for (Object[] objArr : orderHandler.readAll()) {
+            Order currOrder = new Order(objArr);
+            if (currOrder.keeperId == this.id) {
+                orders.add(currOrder);
+            }
+        }
+    }
+
+    private Order selectOrder(JsonHandler orderHandler) {
         
-        Order currentOrder = orderView.getOrderFromUser(courierController.getMyOrders(orderController));
+        Order.printOutOrders(orders);
+        int input = (int)ViewUtils.getChar();
+        boolean exit = false;
+        while (!exit) {
+            for (Order order : orders) {
+                if (order.id == input) {
+                    exit = true;
+                    return order;
+                } 
+            }
+        }
+       return null;
+    }
+    
+    private void CourierMenu(JsonHandler orderHandler) {
+
+        Order currentOrder = selectOrder(orderHandler);
         boolean exit = false;
         while (!exit) {
             ViewUtils.printMenu("Courier", Map.of(
@@ -20,11 +52,11 @@ public class Courier extends User{
             switch (ViewUtils.getChar()) {
                 case '1':
                     ViewUtils.printMenu("Csomag felvéve", Map.of());
-                    currentOrder.keeper = courierController.courier;
+                    currentOrder.keeperId = this.id;
                     break;
                 case '2':
                     ViewUtils.printMenu("Sikeres kézbesítés", Map.of());
-                    currentOrder.keeper = currentOrder.receiver;
+                    currentOrder.receiverId = currentOrder.receiverId;
                     break;
                 case '3':
                     ViewUtils.printMenu("Sikertelen kézbesítés", Map.of());
@@ -38,14 +70,5 @@ public class Courier extends User{
                     break;
             }
         }
-    }
-
-    
-    // public void addToCourier(CourierModel u) {
-    //     couriers.add(u);
-    // }
-
-    public LinkedList<Order> getMyOrders(OrderController orderController){
-        return orderController.getOrdersOfKeeper(courier);
     }
 }

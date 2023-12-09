@@ -1,17 +1,23 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import classes.file.JsonHandler;
+
 
 import classes.*;
-import classes.item.ItemModel;
+
 
 
 
 public class Customer extends User{
 
+    private List<Order> orders = new ArrayList<>();
+    public List<Integer> cart = new ArrayList<>();
 	String customerFirstName;
 	String customerLastName;
 	String customerAddressZIP;
@@ -24,7 +30,7 @@ public class Customer extends User{
     ViewUtils viewUtils = null;
     Scanner sc = new Scanner(System.in);
 
-    public LinkedList<ItemModel> cart = new LinkedList<ItemModel>();
+    // public LinkedList<ItemModel> cart = new LinkedList<ItemModel>();
 
 	public Customer(User u){
         super(u);
@@ -41,8 +47,8 @@ public class Customer extends User{
         //super(s);
 	}
 
-
-	public CustomerMenu(){
+    //TODO - Itemeket így kapja meg?
+	public void CustomerMenu(JsonHandler customerHandler, JsonHandler itemHandler){
       
         boolean exit = false;
         while (!exit) {
@@ -56,31 +62,34 @@ public class Customer extends User{
             switch (ViewUtils.getChar()) {
                 case '2':
                     ViewUtils.printMenu("Termék kosárba rakása", Map.of("k", "Kilépés"));
-                    ItemModel item = new Item(itemController).getItemFromUser();
-                    customerController.customer.cart.add(item);
+                    
+                    // ItemModel item = new Item(itemController).getItemFromUser();
+                    // customerController.customer.cart.add(item);
                 case '3':
                     ViewUtils.printMenu("Termék törlése a kosárból", Map.of("k", "Kilépés"));
-                    customerController.customer.cart.remove(selectItemFromCart());
+                    
+                    
+                    // customerController.customer.cart.remove(selectItemFromCart());
                     break;
                 case '4':
                     ViewUtils.printMenu("Kosár tartalmának megtekintése", Map.of());
-                    listCart();
+                    // listCart();
                     break;
                 case '5':
                     ViewUtils.printMenu("Kosár tartalmának megrendelése", Map.of());
                     // TODO id így maradjon?
-                    int id = new Random().nextInt(1000,Integer.MAX_VALUE);
-                    orderController.orders.add(new Order(
-                        id, 
-                        depotController.getWareHouse(),
-                        selectRecieverFromCustomers(),
-                        customerController.customer.cart));
-                    break;
-                case 'k':
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Nincs ilyen menüpont!");
+                //     int id = new Random().nextInt(1000,Integer.MAX_VALUE);
+                //     orderController.orders.add(new Order(
+                //         id, 
+                //         depotController.getWareHouse(),
+                //         selectRecieverFromCustomers(),
+                //         customerController.customer.cart));
+                //     break;
+                // case 'k':
+                //     exit = true;
+                //     break;
+                // default:
+                //     System.out.println("Nincs ilyen menüpont!");
                     break;
             }
         }
