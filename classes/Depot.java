@@ -1,24 +1,12 @@
-package classes.user_depot;
+package classes;
 
 import java.util.Map;
 
-import classes.ViewUtils;
-import classes.order.OrderController;
-import classes.order.OrderModel;
 import classes.order.OrderView;
-import classes.user.User;
-import classes.user_courier.CourierModel;
 
-public class DepotView {
+public class Depot extends User{
 
-    DepotController depotController = null;
-    OrderController orderController = null;
-    OrderView orderView = null;
-
-    public DepotView(DepotController _depotController,OrderController _orderController) {
-        depotController = _depotController;
-        orderController = _orderController;
-        orderView = new OrderView(orderController);
+    public Depot() {
 
         boolean exit = false;
         while (!exit) {
@@ -28,7 +16,7 @@ public class DepotView {
             switch (ViewUtils.getChar()) {
                 case '1':
                     ViewUtils.printMenu("Csomag átvétele", Map.of());
-                    OrderModel myOrder = orderView.getOrderFromUserOfKeeper(depotController.depot);
+                    Order myOrder = orderView.getOrderFromUserOfKeeper(depotController.depot);
                     if (myOrder.keeper instanceof CourierModel) {
                         orderController.setOrderKeeper(myOrder.id, depotController.depot);
                     } else {
@@ -44,4 +32,14 @@ public class DepotView {
             }
         }
     }
+    
+    public DepotController(User user) {
+        depot = new DepotModel(user);
+    }
+
+
+    public DepotModel getWareHouse() {
+        return depots.getFirst();
+    }
+    
 }

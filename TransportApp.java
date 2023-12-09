@@ -89,9 +89,9 @@ public class TransportApp {
         String[] cm2 = {"Toni","Megko","8200","Veszprem","Dozsa Gyorgy ut 2","12345678","dimitrov@veb2023.com"};
         String[] cm3 = {"Zoltan","Gondolko","8200","Veszprem","Iskola utca 4","12345678","email@email.com"};
 
-        CustomerModel r1 = new CustomerModel(cm1);
-        CustomerModel r2 = new CustomerModel(cm2);
-        CustomerModel r3 = new CustomerModel(cm3);
+        Customer r1 = new Customer(cm1);
+        Customer r2 = new Customer(cm2);
+        Customer r3 = new Customer(cm3);
         // Customer r2 = new Customer(new User(2, "Gabor"));
         // Customer r3 = new Customer(new User(3, "Feri"));
         // customers.add(r1);
@@ -104,9 +104,9 @@ public class TransportApp {
 
         // ---Order Order(int id, User keeper, Customer receiver, LinkedList<Item>
         // items)
-        OrderModel order1 = new OrderModel(100, k1, r1, item2);
-        OrderModel order2 = new OrderModel(101, k1, r2, item2);
-        OrderModel order3 = new OrderModel(102, k1, r3, item3);
+        Order order1 = new Order(100, k1, r1, item2);
+        Order order2 = new Order(101, k1, r2, item2);
+        Order order3 = new Order(102, k1, r3, item3);
         OrderController orderController = new OrderController();
         orderController.addOrderToList(order1);
         orderController.addOrderToList(order2);
@@ -139,14 +139,14 @@ public class TransportApp {
 
         switch (user.getUserType()) {
             case 'C': // futar
-            CourierController c = new CourierController(user);
+            Courier c = new Courier(user);
             c.couriers = couriersFromFile;
                 new CourierView(c,orderController);
                 break;
             case 'D': // Depo
             DepotController d = new DepotController(user);
                 d.depots = depotsFromFile;
-                new DepotView(d,orderController);
+                new Depot(d,orderController);
                 break;
             case 'V': // vevo
                 new CustomerView(new CustomerController(user),

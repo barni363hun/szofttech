@@ -1,24 +1,15 @@
-package classes.user_courier;
+package classes;
 
+import java.util.LinkedList;
 import java.util.Map;
 
-import classes.ViewUtils;
-import classes.order.OrderController;
-import classes.order.OrderModel;
-import classes.order.OrderView;
+public class Courier extends User{
 
-public class CourierView {
+    
+    public CourierMenu() {
 
-    CourierController courierController = null;
-    OrderController orderController = null;
-    OrderView orderView = null;
-
-    public CourierView(CourierController _courierController,OrderController _orderController) {
-        courierController = _courierController;
-        orderController = _orderController;
-        orderView=new OrderView(orderController);
-
-        OrderModel currentOrder = orderView.getOrderFromUser(courierController.getMyOrders(orderController));
+        
+        Order currentOrder = orderView.getOrderFromUser(courierController.getMyOrders(orderController));
         boolean exit = false;
         while (!exit) {
             ViewUtils.printMenu("Courier", Map.of(
@@ -47,5 +38,14 @@ public class CourierView {
                     break;
             }
         }
+    }
+
+    
+    // public void addToCourier(CourierModel u) {
+    //     couriers.add(u);
+    // }
+
+    public LinkedList<Order> getMyOrders(OrderController orderController){
+        return orderController.getOrdersOfKeeper(courier);
     }
 }
