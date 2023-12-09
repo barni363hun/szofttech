@@ -6,14 +6,15 @@ import java.util.Scanner;
 
 import classes.ViewUtils;
 
-public class ItemView {
+public class Item {
 
     ItemController itemController = null;
     Scanner sc = new Scanner(System.in);
 
-    public ItemView(ItemController _itemController) {
+    public Item(ItemController _itemController) {
         itemController = _itemController;
     }
+    
     public ItemModel getItemFromUser() {
         // TODO possibly null
         // melyik item-el szeretnél dolgozni

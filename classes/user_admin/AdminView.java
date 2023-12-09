@@ -1,10 +1,10 @@
 package classes.user_admin;
 
-import classes.item.ItemView;
+import classes.item.Item;
 import classes.user.User;
 
 public class AdminView {
-   public AdminView(User user, ItemView iv) {
+   public AdminView(User user, Item iv) {
       adminMenu();
    }
 

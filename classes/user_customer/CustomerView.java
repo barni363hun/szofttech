@@ -8,7 +8,7 @@ import java.util.Scanner;
 import classes.ViewUtils;
 import classes.item.ItemController;
 import classes.item.ItemModel;
-import classes.item.ItemView;
+import classes.item.Item;
 import classes.order.OrderController;
 import classes.order.OrderModel;
 import classes.user_depot.DepotController;
@@ -47,7 +47,7 @@ public class CustomerView {
             switch (ViewUtils.getChar()) {
                 case '2':
                     ViewUtils.printMenu("Termék kosárba rakása", Map.of("k", "Kilépés"));
-                    ItemModel item = new ItemView(itemController).getItemFromUser();
+                    ItemModel item = new Item(itemController).getItemFromUser();
                     customerController.customer.cart.add(item);
                 case '3':
                     ViewUtils.printMenu("Termék törlése a kosárból", Map.of("k", "Kilépés"));
