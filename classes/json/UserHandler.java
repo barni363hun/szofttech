@@ -48,11 +48,4 @@ public class UserHandler extends JsonHandler<User>{
         }
         return -1;
     }
-
-    @Override
-    public void close() throws Exception {
-        writeAllToJsonFile();
-    }
-    
-    
 }

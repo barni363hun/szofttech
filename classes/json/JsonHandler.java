@@ -2,14 +2,12 @@ package classes.json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import classes.Item;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class JsonHandler<T extends JsonDataClass> implements AutoCloseable {
+public abstract class JsonHandler<T extends JsonDataClass>{
     public LinkedList<T> list = new LinkedList<T>();
     protected String fileName;
 
@@ -51,17 +49,6 @@ public abstract class JsonHandler<T extends JsonDataClass> implements AutoClosea
         }
         return transformedList;
     }
-
-    // public void updateById(int id) {
-    //     T t = items.set(id,);
-    //     t = 
-    //             items.add(t);
-    //             writeAllToJsonFile();
-    //         }
-    //     }
-    //     System.out.println("Item with ID " + id + " not found.");
-    //     // TODO exception
-    // }
     
     public void printItems() {
         System.out.println("All items:");

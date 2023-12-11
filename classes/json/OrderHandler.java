@@ -16,6 +16,7 @@ public class OrderHandler extends JsonHandler<Order>{
     public OrderHandler(String fileName) {
         super(fileName);
     }
+
     @Override
     protected void loadFromJsonFile() {
      try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
@@ -31,7 +32,7 @@ public class OrderHandler extends JsonHandler<Order>{
             for (ArrayList t : a) {
                 list.add(new Order(t));
             }
-            System.out.println("--------------------------------");
+            // System.out.println("--------------------------------");
         } catch (FileNotFoundException e) {
             System.out.println("File not found. Creating a new one.");
         } catch (IOException e) {
@@ -39,10 +40,4 @@ public class OrderHandler extends JsonHandler<Order>{
         }
         
     }
-    @Override
-    public void close() throws Exception {
-        writeAllToJsonFile();
-    }
-    
-    
 }

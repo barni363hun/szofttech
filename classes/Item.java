@@ -66,29 +66,4 @@ public class Item extends JsonDataClass{
         }
        return res;
     }
-    
-    // public void addItemToList(int id, String name, int price){
-    //     items.create(new Object[]{id, name, price,false});
-    // }
-
-    // public List<Object[]> getItems(){
-    //     return items.readAll();
-    // }
-    
-    // public void getItemFromUser() {
-    //     items.printItems();
-        // boolean exit = false;
-        // while (!exit) {
-        //     Utils.printMenu("Adja meg a termék id-jét", Map.of());
-        //     String bemenet = sc.next();
-        //     for (int i = 0; i < items.size(); i++) {
-        //         if (Integer.toString(items.readById(i)[0]) == bemenet){
-        //             return items.readById(i);
-        //         }
-        //     }
-        // Utils.printMenu("Hibás érték", Map.of());
-        // }
-        // return null;
-    // }
-    
 }

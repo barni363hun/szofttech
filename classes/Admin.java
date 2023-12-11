@@ -88,7 +88,6 @@ public class Admin extends User {
           }
       } while (!isValidUserType);
   
-      // Assuming User class has a constructor that takes Object[]
       userHandler.list.add(new User(userHandler.getBiggestId()+1, username, password, type));
       userHandler.writeAllToJsonFile();
   }

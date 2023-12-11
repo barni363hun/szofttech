@@ -1,8 +1,5 @@
 package classes;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -31,26 +28,5 @@ public class Utils {
             System.out.println("");
         }
     }
-
-    // !deprecated!
-    // public static <T> Object[] transformsToObjArr(T obj) {
-    //     if (obj == null) {
-    //         return null; // or throw an exception, depending on your requirements
-    //     }
-    //     Field[] fields = obj.getClass().getDeclaredFields();
-    //     List<Object> objList = new ArrayList<>();
-
-    //     try {
-    //         for (Field field : fields) {
-    //             field.setAccessible(true);
-    //             Object value = field.get(obj);
-    //             objList.add(value);
-    //         }
-    //     } catch (IllegalAccessException e) {
-    //         e.printStackTrace(); // Handle the exception based on your needs
-    //     }
-
-    //     return objList.toArray();
-    // }
 
 }
