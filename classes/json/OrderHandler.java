@@ -15,7 +15,6 @@ public class OrderHandler extends JsonHandler<Order>{
 
     public OrderHandler(String fileName) {
         super(fileName);
-        //TODO Auto-generated constructor stub
     }
     @Override
     protected void loadFromJsonFile() {
@@ -32,7 +31,7 @@ public class OrderHandler extends JsonHandler<Order>{
             for (ArrayList t : a) {
                 list.add(new Order(t));
             }
-            // System.out.println("--------------------------------");
+            System.out.println("--------------------------------");
         } catch (FileNotFoundException e) {
             System.out.println("File not found. Creating a new one.");
         } catch (IOException e) {

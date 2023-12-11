@@ -16,13 +16,13 @@ public class Order extends JsonDataClass {
     public int receiverId;
     public int[] itemIds;
     
-    
     @Override
     public List<Object> getArrayList() {
         List<Object> itemData = new ArrayList<>();
         itemData.add(id);
-        itemData.add(nextOperatorId);
+        itemData.add(keeperId);
         itemData.add(receiverId);
+        itemData.add(nextOperatorId);
         itemData.add(itemIds);
         return itemData;
     }
@@ -37,10 +37,11 @@ public class Order extends JsonDataClass {
         return res;
     }
 
-    static public List<Order> getOrdersByRole(List<Order> orders,String role) {
-        // TODO
-        return orders;
-    }
+    // static public List<Order> getOrdersByRole(List<Order> orders,String role) {
+    //     
+    //     orders.get(0).
+    //     return orders;
+    // }
     
 
     static public void printOutOrders(List<Order> orders){
@@ -93,11 +94,13 @@ public class Order extends JsonDataClass {
     private static int[] convertArrayListToIntArray(ArrayList arrayList) {
         int[] result = new int[arrayList.size()];
         for (int i = 0; i < arrayList.size(); i++) {
-            result[i] = ((Number) arrayList.get(3)).intValue();
+            result[i] = ((Number) arrayList.get(i)).intValue();
         }
         return result;
     }
 
+
+    
     // public void printData() {
     //     StringBuilder dataString = new StringBuilder("Order ID: " + id);
 
@@ -178,7 +181,7 @@ public class Order extends JsonDataClass {
     // }
 
     // public LinkedList<OrderModel> getOrdersByDepot(DepotModel depot){
-    //     //TODO
+    //     
     //     return orders;
     // }
 

@@ -2,7 +2,6 @@ import java.util.*;
 
 import classes.*;
 import classes.json.ItemHandler;
-import classes.json.JsonHandler;
 import classes.json.OrderHandler;
 import classes.json.UserHandler;
 
@@ -21,7 +20,7 @@ public class TransportApp {
             case 'C': // futar
                 Courier courier = new Courier(user);
                 for (Order order : orderHandler.list) {
-                    if (order.keeperId == courier.getId()) {
+                    if (order.nextOperatorId == courier.getId()) {
                         courier.addOrder(order);
                     }
                 }

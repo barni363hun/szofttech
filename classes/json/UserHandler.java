@@ -15,7 +15,6 @@ public class UserHandler extends JsonHandler<User>{
 
     public UserHandler(String fileName) {
         super(fileName);
-        //TODO Auto-generated constructor stub
     }
     @Override
     protected void loadFromJsonFile() {

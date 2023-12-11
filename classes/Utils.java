@@ -32,7 +32,7 @@ public class Utils {
         }
     }
 
-    //TODO ez mehet át a JsonHandler-be?
+    // !deprecated!
     // public static <T> Object[] transformsToObjArr(T obj) {
     //     if (obj == null) {
     //         return null; // or throw an exception, depending on your requirements
