@@ -1,4 +1,6 @@
 package classes;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Login {
@@ -6,18 +8,23 @@ public class Login {
 	private String TypedUsername;
 	private String TypedPassword;
 
-	List<User> users;
+	LinkedList<User> users = new LinkedList<User>();
 
-	public Login(JsonHandler<User> userHandler) {
-		users = userHandler.list;
+	public Login(UserHandler userHandler) {
+		// users = ;
+		
+		User a = userHandler.list.get(0);
+		System.out.println(a.getClass());
+
 	}
 
 	private User getUserByUsername(String username) {
-		for (User user : users) {
-			if (user.userName == username) {
-				return user;
-			}
-		}
+		// for (int i = 0; i < users.size(); i++) {
+		// 	User currentUser = users.get(i);
+		// 	if (.userName.equals(username)) {
+		// 		return users.get(i);
+		// 	}
+		// }
 		return null; 
 	}
 

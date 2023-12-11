@@ -16,19 +16,17 @@ public class User extends JsonDataClass{
 		userType = u.userType;
 	}
 	
-	// public User(Object[] objArr){
-	// 	id = (int) (double)objArr[0];
-	// 	userName = (String) objArr[1];
-	// 	userPassword = (String) objArr[2];
-	// 	userType = (char) objArr[3];
-	// }
-
     public User(int _id, String username, String password, char type) {
 		id = _id;
 		userName = username;
 		userPassword = password;
 		userType = type;
 	}
+	
+	public User(ArrayList t) {
+		this(((Number) t.get(0)).intValue(), (String) t.get(1), (String) t.get(2), ((String) t.get(3)).charAt(0));
+	}
+
 
 	static public void printOutUsers(List<User> users) {
         for (User user : users) {

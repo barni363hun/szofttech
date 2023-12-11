@@ -6,11 +6,12 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-public class JsonHandler<T extends JsonDataClass> implements AutoCloseable {
-    public List<T> list;
-    private String fileName;
+public abstract class JsonHandler<T extends JsonDataClass> implements AutoCloseable {
+    public LinkedList<T> list = new LinkedList<T>();
+    protected String fileName;
 
     //delete:
     // list.removeIf(item -> item.id == id);
@@ -19,25 +20,9 @@ public class JsonHandler<T extends JsonDataClass> implements AutoCloseable {
         this.fileName = fileName;
         loadFromJsonFile();
     }
-
-    private void loadFromJsonFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            StringBuilder content = new StringBuilder();
-            while ((line = reader.readLine()) != null) {
-                content.append(line);
-            }
-
-            Gson gson = new Gson();
-            Type type = new TypeToken<List<T>>() {}.getType();
-            list = gson.fromJson(content.toString(), type);
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found. Creating a new one.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     
+    protected void loadFromJsonFile(){};
+
     @Override
     public void close() {
         writeAllToJsonFile();
