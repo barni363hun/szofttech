@@ -3,6 +3,8 @@ package classes;
 import java.util.Map;
 import java.util.Scanner;
 
+import classes.json.JsonHandler;
+
 public class Admin extends User {
 
    public Admin(User user) {
@@ -17,15 +19,27 @@ public class Admin extends User {
                     "1", "Termékek listázása",
                     "2", "Megrendelések listázása",
                     "3", "Felhasználók listázása",
+                    "4", "Termék felvétele",
+                    "5", "Felhasználó felvétele",
                     "k", "Kilépés"));
             switch (Utils.getChar()) {
                 case '1':
+                    Utils.printMenu("Termékek", Map.of());
                     Item.printOutItems(itemHandler.list);
+                    break;
                 case '2':
+                    Utils.printMenu("Megrendelések", Map.of());
                     Order.printOutOrders(orderHandler.list);
                     break;
                 case '3':
+                    Utils.printMenu("Felhasználók", Map.of());
                     User.printOutUsers(userHandler.list);
+                    break;
+                case '4':
+                    makeItem(itemHandler);
+                    break;
+                case '5':
+                    makeUser(userHandler);
                     break;
                 case 'k':
                     exit = true;
@@ -40,28 +54,29 @@ public class Admin extends User {
    // Static method to read data for Item
    public static void makeItem(JsonHandler<Item> itemHandler) {
 
-      System.out.print("Enter Item Name: ");
+      System.out.println("Enter Item Name: ");
       String name = Utils.sc.next();
 
-      System.out.print("Enter Item Price: ");
+      System.out.println("Enter Item Price: ");
       int price = Utils.sc.nextInt();
       
-      itemHandler.list.add(new Item(0,name,price)); // the id will be discarded
+      itemHandler.list.add(new Item(itemHandler.getBiggestId()+1,name,price)); // the id will be discarded
+      itemHandler.writeAllToJsonFile();
    }
    
    public static void makeUser(JsonHandler<User> userHandler) {
   
-      System.out.print("Enter User Name: ");
+      System.out.println("Enter User Name: ");
       String username = Utils.sc.next();
   
-      System.out.print("Enter User Password: ");
+      System.out.println("Enter User Password: ");
       String password = Utils.sc.next();
   
       // Read User Type and validate
       boolean isValidUserType = false;
       char type = 'C';
       do {
-          System.out.print("Enter User Type (C | A | V | D): ");
+          System.out.println("Enter User Type (C | A | V | D): ");
           char userTypeInput = Utils.sc.next().charAt(0);
   
           // Validate user type
@@ -74,7 +89,8 @@ public class Admin extends User {
       } while (!isValidUserType);
   
       // Assuming User class has a constructor that takes Object[]
-      userHandler.list.add(new User(0, username, password, type));
+      userHandler.list.add(new User(userHandler.getBiggestId(), username, password, type));
+      userHandler.writeAllToJsonFile();
   }
   
 

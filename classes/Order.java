@@ -1,4 +1,5 @@
 package classes;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 // import java.util.LinkedList;
@@ -6,20 +7,25 @@ import java.util.List;
 // import java.util.Scanner;
 // import java.lang.reflect.Field;
 
+import classes.json.JsonDataClass;
+
 
 public class Order extends JsonDataClass {
-    public int id;
     public int keeperId;
     public int nextOperatorId;
     public int receiverId;
     public int[] itemIds;
     
-    // public Order(Object[] objectArray) {
-    //     this.id = (int) objectArray[0];
-    //     this.keeperId = (int) objectArray[1];
-    //     this.receiverId = (int) objectArray[2];
-    //     itemIds = (int[]) objectArray[3];
-    // }
+    
+    @Override
+    public List<Object> getArrayList() {
+        List<Object> itemData = new ArrayList<>();
+        itemData.add(id);
+        itemData.add(nextOperatorId);
+        itemData.add(receiverId);
+        itemData.add(itemIds);
+        return itemData;
+    }
 
     static public List<Order> getOrdersAddressedToThisOperator(List<Order> orders,User user){
         List<Order> res = new ArrayList<Order>();
@@ -35,6 +41,7 @@ public class Order extends JsonDataClass {
         // TODO
         return orders;
     }
+    
 
     static public void printOutOrders(List<Order> orders){
         for (Order order : orders) {
@@ -52,23 +59,43 @@ public class Order extends JsonDataClass {
     static public Order selectOrderFromList(List<Order> orders) {
         Order.printOutOrders(orders);
         int input;
-        boolean exit = false;
-        while (!exit) {
-            input = (int)Utils.getChar();
+        Order res = null;
+        while (res == null) {
+            System.out.println("Adj meg egy id-t");
+            input = Utils.sc.nextInt();
             for (Order order : orders) {
                 if (order.id == input) {
-                    return order;
+                    res = order;
                 } 
             }
         }
-       return null;
+       return res;
     }
     
-    public Order(int id, int keeperId, int receiverId, int[] itemIds) {
+    public Order(int id, int keeperId, int receiverId,int nextOperatorId, int[] itemIds) {
         this.id = id;
         this.keeperId = keeperId;
         this.receiverId = receiverId;
+        this.nextOperatorId = nextOperatorId;
         this.itemIds = itemIds;
+    }
+
+    public Order(ArrayList t) {
+        this(
+            ((Number) t.get(0)).intValue(),
+            ((Number) t.get(1)).intValue(),
+            ((Number) t.get(2)).intValue(),
+            ((Number) t.get(3)).intValue(),
+            convertArrayListToIntArray((ArrayList) t.get(4))
+        );
+    }
+        
+    private static int[] convertArrayListToIntArray(ArrayList arrayList) {
+        int[] result = new int[arrayList.size()];
+        for (int i = 0; i < arrayList.size(); i++) {
+            result[i] = ((Number) arrayList.get(3)).intValue();
+        }
+        return result;
     }
 
     // public void printData() {

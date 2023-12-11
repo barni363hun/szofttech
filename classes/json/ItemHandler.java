@@ -1,17 +1,23 @@
-package classes;
+package classes.json;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-public class UserHandler extends JsonHandler<User>{
+import classes.Item;
 
-    public UserHandler(String fileName) {
+public class ItemHandler extends JsonHandler<Item>{
+
+    public ItemHandler(String fileName) {
         super(fileName);
         //TODO Auto-generated constructor stub
     }
@@ -28,7 +34,7 @@ public class UserHandler extends JsonHandler<User>{
             LinkedList<ArrayList> a = gson.fromJson(content.toString(), LinkedList.class); // Change the type here
             // System.out.println(a);
             for (ArrayList t : a) {
-                list.add(new User(t));
+                list.add(new Item(t));
             }
             // System.out.println("--------------------------------");
         } catch (FileNotFoundException e) {
@@ -39,5 +45,8 @@ public class UserHandler extends JsonHandler<User>{
         
     }
     
-    
+    @Override
+    public void close() throws Exception {
+        writeAllToJsonFile();
+    }
 }

@@ -12,12 +12,12 @@ public class Utils {
     
     public static char getChar() {
         while (true) {
-            System.out.println("Adj meg egy karatert!");
+            System.out.println("Adj meg egy karaktert!");
             String input = sc.next();
             if (input.length() == 1) {
                 return input.charAt(0);
             } else {
-                System.out.println("Ez nem egy karakter!");
+                System.out.println("Ez nem egy karaktert!");
             }
         }
     }

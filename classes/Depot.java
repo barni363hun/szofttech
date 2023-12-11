@@ -3,6 +3,9 @@ package classes;
 import java.util.List;
 import java.util.Map;
 
+import classes.json.JsonHandler;
+import classes.json.UserHandler;
+
 public class Depot extends User{
 
     public Depot(User user){
@@ -12,11 +15,6 @@ public class Depot extends User{
     // public Depot(Object[] objArr) {
     //     super(objArr);
     // }
-
-    public static Depot getWareHouse(JsonHandler<User> userHandler){
-        // TODO
-        return new Depot(userHandler.list.get(0));
-    }
 
     public void DepotMenu(JsonHandler<Order> orderHandler){
         boolean exit = false;

@@ -3,11 +3,21 @@ package classes;
 import java.util.ArrayList;
 import java.util.List;
 
+import classes.json.JsonDataClass;
+
 public class Item extends JsonDataClass{
 
-	public int id;
 	public String name;
 	public int price;
+    
+    @Override
+    public List<Object> getArrayList() {
+        List<Object> itemData = new ArrayList<>();
+        itemData.add(id);
+        itemData.add(name);
+        itemData.add(price);
+        return itemData;
+    }
 
      public Item(Object[] objectArray) {
         this.id = (int) objectArray[0];
@@ -22,6 +32,15 @@ public class Item extends JsonDataClass{
         price = _price;
     }
     
+    public Item(ArrayList t) {
+        this(
+            ((Number) t.get(0)).intValue(),    // Assuming id is at index 0
+            (String) t.get(1),                  // Assuming name is at index 1
+            ((Number) t.get(2)).intValue()      // Assuming price is at index 2
+        );
+    }
+
+
     private static void printItem(Item item) {
         System.out.println("Product Information: ID=" + item.id + ", Name=" + item.name + ", Price=" + item.price);
     }
@@ -35,16 +54,17 @@ public class Item extends JsonDataClass{
     public static Item selectItemFromList(List<Item> items) {
         Item.printOutItems(items);
         int input;
-        boolean exit = false;
-        while (!exit) {
-            input = (int)Utils.getChar();
+        Item res = null; 
+        while (res == null) {
+            System.out.println("Adj meg egy id-t");
+            input = Utils.sc.nextInt();
             for (Item item : items) {
                 if (item.id == input) {
-                    return item;
-                } 
+                    res = item;
+                }
             }
         }
-       return null;
+       return res;
     }
     
     // public void addItemToList(int id, String name, int price){

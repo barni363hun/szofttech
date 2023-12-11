@@ -3,11 +3,22 @@ package classes;
 import java.util.ArrayList;
 import java.util.List;
 
+import classes.json.JsonDataClass;
+
 public class User extends JsonDataClass{
-	protected int id;
 	protected String userName;
 	protected String userPassword;
 	protected char userType;
+
+    @Override
+    public List<Object> getArrayList() {
+        List<Object> itemData = new ArrayList<>();
+        itemData.add(id);
+        itemData.add(userName);
+        itemData.add(userPassword);
+        itemData.add(userType);
+        return itemData;
+    }
 
 	public User(User u){
 		id = u.id;

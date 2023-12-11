@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import classes.json.UserHandler;
+
 public class Login {
 
 	private String TypedUsername;
@@ -11,20 +13,16 @@ public class Login {
 	LinkedList<User> users = new LinkedList<User>();
 
 	public Login(UserHandler userHandler) {
-		// users = ;
-		
-		User a = userHandler.list.get(0);
-		System.out.println(a.getClass());
-
+		users = userHandler.list;
 	}
 
 	private User getUserByUsername(String username) {
-		// for (int i = 0; i < users.size(); i++) {
-		// 	User currentUser = users.get(i);
-		// 	if (.userName.equals(username)) {
-		// 		return users.get(i);
-		// 	}
-		// }
+		for (int i = 0; i < users.size(); i++) {
+			User currentUser = users.get(i);
+			if (currentUser.userName.equals(username)) {
+				return users.get(i);
+			}
+		}
 		return null; 
 	}
 
@@ -36,7 +34,7 @@ public class Login {
 		System.out.println("");
 		this.TypedPassword = String.valueOf(userPasswordMasked);
 		User currUser = getUserByUsername(TypedUsername);
-		if (currUser.userPassword == TypedPassword) {
+		if (currUser.userPassword.equals(TypedPassword)) {
 			System.out.println("You are now logged in!");
 			return currUser;
 		} else {

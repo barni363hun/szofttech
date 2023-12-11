@@ -1,10 +1,10 @@
-package classes;
+package classes.json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+
+import classes.Item;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,19 +23,33 @@ public abstract class JsonHandler<T extends JsonDataClass> implements AutoClosea
     
     protected void loadFromJsonFile(){};
 
-    @Override
-    public void close() {
-        writeAllToJsonFile();
+    public int getBiggestId(){
+        int max = 0;
+        for (T t : list) {
+            if (t.id > max) {
+                max = t.id;
+            }
+        }
+        return max;
     }
 
-    private void writeAllToJsonFile() {
+    public void writeAllToJsonFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String json = gson.toJson(list);
+            List<List<Object>> transformedList = transformList(list);
+            String json = gson.toJson(transformedList);
             writer.write(json);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private List<List<Object>> transformList(List<T> TList) {
+        List<List<Object>> transformedList = new ArrayList<>();
+        for (T t : TList) {
+            transformedList.add(t.getArrayList());
+        }
+        return transformedList;
     }
 
     // public void updateById(int id) {

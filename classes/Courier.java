@@ -21,7 +21,7 @@ public class Courier extends User {
     }
     
     public void CourierMenu() {
-
+        Utils.printMenu("Melyik csomaggal akarsz interaktálni?", Map.of());
         Order currentOrder = Order.selectOrderFromList(orders);
         boolean exit = false;
         while (!exit) {
