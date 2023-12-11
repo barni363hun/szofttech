@@ -33,24 +33,24 @@ public class Utils {
     }
 
     //TODO ez mehet át a JsonHandler-be?
-    public static <T> Object[] transformsToObjArr(T obj) {
-        if (obj == null) {
-            return null; // or throw an exception, depending on your requirements
-        }
-        Field[] fields = obj.getClass().getDeclaredFields();
-        List<Object> objList = new ArrayList<>();
+    // public static <T> Object[] transformsToObjArr(T obj) {
+    //     if (obj == null) {
+    //         return null; // or throw an exception, depending on your requirements
+    //     }
+    //     Field[] fields = obj.getClass().getDeclaredFields();
+    //     List<Object> objList = new ArrayList<>();
 
-        try {
-            for (Field field : fields) {
-                field.setAccessible(true);
-                Object value = field.get(obj);
-                objList.add(value);
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace(); // Handle the exception based on your needs
-        }
+    //     try {
+    //         for (Field field : fields) {
+    //             field.setAccessible(true);
+    //             Object value = field.get(obj);
+    //             objList.add(value);
+    //         }
+    //     } catch (IllegalAccessException e) {
+    //         e.printStackTrace(); // Handle the exception based on your needs
+    //     }
 
-        return objList.toArray();
-    }
+    //     return objList.toArray();
+    // }
 
 }

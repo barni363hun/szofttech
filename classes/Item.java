@@ -3,7 +3,7 @@ package classes;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Item {
+public class Item extends JsonDataClass{
 
 	public int id;
 	public String name;
@@ -30,14 +30,6 @@ public class Item {
         for (Item item : items) {
             printItem(item);
         }
-    }
-    
-    public static List<Item> getAllItems(JsonHandler itemHandler){
-        List<Item> items = new ArrayList<>();
-        for (Object[] objArr : itemHandler.readAll()) {
-            items.add(new Item(objArr));
-        }
-        return items;
     }
     
     public static Item selectItemFromList(List<Item> items) {

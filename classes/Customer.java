@@ -21,9 +21,9 @@ public class Customer extends User{
         super(u);
     }
 
-    public Customer(Object[] objArr) {
-        super(objArr);
-    }
+    // public Customer(Object[] objArr) {
+    //     super(objArr);
+    // }
 	// public Customer(String[] s) {
 	// 	setCustomerFirstName(s[0]);
 	// 	setCustomerLastName(s[1]);
@@ -36,7 +36,7 @@ public class Customer extends User{
 	// }
 
     //TODO - Itemeket így kapja meg?
-	public void CustomerMenu(JsonHandler itemHandler,JsonHandler orderHandler,JsonHandler userHandler){
+	public void CustomerMenu(JsonHandler<Item> itemHandler, JsonHandler<Order> orderHandler, JsonHandler<User> userHandler){
       
         boolean exit = false;
         while (!exit) {
@@ -50,7 +50,7 @@ public class Customer extends User{
             switch (Utils.getChar()) {
                 case '2':
                     Utils.printMenu("Termék kosárba rakása", Map.of());
-                    Item addItem = Item.selectItemFromList(Item.getAllItems(itemHandler));
+                    Item addItem = Item.selectItemFromList(itemHandler.list);
                     cart.add(addItem);
                 case '3':
                     Utils.printMenu("Termék törlése a kosárból", Map.of());
@@ -66,8 +66,8 @@ public class Customer extends User{
                     for (int i = 0; i < cart.size(); i++) {
                         itemIds[i] = cart.get(i).id;
                     }
-                    Order o = new Order(orderHandler.size()+1, Depot.getWareHouse(userHandler).id, id, itemIds);
-                    orderHandler.add(o);
+                    Order o = new Order(0,Depot.getWareHouse(userHandler).id,id,itemIds);
+                    orderHandler.list.add(o);
                 case 'k':
                     exit = true;
                     break;

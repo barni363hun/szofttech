@@ -9,7 +9,7 @@ public class Admin extends User {
       super(user);
    }
 
-   public void AdminMenu(JsonHandler itemHandler, JsonHandler orderHandler, JsonHandler userHandler) {
+   public void AdminMenu(JsonHandler<Item> itemHandler, JsonHandler<Order> orderHandler, JsonHandler<User> userHandler) {
 
         boolean exit = false;
         while (!exit) {
@@ -20,12 +20,12 @@ public class Admin extends User {
                     "k", "Kilépés"));
             switch (Utils.getChar()) {
                 case '1':
-                    Item.printOutItems(Item.getAllItems(itemHandler));
+                    Item.printOutItems(itemHandler.list);
                 case '2':
-                    Order.printOutOrders(Order.getAllOrders(orderHandler));
+                    Order.printOutOrders(orderHandler.list);
                     break;
                 case '3':
-                    User.printOutUsers(User.getAllUsers(userHandler));
+                    User.printOutUsers(userHandler.list);
                     break;
                 case 'k':
                     exit = true;
@@ -38,7 +38,7 @@ public class Admin extends User {
    }
 
    // Static method to read data for Item
-   public static void makeItem(JsonHandler itemHandler) {
+   public static void makeItem(JsonHandler<Item> itemHandler) {
 
       System.out.print("Enter Item Name: ");
       String name = Utils.sc.next();
@@ -46,10 +46,10 @@ public class Admin extends User {
       System.out.print("Enter Item Price: ");
       int price = Utils.sc.nextInt();
       
-      itemHandler.add(new Item(0,name,price)); // the id will be discarded
+      itemHandler.list.add(new Item(0,name,price)); // the id will be discarded
    }
    
-   public static void makeUser(JsonHandler userHandler) {
+   public static void makeUser(JsonHandler<User> userHandler) {
   
       System.out.print("Enter User Name: ");
       String username = Utils.sc.next();
@@ -74,7 +74,7 @@ public class Admin extends User {
       } while (!isValidUserType);
   
       // Assuming User class has a constructor that takes Object[]
-      userHandler.add(new User(0, username, password, type));
+      userHandler.list.add(new User(0, username, password, type));
   }
   
 

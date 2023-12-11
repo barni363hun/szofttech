@@ -1,6 +1,4 @@
 package classes;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Login {
@@ -8,14 +6,10 @@ public class Login {
 	private String TypedUsername;
 	private String TypedPassword;
 
-	List<User> users = new ArrayList<User>();
+	List<User> users;
 
-	public Login(JsonHandler userHandler) {
-		ArrayList<Object[]> all = userHandler.readAll();
-		Object[] objArr = all.get(0);
-		System.out.println(objArr.getClass());
-		// int id = (int) objArr;
-		// System.out.println(id);
+	public Login(JsonHandler<User> userHandler) {
+		users = userHandler.list;
 	}
 
 	private User getUserByUsername(String username) {

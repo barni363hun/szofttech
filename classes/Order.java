@@ -1,33 +1,25 @@
 package classes;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.lang.reflect.Field;
+// import java.util.LinkedList;
+// import java.util.Map;
+// import java.util.Scanner;
+// import java.lang.reflect.Field;
 
 
-public class Order {
+public class Order extends JsonDataClass {
     public int id;
     public int keeperId;
     public int nextOperatorId;
     public int receiverId;
     public int[] itemIds;
     
-    public Order(Object[] objectArray) {
-        this.id = (int) objectArray[0];
-        this.keeperId = (int) objectArray[1];
-        this.receiverId = (int) objectArray[2];
-        itemIds = (int[]) objectArray[3];
-    }
-
-    public static List<Order> getAllOrders(JsonHandler orderHandler){
-        List<Order> orders = new ArrayList<>();
-        for (Object[] objArr : orderHandler.readAll()) {
-            orders.add(new Order(objArr));
-        }
-        return orders;
-    }
+    // public Order(Object[] objectArray) {
+    //     this.id = (int) objectArray[0];
+    //     this.keeperId = (int) objectArray[1];
+    //     this.receiverId = (int) objectArray[2];
+    //     itemIds = (int[]) objectArray[3];
+    // }
 
     static public List<Order> getOrdersAddressedToThisOperator(List<Order> orders,User user){
         List<Order> res = new ArrayList<Order>();

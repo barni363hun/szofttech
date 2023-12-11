@@ -3,7 +3,7 @@ package classes;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User extends JsonDataClass{
 	protected int id;
 	protected String userName;
 	protected String userPassword;
@@ -16,12 +16,12 @@ public class User {
 		userType = u.userType;
 	}
 	
-	public User(Object[] objArr){
-		id = (int) (double)objArr[0];
-		userName = (String) objArr[1];
-		userPassword = (String) objArr[2];
-		userType = (char) objArr[3];
-	}
+	// public User(Object[] objArr){
+	// 	id = (int) (double)objArr[0];
+	// 	userName = (String) objArr[1];
+	// 	userPassword = (String) objArr[2];
+	// 	userType = (char) objArr[3];
+	// }
 
     public User(int _id, String username, String password, char type) {
 		id = _id;
@@ -29,26 +29,6 @@ public class User {
 		userPassword = password;
 		userType = type;
 	}
-
-	public static List<User> getAllUsers(JsonHandler userHandler) {
-        List<User> users = new ArrayList<>();
-
-        try {
-            List<Object[]> userData = userHandler.readAll();
-
-            for (Object[] objArr : userData) {
-                User user = new User(objArr); // Assuming User class has a constructor that takes Object[]
-                users.add(user);
-            }
-
-        } catch (Exception e) {
-            // Handle exceptions such as IO errors, parsing errors, etc.
-            System.err.println("Error reading users: " + e.getMessage());
-            // You might want to log the exception or take appropriate action.
-        }
-
-        return users;
-    }
 
 	static public void printOutUsers(List<User> users) {
         for (User user : users) {

@@ -5,11 +5,11 @@ import classes.*;
 public class TransportApp {
     public TransportApp() {
         
-        JsonHandler userHandler = new JsonHandler("users.json");
-        JsonHandler orderHandler = new JsonHandler("orders.json");
-        JsonHandler itemHandler = new JsonHandler("items.json");
+        JsonHandler<User> userHandler = new JsonHandler<User>("users.json");
+        JsonHandler<Order> orderHandler = new JsonHandler<Order>("orders.json");
+        JsonHandler<Item> itemHandler = new JsonHandler<Item>("items.json");
         // userHandler.add(new User(0,"admin","admin",'A'));
-        userHandler.printItems();
+        // userHandler.printItems();
         
         Login login = new Login(userHandler);
 		login.getUserNameFromUser();
@@ -18,8 +18,7 @@ public class TransportApp {
         switch (user.getUserType()) {
             case 'C': // futar
                 Courier courier = new Courier(user);
-                List<Order> all = Order.getAllOrders(orderHandler);
-                for (Order order : all) {
+                for (Order order : orderHandler.list) {
                     if (order.keeperId == courier.getId()) {
                         courier.addOrder(order);
                     }
