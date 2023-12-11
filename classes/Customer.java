@@ -1,27 +1,19 @@
 package classes;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
-
-import classes.*;
-
-
-
 
 public class Customer extends User{
 
     public List<Item> cart = new ArrayList<>();
-	String customerFirstName;
-	String customerLastName;
-	String customerAddressZIP;
-	String customerAddressTown;
-	String customerAddressStreet;
-	String customerPhone;
-	String customerEmail;
+	// String customerFirstName;
+	// String customerLastName;
+	// String customerAddressZIP;
+	// String customerAddressTown;
+	// String customerAddressStreet;
+	// String customerPhone;
+	// String customerEmail;
 
     // public LinkedList<ItemModel> cart = new LinkedList<ItemModel>();
 
@@ -57,11 +49,11 @@ public class Customer extends User{
                     "k", "Kilépés"));
             switch (Utils.getChar()) {
                 case '2':
-                    Utils.printMenu("Termék kosárba rakása", Map.of("k", "Kilépés"));
+                    Utils.printMenu("Termék kosárba rakása", Map.of());
                     Item addItem = Item.selectItemFromList(Item.getAllItems(itemHandler));
                     cart.add(addItem);
                 case '3':
-                    Utils.printMenu("Termék törlése a kosárból", Map.of("k", "Kilépés"));
+                    Utils.printMenu("Termék törlése a kosárból", Map.of());
                     cart.remove(Item.selectItemFromList(cart));
                     break;
                 case '4':
@@ -75,7 +67,7 @@ public class Customer extends User{
                         itemIds[i] = cart.get(i).id;
                     }
                     Order o = new Order(orderHandler.size()+1, Depot.getWareHouse(userHandler).id, id, itemIds);
-                    orderHandler.create(Utils.transformsToObjArr(o));
+                    orderHandler.add(o);
                 case 'k':
                     exit = true;
                     break;

@@ -44,7 +44,7 @@ public class Order {
         return orders;
     }
 
-    static private void printOutOrders(List<Order> orders){
+    static public void printOutOrders(List<Order> orders){
         for (Order order : orders) {
             System.out.print("Order ID: " + order.id);
             System.out.print(" | Keeper ID: " + order.keeperId);

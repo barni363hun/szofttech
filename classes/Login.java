@@ -1,11 +1,7 @@
 package classes;
 
-import java.io.Console;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
 public class Login {
 
@@ -15,10 +11,11 @@ public class Login {
 	List<User> users = new ArrayList<User>();
 
 	public Login(JsonHandler userHandler) {
-		for (Object[] objArr : userHandler.readAll()) {
-			User user = new User(objArr);
-			users.add(user);
-		}
+		ArrayList<Object[]> all = userHandler.readAll();
+		Object[] objArr = all.get(0);
+		System.out.println(objArr.getClass());
+		// int id = (int) objArr;
+		// System.out.println(id);
 	}
 
 	private User getUserByUsername(String username) {

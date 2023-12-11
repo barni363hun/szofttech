@@ -8,6 +8,8 @@ public class TransportApp {
         JsonHandler userHandler = new JsonHandler("users.json");
         JsonHandler orderHandler = new JsonHandler("orders.json");
         JsonHandler itemHandler = new JsonHandler("items.json");
+        // userHandler.add(new User(0,"admin","admin",'A'));
+        userHandler.printItems();
         
         Login login = new Login(userHandler);
 		login.getUserNameFromUser();

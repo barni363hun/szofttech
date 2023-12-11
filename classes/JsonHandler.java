@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonHandler {
-    private List<Object[]> items;
+    private ArrayList<Object[]> items = new ArrayList<Object[]>();
     private String fileName;
 
     public JsonHandler(String fileName) {
         this.fileName = fileName;
-        this.items = new ArrayList<>();
         loadFromJsonFile();
     }
 
@@ -46,13 +45,13 @@ public class JsonHandler {
             e.printStackTrace();
         }
     }
-
-    public void create(Object[] obj) {
-        items.add(obj);
+    
+    public <T> void add(T c) {
+        items.add(Utils.transformsToObjArr(c));
         writeAllToJsonFile();
     }
 
-    public List<Object[]> readAll() {
+    public ArrayList<Object[]> readAll() {
         return items;
     }
 
@@ -96,20 +95,6 @@ public class JsonHandler {
         String json = gson.toJson(items);
 
         System.out.println(json);
-    }
-    public static void main(String[] args) {
-        JsonHandler jsonHandler = new JsonHandler("data.json");
-    
-        // Example usage
-        Object[] obj1 = {1, "John Doe", 25,new Object[]{"item1","asd"}};
-        Object[] obj2 = {2, "Jane Doe", 30};
-    
-        jsonHandler.create(obj1);
-        jsonHandler.create(obj2);
-    
-        jsonHandler.printItems(); // Print all items
-    
-        // ... (rest of your code)
     }
     
 }
