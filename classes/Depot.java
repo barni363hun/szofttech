@@ -1,31 +1,43 @@
 package classes;
 
+import java.util.List;
 import java.util.Map;
-
-import classes.file.JsonHandler;
 
 public class Depot extends User{
 
-    private int[] orderIdStock;
-
-    public Depot(User user, JsonHandler depotHandler, JsonHandler orderHandler){
+    public Depot(User user){
         super(user);
-        printMenu(orderHandler);
     }
 
-    private void printMenu(JsonHandler orderHandler){
+    public Depot(Object[] objArr) {
+        super(objArr);
+    }
+
+    public static Depot getWareHouse(JsonHandler userHandler){
+        // TODO
+        return new Depot(userHandler.readById(0));
+    }
+
+    public void DepotMenu(JsonHandler orderHandler){
         boolean exit = false;
         while (!exit) {
-            ViewUtils.printMenu("Depo", Map.of(
+            Utils.printMenu("Depo", Map.of(
                     "1", "Csomag átvétele",
                     "k", "Kilépés"));
-            switch (ViewUtils.getChar()) {
+            switch (Utils.getChar()) {
                 case '1':
-                    ViewUtils.printMenu("Csomag átvétele", Map.of());
-                    if (myOrder.keeper instanceof CourierModel) {
-                        orderController.setOrderKeeper(myOrder.id, depotController.depot);
-                    } else {
-                        System.out.println("Ez a csomag nem futárnál van!");
+                    Utils.printMenu("Csomag átvétele", Map.of());
+                    // is this order should arrive to me?
+                    List<Order> addressedToMe = Order.getOrdersAddressedToThisOperator(Order.getAllOrders(orderHandler),this);
+                    if (addressedToMe.size() > 0) { 
+                        
+                        Order currOrder = Order.selectOrderFromList(addressedToMe);
+                        currOrder.keeperId = currOrder.nextOperatorId;
+                        // TODO ki legyen a next-operator ???
+                        orderHandler.updateById(currOrder.id,currOrder);
+                    }
+                    else{
+                        // TODO error message
                     }
                     break;
                 case 'k':
@@ -37,14 +49,4 @@ public class Depot extends User{
             }
         }
     }
-    
-    public DepotController(User user) {
-        depot = new DepotModel(user);
-    }
-
-
-    public DepotModel getWareHouse() {
-        return depots.getFirst();
-    }
-    
 }

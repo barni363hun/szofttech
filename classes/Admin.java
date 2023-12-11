@@ -1,11 +1,13 @@
 package classes;
 
 public class Admin extends User {
-   public Admin(User user, Item iv) {
-      adminMenu();
+
+   public Admin(User user) {
+      super(user);
    }
 
-   private void adminMenu() {
+   public void AdminMenu(JsonHandler itemHandler, JsonHandler orderHandler, JsonHandler userHandler) {
 
+      
    }
 }

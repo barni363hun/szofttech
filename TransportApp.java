@@ -1,57 +1,43 @@
-import java.io.*;
 import java.util.*;
 
-import classes.Courier;
-import classes.Depot;
-import classes.User;
-import classes.file.FileRead;
-import classes.file.JsonHandler;
-import classes.file.Login;
-
+import classes.*;
 
 public class TransportApp {
-    // LinkedList<OrderM> orders = new LinkedList<Order>();
-    // LinkedList<Courier> couriers = new LinkedList<Courier>();
-	private FileRead userList = new FileRead("user");
-    private static Random r = new Random();
-    
-
     public TransportApp() {
         
         JsonHandler userHandler = new JsonHandler("users.json");
         JsonHandler orderHandler = new JsonHandler("orders.json");
         JsonHandler itemHandler = new JsonHandler("items.json");
-        JsonHandler customerHandler = new JsonHandler("customers.json");
         
-        Login login = new Login();
-		login.setUserNameTyped(userList.getRow(0));
-		login.setUserPasswordTyped(userList.getRow(1)[login.line]);
-
-		User user = new User(userList.splitLine(login.line));
-
-        System.out.println("asd");
-
+        Login login = new Login(userHandler);
+		login.getUserNameFromUser();
+		User user = login.getPasswordFromUser();
+        
         switch (user.getUserType()) {
             case 'C': // futar
-            Courier c = new Courier(user);
-            c
+                Courier courier = new Courier(user);
+                List<Order> all = Order.getAllOrders(orderHandler);
+                for (Order order : all) {
+                    if (order.keeperId == courier.getId()) {
+                        courier.addOrder(order);
+                    }
+                }
+                courier.CourierMenu();
                 break;
-            case 'D': // Depo
-            Depot d = new Depot(user,userHandler);
-                d.depots = depotsFromFile;
-                new Depot(d,orderController);
+            case 'D': // depo
+                Depot d = new Depot(user);
+                d.DepotMenu(orderHandler);
                 break;
             case 'V': // vevo
-                new CustomerView(new CustomerController(user),
-                    itemController,
-                    orderController,
-                    new DepotController());
+                Customer customer = new Customer(user);
+                customer.CustomerMenu(itemHandler, orderHandler, userHandler);
+                break;
+            case 'A': // admin
+                Admin admin = new Admin(user);
+                admin.AdminMenu(itemHandler, orderHandler, userHandler);
                 break;
             default:
                 break;
         }
-
-        
-        
     }
 }

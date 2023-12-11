@@ -5,8 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import classes.file.JsonHandler;
-
 public class Courier extends User {
     private List<Order> orders = new ArrayList<>();
     
@@ -14,52 +12,35 @@ public class Courier extends User {
         super(user);
     }
 
-    public void setOrders(JsonHandler orderHandler) {
-        for (Object[] objArr : orderHandler.readAll()) {
-            Order currOrder = new Order(objArr);
-            if (currOrder.keeperId == this.id) {
-                orders.add(currOrder);
-            }
-        }
+    public int getId(){
+        return this.id;
     }
 
-    private Order selectOrder(JsonHandler orderHandler) {
-        
-        Order.printOutOrders(orders);
-        int input = (int)ViewUtils.getChar();
-        boolean exit = false;
-        while (!exit) {
-            for (Order order : orders) {
-                if (order.id == input) {
-                    exit = true;
-                    return order;
-                } 
-            }
-        }
-       return null;
+    public void addOrder(Order order) {
+        orders.add(order);
     }
     
-    private void CourierMenu(JsonHandler orderHandler) {
+    public void CourierMenu() {
 
-        Order currentOrder = selectOrder(orderHandler);
+        Order currentOrder = Order.selectOrderFromList(orders);
         boolean exit = false;
         while (!exit) {
-            ViewUtils.printMenu("Courier", Map.of(
+            Utils.printMenu("Courier", Map.of(
                     "1", "Csomag felvétele a raktárból",
                     "2", "Csomag kiszállítva",
                     "3", "Csomag kiszállítása sikertelen",
                     "k", "Kilépés"));
-            switch (ViewUtils.getChar()) {
+            switch (Utils.getChar()) {
                 case '1':
-                    ViewUtils.printMenu("Csomag felvéve", Map.of());
+                    Utils.printMenu("Csomag felvéve", Map.of());
                     currentOrder.keeperId = this.id;
                     break;
                 case '2':
-                    ViewUtils.printMenu("Sikeres kézbesítés", Map.of());
+                    Utils.printMenu("Sikeres kézbesítés", Map.of());
                     currentOrder.receiverId = currentOrder.receiverId;
                     break;
                 case '3':
-                    ViewUtils.printMenu("Sikertelen kézbesítés", Map.of());
+                    Utils.printMenu("Sikertelen kézbesítés", Map.of());
                     // TODO nemtom itt mit csináljunk
                     break;
                 case 'k':

@@ -1,4 +1,4 @@
-package classes.file;
+package classes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -67,7 +67,7 @@ public class JsonHandler {
         return null;
     }
 
-    public void updateById(int id, Object[] newObj) {
+    private void updateByIdObjArr(int id, Object[] newObj) {
         for (int i = 0; i < items.size(); i++) {
             // Assuming the first element in each array is the ID
             int itemId = (int) items.get(i)[0];
@@ -78,6 +78,10 @@ public class JsonHandler {
             }
         }
         System.out.println("Item with ID " + id + " not found.");
+    }
+
+    public <T> void updateById(int id, T c) {
+        updateByIdObjArr(id, Utils.transformsToObjArr(c));
     }
 
     public void deleteById(int id) {
