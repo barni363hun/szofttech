@@ -31,6 +31,18 @@ public class Order extends JsonDataClass {
         }
         return res;
     }
+    
+    public void printData(){
+        System.out.print("Order ID: " + id);
+        System.out.print(" | Keeper ID: " + keeperId);
+        System.out.print(" | Receiver ID: " + receiverId);
+        System.out.print(" | nextOperator ID: " + nextOperatorId);
+        System.out.print(" | Item IDs: ");
+        for (int itemId : itemIds) {
+            System.out.print(itemId + " ");
+        }
+        System.out.println("\n-------------------------");
+    }
 
     static public void printOutOrders(List<Order> orders){
         for (Order order : orders) {
@@ -42,8 +54,9 @@ public class Order extends JsonDataClass {
             for (int itemId : order.itemIds) {
                 System.out.print(itemId + " ");
             }
-            System.out.println("\n-------------------------");
+            System.out.println();
         }
+        System.out.println("\n-------------------------");
     }
     
     static public Order selectOrderFromList(List<Order> orders) {

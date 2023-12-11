@@ -1,5 +1,8 @@
 package classes;
 
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -27,6 +30,23 @@ public class Utils {
             }
             System.out.println("");
         }
+    }
+
+    public static String getTime(){
+        // Get the current date and time
+        LocalDateTime localDateTime = LocalDateTime.now();
+
+        // Format the date and time using a specific pattern
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = localDateTime.format(formatter);
+
+        System.out.println("Timestamp created: " + formattedDateTime);
+
+        // If you also want to include the time zone information
+        ZonedDateTime zonedDateTime = ZonedDateTime.now();
+        String formattedZonedDateTime = zonedDateTime.format(formatter);
+
+        return formattedZonedDateTime;
     }
 
 }
