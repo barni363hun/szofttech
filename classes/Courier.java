@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import classes.json.OrderHandler;
+
 public class Courier extends User {
     private List<Order> orders = new ArrayList<>();
     
@@ -20,7 +22,7 @@ public class Courier extends User {
         orders.add(order);
     }
     
-    public void CourierMenu() {
+    public void CourierMenu(OrderHandler orderHandler) {
         Utils.printMenu("Melyik csomaggal akarsz interaktálni?", Map.of());
         Order currentOrder = Order.selectOrderFromList(orders);
         boolean exit = false;
@@ -34,10 +36,15 @@ public class Courier extends User {
                 case '1':
                     Utils.printMenu("Csomag felvéve", Map.of());
                     currentOrder.keeperId = this.id;
+                    currentOrder.nextOperatorId = currentOrder.receiverId;
+                    orderHandler.list.set(currentOrder.id-1, currentOrder);
+                    exit = true;
                     break;
                 case '2':
                     Utils.printMenu("Sikeres kézbesítés", Map.of());
-                    currentOrder.receiverId = currentOrder.receiverId;
+                    currentOrder.keeperId = currentOrder.receiverId;
+                    orderHandler.list.set(currentOrder.id-1, currentOrder);
+                    exit = true;
                     break;
                 case '3':
                     Utils.printMenu("Sikertelen kézbesítés", Map.of());

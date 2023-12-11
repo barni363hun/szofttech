@@ -49,6 +49,7 @@ public class Order extends JsonDataClass {
             System.out.print("Order ID: " + order.id);
             System.out.print(" | Keeper ID: " + order.keeperId);
             System.out.print(" | Receiver ID: " + order.receiverId);
+            System.out.print(" | nextOperator ID: " + order.nextOperatorId);
             System.out.print(" | Item IDs: ");
             for (int itemId : order.itemIds) {
                 System.out.print(itemId + " ");

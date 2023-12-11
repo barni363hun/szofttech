@@ -24,11 +24,11 @@ public class TransportApp {
                         courier.addOrder(order);
                     }
                 }
-                courier.CourierMenu();
+                courier.CourierMenu(orderHandler);
                 break;
             case 'D': // depo
                 Depot d = new Depot(user);
-                d.DepotMenu(orderHandler);
+                d.DepotMenu(orderHandler,userHandler);
                 break;
             case 'V': // vevo
                 Customer customer = new Customer(user);
@@ -41,5 +41,6 @@ public class TransportApp {
             default:
                 break;
         }
+        orderHandler.writeAllToJsonFile();
     }
 }

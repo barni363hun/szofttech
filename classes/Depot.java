@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import classes.json.JsonHandler;
+import classes.json.OrderHandler;
 import classes.json.UserHandler;
 
 public class Depot extends User{
@@ -16,7 +17,7 @@ public class Depot extends User{
     //     super(objArr);
     // }
 
-    public void DepotMenu(JsonHandler<Order> orderHandler){
+    public void DepotMenu(OrderHandler orderHandler, UserHandler userHandler){
         boolean exit = false;
         while (!exit) {
             Utils.printMenu("Depo", Map.of(
@@ -28,11 +29,10 @@ public class Depot extends User{
                     // is this order should arrive to me?
                     List<Order> addressedToMe = Order.getOrdersAddressedToThisOperator(orderHandler.list,this);
                     if (addressedToMe.size() > 0) { 
-                        
                         Order currOrder = Order.selectOrderFromList(addressedToMe);
                         currOrder.keeperId = currOrder.nextOperatorId;
-                        // TODO ki legyen a next-operator ???
-                        orderHandler.list.set(currOrder.id, currOrder);
+                        currOrder.nextOperatorId = userHandler.getFirstByType('C');
+                        orderHandler.list.set(currOrder.id-1, currOrder);
                     }
                     else{
                         // TODO error message
