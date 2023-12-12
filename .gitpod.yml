@@ -1,4 +1,5 @@
-
 vscode:
   extensions:
-    - vscjava.vscode-java-pack
+    - jeanp413.test-java-extension-pack
+    - KylinIDETeam.java
+    - KylinIDETeam.vscode-java-debug
