@@ -19,12 +19,12 @@ public class Item extends JsonDataClass{
         return itemData;
     }
 
-     public Item(Object[] objectArray) {
-        this.id = (int) objectArray[0];
-        this.name = (String) objectArray[1];
-        this.price = (int) objectArray[2];
+    //  public Item(Object[] objectArray) {
+    //     this.id = (int) objectArray[0];
+    //     this.name = (String) objectArray[1];
+    //     this.price = (int) objectArray[2];
 
-    }
+    // }
 
     public Item(int _id, String _name, int _price) {
         id = _id;

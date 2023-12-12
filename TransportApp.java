@@ -22,7 +22,7 @@ public class TransportApp {
             case 'C': // futar
                 Courier courier = new Courier(user);
                 for (Order order : orderHandler.list) {
-                    if (order.nextOperatorId == courier.getId()) {
+                    if (order.nextOperatorId == courier.id) {
                         courier.addOrder(order);
                     }
                 }

@@ -6,12 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
-
 import com.google.gson.Gson;
-
 import classes.Message;
-import classes.Order;
-
 public class MessageHandler extends JsonHandler<Message>{
 
     public MessageHandler(String fileName) {

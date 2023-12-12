@@ -3,7 +3,9 @@ package classes;
 import java.util.Map;
 import java.util.Scanner;
 
-import classes.json.JsonHandler;
+import classes.json.ItemHandler;
+import classes.json.OrderHandler;
+import classes.json.UserHandler;
 
 public class Admin extends User {
 
@@ -11,7 +13,7 @@ public class Admin extends User {
       super(user);
    }
 
-   public void AdminMenu(JsonHandler<Item> itemHandler, JsonHandler<Order> orderHandler, JsonHandler<User> userHandler) {
+   public void AdminMenu(ItemHandler itemHandler, OrderHandler orderHandler, UserHandler userHandler) {
 
         boolean exit = false;
         while (!exit) {
@@ -52,7 +54,7 @@ public class Admin extends User {
    }
 
    // Static method to read data for Item
-   public static void makeItem(JsonHandler<Item> itemHandler) {
+   public static void makeItem(ItemHandler itemHandler) {
 
       System.out.println("Enter Item Name: ");
       String name = Utils.sc.next();
@@ -64,7 +66,7 @@ public class Admin extends User {
       itemHandler.writeAllToJsonFile();
    }
    
-   public static void makeUser(JsonHandler<User> userHandler) {
+   public static void makeUser(UserHandler userHandler) {
   
       System.out.println("Enter User Name: ");
       String username = Utils.sc.next();

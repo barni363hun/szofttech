@@ -14,10 +14,6 @@ public class Courier extends User {
         super(user);
     }
 
-    public int getId(){
-        return this.id;
-    }
-
     public void addOrder(Order order) {
         orders.add(order);
     }
